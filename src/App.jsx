@@ -1,6 +1,9 @@
 import { Provider } from 'react-redux'
 import { store } from './store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Help, Profile, UserHome } from './pages/user';
+import { AdminHome, Transaction,Settings } from './pages/admin';
+
 import './App.css'
 
 function App() {
@@ -9,10 +12,20 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-          </Route>
+            <Route index element={<h1> Library Management System </h1>} />
+            <Route path="user">
+              <Route index element={<UserHome />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="help" element={<Help />} />
+            </Route>
+            <Route path="admin">
+              <Route index element={<AdminHome />} />
+              <Route path="transaction" element={<Transaction />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Route> 
         </Routes>
       </BrowserRouter>
-      <h1> Library Management System </h1>
     </Provider>
   )
 }
