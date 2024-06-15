@@ -1,6 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { UserHome } from "../pages/user";
-import { AdminHome } from "../pages/admin";
+import { AdminHome, Transaction } from "../pages/admin";
 import { Routes } from "react-router-dom";
 
 
@@ -16,7 +16,7 @@ const Routers = () => {
             </Route>
             <Route path="admin">
               <Route index element={<AdminHome />} />
-              {/* <Route path="transaction" element={<Transaction />} /> */}
+              <Route path="transactions" element={<Transaction />} />
               {/* <Route path="settings" element={<Settings />} /> */}
             </Route>
           </Route> 
