@@ -1,0 +1,8 @@
+.navbar {
+    @apply flex flex-col justify-start bg-gray-200 ml-4 mr-10 mb-8 pt-4 w-40 rounded-md text-base;
+}
+
+.navbar_title {
+    @apply text-2xl font-bold whitespace-nowrap;
+    color: #666666
+}
