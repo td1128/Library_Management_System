@@ -8,7 +8,7 @@ export const Transaction = () => {
       <div className=" w-[25%]">
         Navbar
       </div>
-      <div className=" w-full p-5 flex-col">
+      <div className=" w-full p-5 flex-col space-y-10">
         <Search/>
         <Grid/>
       </div>
