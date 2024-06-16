@@ -5,6 +5,9 @@ import { Help, Profile, UserHome } from './pages/user';
 import { AdminHome, Settings } from './pages/admin';
 import { Transaction } from './pages/admin';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 // import './App.css'
 import MuiBreadcrumbs from './common_components/breadcrumbs/MuiBreadcrumbs';
 import Routers from './routes/Routers';
