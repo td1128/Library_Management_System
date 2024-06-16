@@ -1,0 +1,5 @@
+.horizontal-scroll-container {
+    overflow-x: auto;
+    margin-bottom: 15px;
+    position: relative;
+}
