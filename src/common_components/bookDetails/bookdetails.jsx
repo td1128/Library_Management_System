@@ -15,29 +15,33 @@ import {
     XIcon,
     WhatsappIcon,
 } from "react-share";
-import {useState, useRef }from 'react';
+import { useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
 };
 
 const BookDetailsFinal = () => {
-    const currentPage = window.location.href;
+    // const currentPage = window.location.href;
+    const currentPage ="https://images.app.goo.gl/Nzg1kKwumfDiR3qB8";
+    const title = 'Check out this amazing book ';
+    const description = 'Animesh share a book with you.';
+
     const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const shareMoodalRef = useRef();
 
     const handleAddToWishlist = () => {
@@ -52,7 +56,7 @@ const BookDetailsFinal = () => {
     const availabilityCheck = true;
     return (
         <>
-            <Button ref={shareMoodalRef} onClick={handleOpen} className="hidden">Open modal</Button>
+            <Button ref={shareMoodalRef} onClick={handleOpen} style={{ display: 'none' }}>Open modal</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -60,33 +64,35 @@ const BookDetailsFinal = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" >
                         Share one item
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <EmailShareButton url={currentPage}>
-            <EmailIcon size={40} round={true}/>
-        </EmailShareButton>
+                        <EmailShareButton  quote={`${title} ${description}`}
+                    hashtag="#example" url={currentPage}>
+                            <EmailIcon size={40} round={true} />
+                        </EmailShareButton>
 
-        <WhatsappShareButton url={currentPage} className="ml-5px">
-            <WhatsappIcon size={40} round={true}/>
-        </WhatsappShareButton>
+                        <WhatsappShareButton title= {title} descriptionWrapper={description}
+                    hashtag="#share" url={currentPage} style={{ marginLeft: '8px' }}>
+                            <WhatsappIcon size={40} round={true} />
+                        </WhatsappShareButton>
 
-        <FacebookShareButton url={currentPage} className="ml-5px">
-            <FacebookIcon size={40} round={true}/>
-        </FacebookShareButton>
+                        <FacebookShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+                            <FacebookIcon size={40} round={true} />
+                        </FacebookShareButton>
 
-        <LinkedinShareButton url={currentPage}>
-            <LinkedinIcon size={40} round={true}/>
-        </LinkedinShareButton>
+                        <LinkedinShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+                            <LinkedinIcon size={40} round={true} />
+                        </LinkedinShareButton>
 
-        <TelegramShareButton url={currentPage}>
-            <TelegramIcon size={40} round={true}/>
-        </TelegramShareButton>
+                        <TelegramShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+                            <TelegramIcon size={40} round={true} />
+                        </TelegramShareButton>
 
-        <TwitterShareButton url={currentPage}>
-            <XIcon size={40} round={true}/>
-        </TwitterShareButton>
+                        <TwitterShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+                            <XIcon size={40} round={true} />
+                        </TwitterShareButton>
                     </Typography>
                 </Box>
             </Modal>
