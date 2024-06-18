@@ -1,0 +1,790 @@
+.bookDetailsFinalChild {
+  width: 257px;
+  height: 308px;
+  position: relative;
+  border-radius: var(--br-19xl);
+  background-color: var(--color-gainsboro);
+  display: none;
+}
+.profileIcon {
+  width: 38px;
+  height: 38px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-dimgray);
+}
+.juLibrary {
+  position: relative;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.frameDiv,
+.frameWrapper,
+.profileIconParent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.profileIconParent {
+  margin: 0 !important;
+  position: absolute;
+  right: -113px;
+  bottom: -47px;
+  flex-direction: column;
+  gap: 17px;
+  z-index: 1;
+}
+.frameDiv,
+.frameWrapper {
+  flex-direction: row;
+}
+.frameDiv {
+  height: 38px;
+  width: 38px;
+  position: relative;
+}
+.frameWrapper {
+  align-self: stretch;
+}
+.vuesaxlineararrowCircleRigIcon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  object-fit: contain;
+}
+.frameContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.home2Icon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  min-height: 24px;
+}
+.home {
+  text-decoration: none;
+  position: relative;
+  color: inherit;
+  display: inline-block;
+  min-width: 56px;
+}
+.component2,
+.component21 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.component21 {
+  gap: var(--gap-xl);
+}
+.component2 {
+  cursor: pointer;
+}
+.books {
+  position: relative;
+  display: inline-block;
+  min-width: 59px;
+}
+.component5,
+.component6Icon {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.component5 {
+  width: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0;
+  box-sizing: border-box;
+}
+.component6Icon {
+  width: 24%;
+  right: 76%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 1;
+}
+.component9 {
+  width: 100px;
+  height: 24px;
+  position: relative;
+}
+.members {
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: -33px;
+  display: inline-block;
+  min-width: 89px;
+}
+.component51,
+.component6Icon1 {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.component51 {
+  width: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.component6Icon1 {
+  width: 24%;
+  right: 76%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 1;
+}
+.memebers,
+.vuesaxlineargraphIcon {
+  width: 100px;
+  height: 24px;
+  position: relative;
+}
+.vuesaxlineargraphIcon {
+  width: 24px;
+  min-height: 24px;
+}
+.reports1 {
+  position: relative;
+  display: inline-block;
+  min-width: 75px;
+}
+.reports {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.vuesaxlinearnotificationBinIcon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  min-height: 24px;
+}
+.issueNotice1 {
+  position: relative;
+  display: inline-block;
+  min-width: 117px;
+}
+.issueNotice {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.vuesaxlinearsetting2Icon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  min-height: 24px;
+}
+.settings1 {
+  text-decoration: none;
+  position: relative;
+  color: inherit;
+  display: inline-block;
+  min-width: 79px;
+}
+.settings {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.component2Parent {
+  margin: 0;
+  flex-direction: column;
+  gap: 30px;
+  text-align: left;
+  font-size: var(--sub-heading-1-size);
+  color: var(--color-dimgray);
+  font-family: var(--heading-2);
+}
+.component2Parent,
+.frameGroup,
+.frameWrapper1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameWrapper1 {
+  flex-direction: row;
+  padding: 0 7px;
+}
+.frameGroup {
+  align-self: stretch;
+  flex-direction: column;
+  gap: 82px;
+}
+.vuesaxlinearlogoutIcon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  min-height: 24px;
+}
+.logout1 {
+  position: relative;
+  display: inline-block;
+  min-width: 67px;
+}
+.logout {
+  flex-direction: row;
+  gap: var(--gap-xl);
+}
+.component10,
+.component10Wrapper,
+.logout,
+.logoutWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.logoutWrapper {
+  flex-direction: row;
+  cursor: pointer;
+  font-size: var(--sub-heading-1-size);
+}
+.component10,
+.component10Wrapper {
+  flex-direction: column;
+}
+.component10 {
+  align-self: stretch;
+  border-radius: 10px;
+  background-color: var(--cccccc);
+  overflow: hidden;
+  padding: 18px;
+  gap: 456px;
+}
+.component10Wrapper {
+  width: 242px;
+  padding: 2px 0 0;
+  box-sizing: border-box;
+}
+.leftArrowIcon {
+  width: 47px;
+  height: 39px;
+  position: relative;
+}
+.bookImage {
+  position: relative;
+  font-weight: 600;
+}
+.bookImageWrapper {
+  align-self: stretch;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  /* padding: var(--padding-274xl) var(--padding-xl) var(--padding-274xl) 21px; */
+}
+.bookIcon {
+  height: 53px;
+  width: 57px;
+  position: relative;
+}
+.relatedBooks {
+  align-self: stretch;
+  position: relative;
+  font-weight: 600;
+}
+.bookPreview,
+.relatedBooksWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+.relatedBooksWrapper {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 5px 0 0;
+  box-sizing: border-box;
+  min-width: 183px;
+}
+.bookPreview {
+  align-self: stretch;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: center;
+  padding: 11.5px var(--padding-xs);
+  gap: 10px;
+}
+.frameParent3 {
+  width: 280px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 92px;
+  min-width: 150px;
+  max-width: 100%;
+}
+.bookTitle {
+  text-decoration: none;
+  position: relative;
+  font-weight: 600;
+  color: inherit;
+}
+/* .bookTitleContainer,
+.bookTitleContainerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+} */
+.bookTitleContainer {
+  flex: 1;
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  justify-content: center;
+  padding: 8px;
+}
+.bookTitleContainerWrapper {
+  align-self: stretch;
+  /* justify-content: flex-end; */
+  /* padding: 0 var(--padding-2xs) 0 0; */
+}
+.author {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 127px;
+}
+/* .authorWrapper,
+.frameWrapper2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+} */
+.authorWrapper {
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  padding: 8px;
+}
+.frameWrapper2 {
+  align-self: stretch;
+  /* padding: 0 4px; */
+}
+.description {
+  width: 210px;
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.descriptionWrapper {
+  align-self: stretch;
+  background-color: var(--color-gainsboro);
+  padding: 8px;
+}
+.genre,
+.isbn,
+.publisherMcgrawHill {
+  align-self: stretch;
+  position: relative;
+  font-weight: 600;
+}
+.availability,
+.frameChild {
+  position: relative;
+  flex-shrink: 0;
+  debug_commit: 69da668;
+}
+.availability {
+  flex: 1;
+  font-weight: 600;
+  margin-right: 3px;
+  /* display: inline-block; */
+}
+.frameChild {
+  width: 15px;
+  height: 15px;
+  z-index: 1;
+}
+.vectorWrapper {
+  width: 391px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 11.9px 0 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-left: -338.9px;
+}
+.unavailableIcon {
+  width: 25.6px;
+  height: 25px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #e42121;
+  flex-shrink: 0;
+  debug_commit: 69da668;
+  z-index: 1;
+}
+.unavailableIconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs) 0 0;
+  margin-left: -338.9px;
+}
+
+.frameParent5,
+.publisherMcgrawHillParent {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+.availabilityParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+.frameParent5,
+.publisherMcgrawHillParent {
+  flex-direction: column;
+}
+.publisherMcgrawHillParent {
+  background-color: var(--color-gainsboro);
+  overflow: hidden;
+  align-items: flex-start;
+  padding: 8px;
+  box-sizing: border-box;
+  gap: 5px;
+}
+.frameParent5 {
+  align-items: flex-end;
+  gap: 10px;
+}
+.buttons1 {
+  position: relative;
+  font-size: var(--heading-2-size);
+  font-weight: 600;
+  font-family: var(--heading-2);
+  color: var(--color);
+  text-align: left;
+}
+.buttons {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-mini) var(--padding-2xs);
+  background-color: var(--cccccc);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+.buttons:hover {
+  background-color: #b3b3b3;
+}
+.addToWishlistIcon{
+  width: 40px;
+  height: 44px;
+  position: relative;
+  cursor: pointer;
+}
+.shareButtonIcon {
+  width: 40px;
+  height: 44px;
+  position: relative;
+  cursor: pointer;
+}
+
+.shareButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 9px 0 0;
+}
+.buttonsParent {
+  flex-direction: row;
+  gap: 44.5px;
+}
+.buttonsParent,
+.frameParent2,
+.frameParent4 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.frameParent4 {
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 402px;
+}
+.frameParent2 {
+  width: 1022.1px;
+  flex-direction: row;
+  gap: 28.4px;
+}
+.frameChild1,
+.frameInner,
+.frameItem,
+.rectangleDiv {
+  height: 308px;
+  flex: 1;
+  position: relative;
+  border-radius: var(--br-19xl);
+  background-color: var(--color-gainsboro);
+  min-width: 236px;
+  max-width: 257px;
+}
+.frameParent1,
+.frameWrapper3,
+.rectangleParent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.rectangleParent {
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-2xl);
+}
+.frameParent1,
+.frameWrapper3 {
+  align-self: stretch;
+}
+.frameWrapper3 {
+  flex-direction: row;
+  padding: 0 0 0 16px;
+  box-sizing: border-box;
+}
+.frameParent1 {
+  flex-direction: column;
+  gap: 42px;
+}
+.frameParent,
+.leftArrowParent {
+  display: flex;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  text-align: left;
+  font-family: var(--heading-2);
+}
+.leftArrowParent {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-lgi);
+  max-width: calc(100% - 282px);
+  font-size: var(--heading-2-size);
+  color: var(--color-black);
+}
+.frameParent {
+  align-self: stretch;
+  height: 1001px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0 0 25px;
+  box-sizing: border-box;
+  gap: 40px;
+  debug_commit: 69da668;
+  max-width: 100%;
+  font-size: 25px;
+  color: var(--color-dimgray);
+}
+.frameChild2 {
+  height: 308px;
+  flex: 1;
+  position: relative;
+  border-radius: var(--br-19xl);
+  background-color: var(--color-gainsboro);
+  min-width: 236px;
+  max-width: 257px;
+}
+.frameChild3 {
+  z-index: 1;
+}
+.frameChild3,
+.frameChild4,
+.frameChild5 {
+  height: 308px;
+  flex: 1;
+  position: relative;
+  border-radius: var(--br-19xl);
+  background-color: var(--color-gainsboro);
+  min-width: 236px;
+  max-width: 257px;
+}
+.bookDetailsFinalInner,
+.rectangleGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.rectangleGroup {
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--gap-lgi);
+  debug_commit: 69da668;
+}
+.bookDetailsFinalInner {
+  width: 1097px;
+  justify-content: flex-end;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+.bookDetailsFinal {
+  border: 2px solid grey;
+  border-radius: 12px;
+  padding: 5px;
+  width: 70%;
+  height: 500px;
+  position: relative;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  /* padding: var(--padding-4xl) 27px 0 var(--padding-4xl); */
+  box-sizing: border-box;
+  gap: 245px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 900px) {
+  .component10Wrapper {
+    display: none;
+  }
+  .bookImage,
+  .relatedBooks {
+    font-size: var(--font-size-9xl);
+  }
+  .frameParent3 {
+    flex: 1;
+  }
+  .author,
+  .availability,
+  .bookTitle,
+  .description,
+  .genre,
+  .isbn,
+  .publisherMcgrawHill {
+    font-size: var(--font-size-9xl);
+  }
+  .frameParent2 {
+    flex-wrap: wrap;
+  }
+  .leftArrowParent {
+    max-width: 100%;
+  }
+  .frameParent {
+    height: auto;
+  }
+  .bookDetailsFinal {
+    height: auto;
+    gap: 122px;
+  }
+}
+@media screen and (max-width: 675px) {
+  .bookImageWrapper {
+    padding-top: var(--padding-171xl);
+    padding-bottom: var(--padding-171xl);
+    box-sizing: border-box;
+  }
+  .frameParent4 {
+    gap: 10px;
+    min-width: 100%;
+  }
+  .frameParent1 {
+    gap: 10px;
+  }
+  .frameParent {
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .juLibrary {
+    font-size: var(--sub-heading-1-size);
+  }
+  .books,
+  .home,
+  .issueNotice1,
+  .logout1,
+  .members,
+  .reports1,
+  .settings1 {
+    font-size: var(--font-size-base);
+  }
+  .bookImage,
+  .relatedBooks {
+    font-size: var(--font-size-2xl);
+  }
+  .bookPreview {
+    flex-wrap: wrap;
+  }
+  .frameParent3 {
+    gap: 46px;
+    min-width: 100%;
+  }
+  .author,
+  .availability,
+  .bookTitle,
+  .description,
+  .genre,
+  .isbn,
+  .publisherMcgrawHill {
+    font-size: var(--font-size-2xl);
+  }
+  .buttonsParent {
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+  .bookDetailsFinal {
+    gap: 61px;
+  }
+}

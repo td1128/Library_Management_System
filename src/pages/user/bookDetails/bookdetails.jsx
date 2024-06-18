@@ -56,7 +56,8 @@ const BookDetailsFinal = () => {
     const availabilityCheck = true;
     return (
         <>
-            <Button ref={shareMoodalRef} onClick={handleOpen} style={{ display: 'none' }}>Open modal</Button>
+        
+            <Button ref={shareMoodalRef} onClick={handleOpen} style={{display:'none'}}>Open modal</Button>
             <Modal
                 open={open}
                 onClose={handleClose}

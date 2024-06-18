@@ -2,7 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 import { UserHome } from "../pages/user";
 import { AdminHome } from "../pages/admin";
 import { Routes } from "react-router-dom";
-import ShowBookDetails from "../pages/user/ShowBookDetails";
+import ShowBookDetails from '../pages/user/bookDetails/ShowBookDetails'
 
 const Routers = () => {
   return (
