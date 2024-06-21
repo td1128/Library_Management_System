@@ -1,0 +1,9 @@
+.statsbox {
+  @apply rounded-md flex flex-col p-6 mr-10 max-w-60 w-fit justify-between;
+  @layer text-md;
+  background-color: #cccccc;
+}
+
+.statustext {
+  @apply text-sm w-32 font-bold rounded-lg;
+}
