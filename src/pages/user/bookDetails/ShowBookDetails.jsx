@@ -1,10 +1,9 @@
 import { React, useState, useRef } from 'react'
 import './BookDetailsDesign.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark, faCircleDot, faCircle } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { setBookDetails, removeBookDetails, clearBookList } from './bookListReducer/BookListReducer';
 
 //Modal component material ui
 import Box from '@mui/material/Box';
@@ -50,7 +49,7 @@ export default function ShowBookDetails(props) {
   const isbn_no = "978-3-16-148410-1";//TODO pops.isbn
   //Getting book list from book list state
   const dispatch = useDispatch();
-  const bookList = useSelector((state) => state.bookList.books);
+  const bookList = useSelector((state) => state.relatedBookList.books);
   const book = bookList[isbn_no]
   // console.log("book: ",book);
   // console.log("book list: ",bookList);
@@ -174,7 +173,9 @@ export default function ShowBookDetails(props) {
         <div className="book_details_section">
           <div className="book_features">
 
-            <span className="book_title">{book_title}</span>
+          {/* <FontAwesomeIcon className='  text-red-500 h-5 w-5 mb-3' icon={faCircleDot} /> */}
+
+            <span className="book_title">{book_title}<FontAwesomeIcon className=' text-green-500 h-5 w-5 mb-4' icon={faCircle} /></span>
             <span className='author'>by  {author}</span>
             <span className='description'>{details.length > 200 ? details : details + "...."}</span>
             {des.length > 30 ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <FontAwesomeIcon ref={downRef} icon={faAngleDown} /><FontAwesomeIcon style={{ display: "none" }} ref={upRef} icon={faAngleUp} /></div> : null}
