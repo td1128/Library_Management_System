@@ -51,39 +51,39 @@ export const {
 export default statsSlice.reducer
 
 const statPaths = [
-    {
-        path: 'https://library-management-system-f9gh.onrender.com/api/admin/stats/total-books',
-        action: setTotalBooks,
-    },
-    {
-        path: 'https://library-management-system-f9gh.onrender.com/api/admin/stats/total-borrowed-this-month',
-        action: setBooksBorrowed,
-    },
-    {
-        path: 'https://library-management-system-f9gh.onrender.com/api/admin/stats/total-overdue',
-        action: setBooksOverdue,
-    },
-    {
-        path: 'https://library-management-system-f9gh.onrender.com/api/admin/stats/total-issued-today',
-        action: setIssuedToday,
-    },
-    {
-        path: 'https://library-management-system-f9gh.onrender.com/api/admin/stats/total-returned-today',
-        action: setReturnedToday,
-    }
+  {
+    path: 'api/admin/stats/total-books',
+    action: setTotalBooks,
+  },
+  {
+    path: 'api/admin/stats/total-borrowed-this-month',
+    action: setBooksBorrowed,
+  },
+  {
+    path: 'api/admin/stats/total-overdue',
+    action: setBooksOverdue,
+  },
+  {
+    path: 'api/admin/stats/total-issued-today',
+    action: setIssuedToday,
+  },
+  {
+    path: 'api/admin/stats/total-returned-today',
+    action: setReturnedToday,
+  },
 ]
 
 export const fetchStats = () => async (dispatch) => {
+  const apiURL = import.meta.env.VITE_APP_API_URL
   try {
     statPaths.forEach(async ({ path, action }) => {
-        const response = await fetch(path)
-        const data = await response.json()
-        dispatch(action(data.totalBooks))
+      const response = await fetch(`${apiURL}/${path}`)
+      const data = await response.json()
+      dispatch(action(data.totalBooks))
     })
-    const response = await fetch('https://library-management-system-f9gh.onrender.com/api/admin/stats/total-members')
+    const response = await fetch(`${apiURL}/api/admin/stats/total-members`)
     const data = await response.json()
-    dispatch(setTotalMembers(data.totalMembers))  
-
+    dispatch(setTotalMembers(data.totalMembers))
   } catch (error) {
     console.error('Failed to fetch stats:', error)
   }

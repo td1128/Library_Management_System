@@ -25,11 +25,11 @@ export const AdminHome = () => {
   const transactionStats = [
     {
       title: 'Total Enrolled Members',
-      value: totalBooks,
+      value: totalMembers,
     },
     {
       title: 'Total Books in Stock',
-      value: totalMembers,
+      value: totalBooks,
     },
     {
       title: 'Total Books Borrowed This Month',
@@ -48,6 +48,7 @@ export const AdminHome = () => {
       value: totalOverdueBooks,
     },
   ]
+
   return (
     <div className="flex-grow flex flex-col ml-6 gap-10">
       <SearchBar />

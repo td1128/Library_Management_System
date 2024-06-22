@@ -1,18 +1,38 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Box, TextField, Icon, FormControl } from '@mui/material'
 import { SearchDropdown } from './SearchDropdown'
 import { SearchToggle } from './SearchToggle'
+import { SearchBookList } from './SearchBookList'
+import { useDispatch } from 'react-redux'
+import { fetchBookList } from '/src/features/searchBookReducer/SearchBookReducer'
 
 export const SearchBar = () => {
+  // queryRef is used to store the previous search query
+  // on carraiage return, the search query is updated
+  // this prevents unnecessary API calls
+  const queryRef = useRef('')
+
   const [searchQuery, setSearchQuery] = useState('')
   const [availability, setAvailability] = useState(false)
-  const [subject, setSubject] = useState('')
+  //const [subject, setSubject] = useState('')
   const [sortBy, setSortBy] = useState('Popularity')
   //const [popularity, setPopularity] = useState(false)
   //const [edition, setEdition] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchBookList(queryRef.current, availability, sortBy))
+  }, [dispatch, availability, sortBy])
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value)
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      queryRef.current = searchQuery
+      dispatch(fetchBookList(searchQuery, availability, sortBy))
+    }
   }
 
   return (
@@ -33,6 +53,7 @@ export const SearchBar = () => {
           placeholder="Search by name, author or subject"
           value={searchQuery}
           onChange={handleSearchChange}
+          onKeyPress={handleKeyPress}
           InputProps={{
             endAdornment: (
               <Icon>
@@ -48,7 +69,7 @@ export const SearchBar = () => {
             value={availability}
             setValue={setAvailability}
           />
-        {/*<SearchDropdown
+          {/*<SearchDropdown
             title="Subject"
             options={['Physics', 'Chemistry', 'Mathematics']}
             value={subject}
@@ -63,6 +84,7 @@ export const SearchBar = () => {
           />
         </Box>
       </Box>
+      <SearchBookList />
     </Box>
   )
 }
