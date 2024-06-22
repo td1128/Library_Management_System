@@ -11,16 +11,19 @@ const initialArray = [
 // Convert array to object
 const initialState = {
     books: initialArray.reduce((acc, item) => {
-        console.log("item: ",item);
+        // console.log("item: ",item);
         acc[item.isbn] = item;
         return acc;
     }, {})
 };
 
-const bookListSlice = createSlice({
+const searchBookListSlice = createSlice({
     name: 'bookList',
     initialState,
     reducers: {
+        setInitialState: (state, action)=>{//TODO
+
+        },
         setBookDetails: (state, action) => {
             const { key, value } = action.payload;
             state.bookList[key] = value; // Set value in the object
@@ -28,12 +31,9 @@ const bookListSlice = createSlice({
         removeBookDetails: (state, action) => {
             const { key } = action.payload;
             delete state.bookList[key]; // Remove value from the object
-        },
-        clearBookList: (state) => {
-            state.bookList = {}; // Clear the object
         }
     }
 });
 
-export const { setBookDetails, removeBookDetails, clearBookList } = bookListSlice.actions;
-export default bookListSlice.reducer;
+export const { setBookDetails, removeBookDetails, setInitialState } = searchBookListSlice.actions;
+export default searchBookListSlice.reducer;

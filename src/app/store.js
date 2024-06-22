@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import BookListReducer from '../pages/user/bookDetails/bookListReducer/BookListReducer';
 import { statsReducer } from '../features';
+import RelatedBookReducer from '../features/relatedBoolReducer/RelatedBookReducer';
 
 export const store = configureStore({
   reducer: {
     stats: statsReducer,
-    bookList: BookListReducer,
+    relatedBookList: RelatedBookReducer,
   },
 });
