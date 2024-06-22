@@ -74,7 +74,7 @@ const statPaths = [
 ]
 
 export const fetchStats = () => async (dispatch) => {
-  const apiURL = "https://library-management-system-ce6z.onrender.com"
+  const apiURL = import.meta.env.VITE_APP_API_URL
   try {
     statPaths.forEach(async ({ path, action }) => {
       const response = await fetch(`${apiURL}/${path}`)
