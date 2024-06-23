@@ -10,19 +10,17 @@ export const SearchBar = () => {
   // queryRef is used to store the previous search query
   // on carraiage return, the search query is updated
   // this prevents unnecessary API calls
-  const queryRef = useRef('')
+  const queryRef = useRef('a')
 
   const [searchQuery, setSearchQuery] = useState('')
   const [availability, setAvailability] = useState(false)
   //const [subject, setSubject] = useState('')
   const [sortBy, setSortBy] = useState('Popularity')
-  //const [popularity, setPopularity] = useState(false)
-  //const [edition, setEdition] = useState(false)
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(fetchBookList(queryRef.current, availability, sortBy))
-  }, [dispatch, availability, sortBy])
+  }, [dispatch, availability, sortBy])*/
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value)
@@ -31,6 +29,7 @@ export const SearchBar = () => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       queryRef.current = searchQuery
+      if (queryRef.current === '') return;
       dispatch(fetchBookList(searchQuery, availability, sortBy))
     }
   }
@@ -62,6 +61,7 @@ export const SearchBar = () => {
             ),
           }}
         />
+        { searchQuery==='' && <p className="text-bold mx-auto">Please enter a search query!</p> }
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <p> Filter by: </p>
           <SearchToggle
