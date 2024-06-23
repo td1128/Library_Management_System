@@ -106,7 +106,7 @@ export default function ShowBookDetails(props) {
   }
 
   const handleBackButton = () => {
-    navigate("/user")
+    navigate(-1);
   }
 
   return (
@@ -155,7 +155,7 @@ export default function ShowBookDetails(props) {
       </div>
 
       <div className="container">
-        <div className="navbar">This is navbar</div>
+        {/* <div className="navbar">This is navbar</div> */}
 
         <div className="book_section">
           <div className="book_image">
@@ -180,11 +180,11 @@ export default function ShowBookDetails(props) {
             <span className='description'>{details.length > 200 ? details : details + "...."}</span>
             {des.length > 30 ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <FontAwesomeIcon ref={downRef} icon={faAngleDown} /><FontAwesomeIcon style={{ display: "none" }} ref={upRef} icon={faAngleUp} /></div> : null}
             
-            <span className='mt-5 heading'>Publisher: <span className='value'>{publisher}</span></span>
+            <span className='mt-2 heading'>Publisher: <span className='value'>{publisher}</span></span>
             <span className='heading'>Date of publication: <span className='value'>{date_publication}</span></span>
             <span className='heading'>ISBN No: <span className='value'>{isbn_no}</span></span>
             <span className='heading'>Availability: {availability?<FontAwesomeIcon className=' text-green-500' icon={faCheck} />:<FontAwesomeIcon className=' text-red-600' icon={faXmark} />}</span>
-          <span className="related_books text-amber-700 mt-5 ">Related books</span>
+          <span className="related_books text-amber-700 mt-2 ">Related books</span>
           <div className="related_books flex flex-wrap flex-row">
             {
               book_list.map((e,id)=>{

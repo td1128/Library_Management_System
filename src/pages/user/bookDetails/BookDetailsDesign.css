@@ -7,32 +7,32 @@
 
 .container{
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     width: 100%;
     height: 92vh;
   }
-  .navbar{
+  /* .navbar{
     grid-column-start: 1;
     grid-column-end: 2;
-    /* background-color: grey; */
-  }
+    background-color: grey;
+  } */
   .book_section{
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
     padding: 8px;
     margin-top: 50px;
     /* background-color: blue; */
   }
   .book_details_section{
-    padding: 15px;
+    padding: 10px;
     grid-column-start: 3;
-    grid-column-end: 7;
+    grid-column-end: 9;
     /* background-color: green; */
     display: flex;
     flex-direction: row;
     overflow-y: scroll;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 1.5rem;
   }
   .book_features{
     display: flex;
@@ -40,11 +40,11 @@
   }
 
   .book_image{
-    height: 350px;
-    
+    height: 70%;
+    width: 100%;
 }
 .image{
-    height: inherit;
+    height: 100%;
     width: 100%;
     border-radius: 15px;
 
@@ -56,11 +56,11 @@
     color: rgb(241, 134, 134);
   }
   .buttons_section{
-    margin-top: 10px;
-    margin-left: 5px;
+    margin-top: 1.8rem;
+    margin-left: 1.5rem;
   }
 .book_title{
-    font-size: 40px;
+    font-size: 2.5rem;
     /* font-family: "Lora", "serif"; */
     font-family: "Noto Serif", "serif";
     font-weight: bolder;
@@ -68,14 +68,14 @@
 .author{
     /* font-family: "Lora", "serif"; */
     font-family: "Merriweather", "serif";
-    font-size: 20px;
+    font-size: 1.8rem;
 }
 .more:hover{
     cursor: pointer;
 }
 .share_icon{
   cursor: pointer;
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 .share_hover:hover{
   color: white;
@@ -89,16 +89,16 @@
 
   font-weight: 400;
   font-style: normal;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .heading{
-  font-size: 20px;
+  font-size: 1.6rem;
   font-family: "Libre Baskerville", "serif";
   font-weight: bold;
 }
 
 .value{
-  font-size: 18px;
+  font-size: 1.2rem;
   font-family: "Satisfy", "cursive";
 }

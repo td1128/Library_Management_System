@@ -8,9 +8,9 @@ import Typography from '@mui/material/Typography';
 
 export default function MediaCard() {
   return (
-    <Card sx={{ maxWidth: 210 }} className='mr-5 mt-5'>
+    <Card sx={{ maxWidth: 210 }} className='mr-2 mt-3'>
       <CardMedia
-        sx={{ height: 100 }}
+        sx={{ height: 80 }}
         image="/Book_img.jpeg"
         title="green iguana"
       />
