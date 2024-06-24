@@ -9,7 +9,7 @@ import Stack from 'react-bootstrap/Stack';
 import JULOGO from '../../assets/Jadavpur_University_Logo.webp';
 import { LibraryCard, EditSubjects } from '../../components';
 import Slider from "react-slick";
-import { fetchUserData } from '../../features/userSlice';
+import { fetchUserData } from '../../features/userThunks';
 import { useSelector, useDispatch } from 'react-redux';
 
 import '../../assets/style/style.css';
@@ -20,6 +20,15 @@ import "slick-carousel/slick/slick-theme.css";
 function Profile() {
 
   const user = useSelector( state => state.user );
+
+  useEffect( () => {
+    dispatch( fetchUserData('m_01010') )
+    setUserCopy( {
+      email,
+      phoneNumber,
+      address
+    } )
+  }, [] );
 
   const { name, department, studentID, joiningDate, rollNo, email, phoneNumber, address, subjectsOfInterest } = user.details;
 
@@ -91,10 +100,6 @@ function Profile() {
     const { name, value } = event.target;
     debouncedHandleChange(name, value);
   };
-
-  useEffect( () => {
-    dispatch( fetchUserData('m_11135') )
-  }, [] );
 
   return (
     <div>

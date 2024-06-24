@@ -1,44 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-export const fetchUserData = createAsyncThunk(
-  'user/fetchData',
-  async ( studentID, thunkAPI ) => {
-    try {
-      const userRootUrl = import.meta.env.VITE_APP_USER_ROOT_URL;
-      const getUserDetails = import.meta.env.VITE_APP_GET_USER_DETAILS;
-      
-      const res = await axios.get( `${userRootUrl}/${getUserDetails}/${studentID}` );
-      console.log(res);
-      // return res.data
-    } catch( error ) {
-      return thunkAPI.rejectWithValue( error.response )
-    }
-  }
-)
-
-
-const initialName = 'John Doe';
-const initialDepartment = 'Computer Science';
-const initialStudentID = '223143';
-const initialJoiningDate = '21/11/2022';
-const initialRollNo = '05011001087';
-const initialEmail = 'johndoe@example.com';
-const initialPhoneNumber = '+91 12345 67890';
-const initialAddress = '188, Raja Subodh Chandra Mallick Rd, Jadavpur, Kolkata, West Bengal 700032';
-const initialSubjectsOfInterest = ['Data Structures and Algorithms', 'Computer Organization and Architecture', 'Database Management System', 'Software Engineering'];
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUserData } from './userThunks.js'
 
 const initialState = {
   details: {
-    name: initialName,
-    department: initialDepartment,
-    studentID: initialStudentID,
-    joiningDate: initialJoiningDate,
-    rollNo: initialRollNo,
-    email: initialEmail,
-    phoneNumber: initialPhoneNumber,
-    address: initialAddress,
-    subjectsOfInterest: initialSubjectsOfInterest,
+    name: '',
+    department: '',
+    studentID: '',
+    joiningDate: '',
+    rollNo: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    subjectsOfInterest: [],
   },
   loading: false,
   error: null
@@ -71,7 +44,28 @@ const userSlice = createSlice({
       } )
       .addCase( fetchUserData.fulfilled, ( state, action ) => {
         state.loading = false;
-        // state.details = action.payload
+        const {
+          first_name: firstName,
+          last_name: lastName,
+          membership_id: studentID,
+          join_date: joiningDate,
+          email,
+          phone_number: phoneNumber,
+          address,
+        } = action.payload;
+
+        state.details = {
+          name: `${firstName} ${lastName}`,
+          department: 'Computer Science',
+          studentID,
+          joiningDate,
+          rollNo: '05011001087', 
+          email,
+          phoneNumber,
+          address,
+          subjectsOfInterest: ['Data Structures and Algorithms', 'Computer Organization and Architecture', 'Database Management System', 'Software Engineering'],
+        };
+
       } )
       .addCase( fetchUserData.rejected, ( state, action ) => {
         state.loading = false;
