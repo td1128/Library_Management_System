@@ -1,6 +1,6 @@
 const navstyles = {
   root_open: {
-    width: 220,
+    width: 230,
     transition: 'width 0.3s',
     overflowX: 'hidden',
     bgcolor: '#4F0C24',
@@ -8,7 +8,7 @@ const navstyles = {
     color: 'white',
   },
   root_closed: {
-    width: 60,
+    width: 80,
     transition: 'width 0.3s',
     overflowX: 'hidden',
     bgcolor: '#4F0C24',
@@ -48,15 +48,23 @@ const navstyles = {
     borderBottom: '1px solid #FFFFFF',
     borderTop: '1px solid #FFFFFF',
   },
+  pathbox: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    bgcolor: '#761236',
+    borderBottom: '1px solid #FFFFFF',
+    paddingRight: 0.5,
+  },
   pathtitle: {
     bgcolor: '#761236',
     color: '#FFFFFF',
     textDecoration: 'none',
     width: '100%',
     display: 'flex',
-    paddingLeft: 0.5,
+    paddingLeft: 1,
     paddingY: 1,
-    borderBottom: '1px solid #FFFFFF',
   },
   pathtitle_hover: {
     bgcolor: '#761236',
@@ -64,9 +72,8 @@ const navstyles = {
     textDecoration: 'none',
     width: '100%',
     display: 'flex',
-    paddingLeft: 0.5,
+    paddingLeft: 1,
     paddingY: 1,
-    borderBottom: '1px solid #FFFFFF',
   },
   pathicon: {
     display: 'flex',

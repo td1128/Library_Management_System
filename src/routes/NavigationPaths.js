@@ -10,7 +10,7 @@ export const adminNavItems = [
     navPath: '/admin/books',
     navTitle: 'Books',
     navIcon: '/src/assets/icons/book-white.png',
-    navIconHover: '/src/assets/icons/book-bulk.png',
+    navIconHover: '/src/assets/icons/book-white.png',
     subPaths: [
         {
             subPath: '/admin/books/add',
@@ -26,7 +26,7 @@ export const adminNavItems = [
     navPath: '/admin/transaction',
     navTitle: 'Transactions',
     navIcon: '/src/assets/icons/transaction-white.png',
-    navIconHover: '/src/assets/icons/transaction-bulk.png',
+    navIconHover: '/src/assets/icons/transaction-white.png',
     subPaths: [
         {
             subPath: '/admin/transaction/issue',
@@ -46,14 +46,14 @@ export const adminNavItems = [
     navPath: '/admin/issue_notice',
     navTitle: 'Issue Notice',
     navIcon: '/src/assets/icons/notice-white.png',
-    navIconHover: '/src/assets/icons/notification-bulk.png',
+    navIconHover: '/src/assets/icons/notice-white.png',
     subPaths: [],
   },
   {
     navPath: '/admin/settings',
     navTitle: 'Settings',
     navIcon: '/src/assets/icons/setting-white.png',
-    navIconHover: '/src/assets/icons/setting-bulk.png',
+    navIconHover: '/src/assets/icons/setting-white.png',
     subPaths: [
         {
             subPath: '/admin/settings/library',
@@ -99,7 +99,7 @@ export const userNavItems = [
   {
     navPath: '/user/help',
     navTitle: 'Help',
-    navIcon: '/src/assets/icons/help-linear.svg',
+    navIcon: '/src/assets/icons/help-bulk.png',
     navIconHover: '/src/assets/icons/help-bulk.png',
     subPaths: [],
   },

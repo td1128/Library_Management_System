@@ -36,7 +36,7 @@ export default function ProfileMenu() {
               </Icon>
             </Avatar>
             <Icon>
-              <img src="/src/assets/icons/arrow-down.svg" />
+              <img src="/src/assets/icons/arrow-down.png" />
             </Icon>
           </Box>
         </Tooltip>
