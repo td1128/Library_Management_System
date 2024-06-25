@@ -78,7 +78,7 @@ export default function ShowBookDetails(props) {
   const title = 'Check out this amazing book ';
   const description = 'Animesh share a book with you.';
 
-  const book_list = ["ajflajf", "jfaoj", "kfjajo", "fjajofj", "kjfjoj", "kafo;j", "kafjofj", "lkjfjjf"];
+  // const book_list = ["ajflajf", "jfaoj", "kfjajo", "fjajofj", "kjfjoj", "kafo;j", "kafjofj", "lkjfjjf"];
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
