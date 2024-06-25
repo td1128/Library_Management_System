@@ -1,52 +1,46 @@
 import { List, ListItem, Box, Icon } from '@mui/material'
+import navstyles from './NavbarStyles'
+import { NavLink } from 'react-router-dom'
 
-const NavbarMenu = ({ children, open, setOpen }) => {
+const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
   const handleDrawerToggle = () => {
     setOpen(!open)
   }
 
-  const drawerWidthOpen = 220
-  const drawerWidthClosed = 60
   return (
-    <div className="flex mb-6 px-4">
-      <Box
-        sx={{
-          width: open ? drawerWidthOpen : drawerWidthClosed,
-          transition: 'width 0.3s',
-          overflowX: 'hidden',
-          bgcolor: '#CCCCCC',
-          borderRadius: '8px',
-          overflow: 'hidden',
-        }}
-      >
-        <List>
-          <ListItem>
-            <Box
-              sx={{
-                width: 28,
-                height: 28,
-                bgcolor: '#666666',
-                borderRadius: '50%',
-              }}
-            ></Box>
+    <div className="flex pr-4">
+      <Box sx={open ? navstyles.root_open : navstyles.root_closed}>
+        <List sx={navstyles.list}>
+          <ListItem component={NavLink} to={rootPath} sx={navstyles.titlebox}>
+            <Box sx={navstyles.icon}>
+              <img
+                src="/src/assets/icons/book-black.png"
+                width="100%"
+                height="100%"
+              />
+            </Box>
+            {open && (
+              <h2 className="text-4xl font-bold text-white"> LitLib </h2>
+            )}
           </ListItem>
+
+          {children}
+
           <ListItem
             button
             onClick={handleDrawerToggle}
-            sx={{ justifyContent: 'space-between', marginBottom: 6 }}
+            sx={{ justifyContent: 'right', marginBottom: 6, marginTop: 'auto' }} // Push to bottom
           >
-            {open && <h2 className="navbar_title"> JU LIBRARY </h2>}
             {open ? (
-              <Icon>
-                <img src="/src/assets/icons/arrow-circle-left.svg" />
+              <Icon fontSize="large">
+                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%"/>
               </Icon>
             ) : (
-              <Icon>
-                <img src="/src/assets/icons/arrow-circle-right.svg" />
+              <Icon fontSize="large">
+                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%" className="rotate-180"/>
               </Icon>
             )}
           </ListItem>
-          {children}
         </List>
       </Box>
     </div>
