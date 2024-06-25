@@ -1,19 +1,13 @@
 import { useSelector } from 'react-redux'
 import { Box, Grid } from '@mui/material'
+import searchstyles from './SearchStyles'
 
 export const SearchBookList = () => {
   const bookList = useSelector((state) => state.searchBookList.books)
 
   return (
     <Box
-      sx={{ 
-        display: 'flex',
-        overflowX: 'auto',
-        scrollBehavior: 'smooth',
-        maxWidth: '75vw',
-        padding: 2,
-        boxSizing: 'border-box'
-      }}
+      sx={searchstyles.booklist}
     >
       <Grid container spacing={2} wrap="nowrap">
         {Object.keys(bookList).map((key) => {

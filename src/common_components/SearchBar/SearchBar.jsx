@@ -4,7 +4,8 @@ import { SearchDropdown } from './SearchDropdown'
 import { SearchToggle } from './SearchToggle'
 import { SearchBookList } from './SearchBookList'
 import { useDispatch } from 'react-redux'
-import { fetchBookList } from '/src/features/searchBookReducer/SearchBookReducer'
+import { fetchSearchQueryResult } from '/src/features/searchBookReducer/SearchBookReducer'
+import searchstyles from './SearchStyles';
 
 export const SearchBar = () => {
   // queryRef is used to store the previous search query
@@ -30,21 +31,16 @@ export const SearchBar = () => {
     if (event.key === 'Enter') {
       queryRef.current = searchQuery
       if (queryRef.current === '') return;
-      dispatch(fetchBookList(searchQuery, availability, sortBy))
+      dispatch(fetchSearchQueryResult(searchQuery, availability, sortBy))
     }
   }
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: 2,
-      }}
+      sx={searchstyles.root}
     >
       <Box
-        sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '70%' }}
+        sx={searchstyles.textfield}
       >
         <TextField
           variant="outlined"
@@ -62,19 +58,19 @@ export const SearchBar = () => {
           }}
         />
         { searchQuery==='' && <p className="text-bold mx-auto">Please enter a search query!</p> }
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      {/*<Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <p> Filter by: </p>
           <SearchToggle
             title="Availability"
             value={availability}
             setValue={setAvailability}
           />
-          {/*<SearchDropdown
+          <SearchDropdown
             title="Subject"
             options={['Physics', 'Chemistry', 'Mathematics']}
             value={subject}
             setValue={setSubject}
-          />*/}
+          />
           <p className="ml-5"> Sort by: </p>
           <SearchDropdown
             title="Sort"
@@ -82,7 +78,7 @@ export const SearchBar = () => {
             value={sortBy}
             setValue={setSortBy}
           />
-        </Box>
+        </Box>*/}
       </Box>
       <SearchBookList />
     </Box>

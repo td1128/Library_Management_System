@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import MuiBreadcrumbs from '../common_components/breadcrumbs/MuiBreadcrumbs'
-import ProfileMenu from '../common_components/ProfileMenu'
+import ProfileMenu from '../common_components/ProfileMenu/ProfileMenu'
 import Navbar from '../common_components/Navbar/Navbar'
 
 const Layout = ({ rootPath, navItems }) => {
@@ -9,8 +9,8 @@ const Layout = ({ rootPath, navItems }) => {
       <Navbar rootPath={rootPath} navItems={navItems} />
       <div className="flex flex-col w-full h-screen">
         <div className="flex justify-between px-2">
-            <MuiBreadcrumbs />
-            <ProfileMenu />
+          <MuiBreadcrumbs />
+          <ProfileMenu />
         </div>
         <Outlet />
       </div>
@@ -19,4 +19,3 @@ const Layout = ({ rootPath, navItems }) => {
 }
 
 export default Layout
-

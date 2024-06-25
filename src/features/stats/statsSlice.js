@@ -52,32 +52,33 @@ export default statsSlice.reducer
 
 const statPaths = [
   {
-    path: 'api/admin/stats/total-books',
+    path: 'total-books',
     action: setTotalBooks,
   },
   {
-    path: 'api/admin/stats/total-borrowed-this-month',
+    path: 'total-borrowed-this-month',
     action: setBooksBorrowed,
   },
   {
-    path: 'api/admin/stats/total-overdue',
+    path: 'total-overdue',
     action: setBooksOverdue,
   },
   {
-    path: 'api/admin/stats/total-issued-today',
+    path: 'total-issued-today',
     action: setIssuedToday,
   },
   {
-    path: 'api/admin/stats/total-returned-today',
+    path: 'total-returned-today',
     action: setReturnedToday,
   },
 ]
 
 export const fetchStats = () => async (dispatch) => {
   const apiURL = import.meta.env.VITE_APP_API_URL
+  const adminPath = import.meta.env.VITE_APP_ADMIN_PATH
   try {
     statPaths.forEach(async ({ path, action }) => {
-      const response = await fetch(`${apiURL}/${path}`)
+      const response = await fetch(`${apiURL}/${adminPath}/stats/${path}`)
       const data = await response.json()
       dispatch(action(data.totalBooks))
     })

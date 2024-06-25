@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
 import Icon from '@mui/material/Icon'
 import { useState } from 'react'
+import profilestyles from './ProfileStyles'
 
 export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -17,21 +18,16 @@ export default function ProfileMenu() {
     setAnchorEl(null)
   }
   return (
-    <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', marginRight: 2 }}>
+    <>
+      <Box sx={profilestyles.root}>
         <p> John Doe </p>
         <Tooltip title="Profile Menu">
           <Box
             onClick={handleClick}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              cursor: 'pointer',
-              ml: 2,
-            }}
+            sx={profilestyles.tooltip}
           >
             {' '}
-            <Avatar sx={{ width: 36, height: 36, mr: 1 }}>
+            <Avatar sx={profilestyles.avatar}>
               <Icon>
                 <img
                   src="/src/assets/icons/profile2-linear.png"
@@ -51,33 +47,7 @@ export default function ProfileMenu() {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            bgcolor: '#CCCCCC',
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&::before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: '#CCCCCC',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
+        PaperProps={profilestyles.paperprops}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
@@ -85,6 +55,6 @@ export default function ProfileMenu() {
         <MenuItem onClick={handleClose}>Change Password</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   )
 }
