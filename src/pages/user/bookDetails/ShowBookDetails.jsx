@@ -1,9 +1,10 @@
-import { React, useState, useRef } from 'react'
+import { React, useState, useRef, useEffect } from 'react'
 import './BookDetailsDesign.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark, faCircleDot, faCircle } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchRelatedBookList } from '../../../features/relatedBoolReducer/RelatedBookReducer';
 
 //Modal component material ui
 import Box from '@mui/material/Box';
@@ -46,24 +47,29 @@ const style = {
 
 //This component accepts ISBN no of the book as props.
 export default function ShowBookDetails(props) {
-  const isbn_no = "978-3-16-148410-1";//TODO pops.isbn
-  //Getting book list from book list state
+  const isbn_no = "978-0-19-852663-6";//TODO pops.book.isbn
   const dispatch = useDispatch();
-  const bookList = useSelector((state) => state.relatedBookList.books);
-  const book = bookList[isbn_no]
-  // console.log("book: ",book);
-  // console.log("book list: ",bookList);
+
+  useEffect(() => {
+    dispatch(fetchRelatedBookList(isbn_no));
+  }, [isbn_no])
+
+  //Getting book list from book list state
+  const relatedBookList = useSelector((state) => state.relatedBookList.books);
+  console.log("Related books : ", relatedBookList);
+
+  // const book = bookList[isbn_no];//TODO props.book
+  const book = { isbn: '978-3-16-148410-1', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", availability: true };
 
   //Book details
   const author = book.author;
   const book_title = book.title;
   const date_publication = book.dateOfPublication;
   const des = book.description;
-  // const des = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni eligendi, neque nemo labore autem error aliquam officiis corporis commodi earum nisi saepe dolores voluptatum quo non impedit perferendis harum dignissimos";
   const publisher = book.publisher;
   const avl = book.availability;
-  
-  const [availability,setAvailability] = useState(avl);
+
+  const [availability, setAvailability] = useState(avl);
   setTimeout(() => {
     setAvailability(false);
   }, 5000);
@@ -72,7 +78,7 @@ export default function ShowBookDetails(props) {
   const title = 'Check out this amazing book ';
   const description = 'Animesh share a book with you.';
 
-  const book_list = ["ajflajf", "jfaoj", "kfjajo","fjajofj", "kjfjoj", "kafo;j", "kafjofj", "lkjfjjf"];
+  const book_list = ["ajflajf", "jfaoj", "kfjajo", "fjajofj", "kjfjoj", "kafo;j", "kafjofj", "lkjfjjf"];
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -98,8 +104,25 @@ export default function ShowBookDetails(props) {
     downRef.current.style.display == "none" ? downRef.current.style.display = "inline" : downRef.current.style.display = "none";
   }
 
-  const handleAddtoWishlist = () => {
+  const handleAddtoWishlist = async () => {
     heartRef.current.style.color = 'rgb(241, 134, 134)';
+    const apiURL = import.meta.env.VITE_APP_API_URL
+    // console.log("api url: ", apiURL);
+    const memberId = 28;//TODO 
+    const data = { "sub_name": `${book_title}` };
+    try {
+      const response = await fetch(`${apiURL}/api/user/profile/add/fav-sub/${memberId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data), // Convert the data object to a JSON string
+      });
+      const json = await response.json()
+      console.log("Response for add to favorite books : ", json);
+    } catch (error) {
+      console.log('Error while requesing for add to favorite books: ', error)
+    }
   }
   const handleShare = () => {
     shareRef.current.click();
@@ -173,25 +196,24 @@ export default function ShowBookDetails(props) {
         <div className="book_details_section">
           <div className="book_features">
 
-          {/* <FontAwesomeIcon className='  text-red-500 h-5 w-5 mb-3' icon={faCircleDot} /> */}
+            {/* <FontAwesomeIcon className='  text-red-500 h-5 w-5 mb-3' icon={faCircleDot} /> */}
 
-            <span className="book_title">{book_title}<FontAwesomeIcon className=' text-green-500 h-5 w-5 mb-4' icon={faCircle} /></span>
+            <span className="book_title">{book_title}<FontAwesomeIcon className=' text-green-500 h-3 w-3 mb-4 ' icon={faCircle} /></span>
             <span className='author'>by  {author}</span>
             <span className='description'>{details.length > 200 ? details : details + "...."}</span>
             {des.length > 30 ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <FontAwesomeIcon ref={downRef} icon={faAngleDown} /><FontAwesomeIcon style={{ display: "none" }} ref={upRef} icon={faAngleUp} /></div> : null}
-            
+
             <span className='mt-2 heading'>Publisher: <span className='value'>{publisher}</span></span>
             <span className='heading'>Date of publication: <span className='value'>{date_publication}</span></span>
             <span className='heading'>ISBN No: <span className='value'>{isbn_no}</span></span>
-            <span className='heading'>Availability: {availability?<FontAwesomeIcon className=' text-green-500' icon={faCheck} />:<FontAwesomeIcon className=' text-red-600' icon={faXmark} />}</span>
-          <span className="related_books text-amber-700 mt-2 ">Related books</span>
-          <div className="related_books flex flex-wrap flex-row">
-            {
-              book_list.map((e,id)=>{
-                return <MediaCard key={id}/>
-              })
-            }
-          </div>
+            <span className='heading'>Availability: {availability ? <FontAwesomeIcon className=' text-green-500' icon={faCheck} /> : <FontAwesomeIcon className=' text-red-600' icon={faXmark} />}</span>
+            <span className="related_books text-amber-700 mt-2 ">Related books</span>
+            <div className="related_books flex flex-wrap flex-row">
+              {Object.entries(relatedBookList).map(([isbn, book]) => (
+                <MediaCard key={isbn} isbn={isbn} book={book} />
+              ))}
+
+            </div>
           </div>
           <div onClick={handleBackButton} className="back_button border h-8 p-2 rounded-full flex justify-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
             <FontAwesomeIcon icon={faArrowLeft} className='' />

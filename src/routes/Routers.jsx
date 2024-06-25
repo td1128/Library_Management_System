@@ -4,6 +4,7 @@ import { AdminHome, Transaction, Settings } from '../pages/admin';
 import ShowBookDetails from '../pages/user/bookDetails/ShowBookDetails'
 import UserLayout from './UserLayout';
 import AdminLayout from './AdminLayout';
+import AdminBookDetails from '../pages/admin/adminBookDetails/AdminBookDetails';
 
 const Routers = () => {
   return (
@@ -20,6 +21,7 @@ const Routers = () => {
           <Route index element={<AdminHome />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="book" element={<AdminBookDetails />} />  
         </Route>
       </Route>
     </Routes>
