@@ -79,7 +79,7 @@ const NavbarOption = ({
         )}
       </Box>
       {open && (
-        <Collapse in={!collapsed} timeout="auto" unmountOnExit>
+        <Collapse in={!collapsed} timeout="auto" unmountOnExit sx={{ width:"100%" }}>
           {subPaths.map((subPath, index) => (
             <div key={index} className="flex flex-col w-full">
               <NavbarSubOption
