@@ -11,8 +11,8 @@ import Routers from './routes/Routers';
 function App() {
   return (
     <Provider store={store}>
-      <MuiBreadcrumbs/>
       <BrowserRouter >
+        <MuiBreadcrumbs />
         <Routers/>
       </BrowserRouter>
     </Provider>
