@@ -2,6 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 import { UserHome, Profile, Help } from "../pages/user";
 import { AdminHome } from "../pages/admin";
 import { Routes } from "react-router-dom";
+import IssueNotice from "../pages/admin/IssueNotice";
 
 
 const Routers = () => {
@@ -18,6 +19,7 @@ const Routers = () => {
               <Route index element={<AdminHome />} />
               {/* <Route path="transaction" element={<Transaction />} /> */}
               {/* <Route path="settings" element={<Settings />} /> */}
+              <Route path="issue-notice" element={<IssueNotice/>} />
             </Route>
           </Route> 
       </Routes>
