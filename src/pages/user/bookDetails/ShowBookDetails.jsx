@@ -1,16 +1,26 @@
 import { React, useState, useRef, useEffect } from 'react'
 import './BookDetailsDesign.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark, faCircleDot, faCircle } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from "react-router-dom";
+import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark, faCircleDot, faCircle, faL } from '@fortawesome/free-solid-svg-icons'//Use material ui;
+import { unstable_useViewTransitionState, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRelatedBookList } from '../../../features/relatedBoolReducer/RelatedBookReducer';
 
+
+//Material ui icons
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 //Modal component material ui
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+
+//Loading component
+import CircularProgress from '@mui/material/CircularProgress';
 
 //Card component
 import MediaCard from './card_body';
@@ -52,33 +62,35 @@ export default function ShowBookDetails(props) {
 
   useEffect(() => {
     dispatch(fetchRelatedBookList(isbn_no));
-  }, [isbn_no])
+  }, [dispatch])
 
-  //Getting book list from book list state
-  const relatedBookList = useSelector((state) => state.relatedBookList.books);
-  console.log("Related books : ", relatedBookList);
-
+// dispatch(fetchRelatedBookList(isbn_no))
   // const book = bookList[isbn_no];//TODO props.book
-  const book = { isbn: '978-3-16-148410-1', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", availability: true };
+  const book = {shelving_no: "sh-2-4", isbn: '978-3-16-148410-1', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", no_of_copies: 1 };
 
   //Book details
+  const shelVingNo = book.shelving_no;
   const author = book.author;
   const book_title = book.title;
   const date_publication = book.dateOfPublication;
   const des = book.description;
   const publisher = book.publisher;
-  const avl = book.availability;
+  const noOfCopies = book.no_of_copies;
 
-  const [availability, setAvailability] = useState(avl);
-  setTimeout(() => {
-    setAvailability(false);
-  }, 5000);
+  //Getting book list from book list state
+  const relatedBookList =  useSelector((state) => state.relatedBookList.books);
+  const loading = useSelector((state)=> state.relatedBookList.loading);
+  console.log("Related books : ", relatedBookList);
 
-  const currentPage = "https://images.app.goo.gl/Nzg1kKwumfDiR3qB8";
+
+  //Share modal details for thumbnail
+  const currentPage = window.location.href;// Page location.
+  console.log("page: ",currentPage);
   const title = 'Check out this amazing book ';
-  const description = 'Animesh share a book with you.';
+  const DESCRIPTION_LAST = "share a book with you.";
+  const USER_NAME = 'Animesh';//This will come from profile reducer.
+  const description = USER_NAME+DESCRIPTION_LAST;
 
-  // const book_list = ["ajflajf", "jfaoj", "kfjajo", "fjajofj", "kjfjoj", "kafo;j", "kafjofj", "lkjfjjf"];
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -91,9 +103,8 @@ export default function ShowBookDetails(props) {
   const heartRef = useRef();
   const shareRef = useRef();
 
-  // const cd = ["abc","cddd","dkj","knf","klfjaoj","kfaoj",";lkjfja","kofajf"];
-
-  const [details, setDetails] = useState(des.substring(0, 150));
+  const description_length = 150;
+  const [details, setDetails] = useState(des.substring(0, description_length));
   const [read, setRead] = useState("More");
 
   const handleMoreDetails = () => {
@@ -105,12 +116,12 @@ export default function ShowBookDetails(props) {
   }
 
   const handleAddtoWishlist = async () => {
-    heartRef.current.style.color = 'rgb(241, 134, 134)';
+    heartRef.current.style.color = 'rgb(241, 134, 134)';//classname added 
     const apiURL = import.meta.env.VITE_APP_API_URL
     // console.log("api url: ", apiURL);
     const memberId = 28;//TODO 
     const data = { "sub_name": `${book_title}` };
-    try {
+    try {//change api call 
       const response = await fetch(`${apiURL}/api/user/profile/add/fav-sub/${memberId}`, {
         method: 'POST',
         headers: {
@@ -178,16 +189,14 @@ export default function ShowBookDetails(props) {
       </div>
 
       <div className="container">
-        {/* <div className="navbar">This is navbar</div> */}
-
         <div className="book_section">
           <div className="book_image">
             <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
           </div>
           <div className="buttons_section">
-            <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full hover:text-red-300"><FontAwesomeIcon ref={heartRef} icon={faHeart} className='icon mr-1' />Add to wish list</button>
-            <div onClick={handleShare} className="share_hover bg-blue-100 ml-4 mt-1 inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
-              <FontAwesomeIcon icon={faShareNodes} className='share_icon share_hover' />
+            <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full hover:text-red-300"> <FavoriteIcon ref={heartRef} className='icon'/> Add to wish list</button>
+            <div onClick={handleShare} className="share_hover bg-blue-100 ml-4  inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
+              <ShareOutlinedIcon className='share_icon share_hover'/>
             </div>
           </div>
         </div>
@@ -196,27 +205,35 @@ export default function ShowBookDetails(props) {
         <div className="book_details_section">
           <div className="book_features">
 
-            {/* <FontAwesomeIcon className='  text-red-500 h-5 w-5 mb-3' icon={faCircleDot} /> */}
+            <span className="book_title">{book_title} <span className={`noOfCopies ${noOfCopies>0?'in_stock':'out_stock'}`}>{noOfCopies>0?"In Stock":"Out of Stock"}</span></span>
 
-            <span className="book_title">{book_title}<FontAwesomeIcon className=' text-green-500 h-3 w-3 mb-4 ' icon={faCircle} /></span>
             <span className='author'>by  {author}</span>
-            <span className='description'>{details.length > 200 ? details : details + "...."}</span>
-            {des.length > 30 ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <FontAwesomeIcon ref={downRef} icon={faAngleDown} /><FontAwesomeIcon style={{ display: "none" }} ref={upRef} icon={faAngleUp} /></div> : null}
+            
+            <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{publisher}</span></span>
+            <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{date_publication}</span></span>
+            <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{isbn_no}</span></span>
+            <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{shelVingNo}</span></span>
+            <span className='place_holder mt-1'>No of copies: <span className='place_value'>{noOfCopies}</span></span>
+            
 
-            <span className='mt-2 heading'>Publisher: <span className='value'>{publisher}</span></span>
-            <span className='heading'>Date of publication: <span className='value'>{date_publication}</span></span>
-            <span className='heading'>ISBN No: <span className='value'>{isbn_no}</span></span>
-            <span className='heading'>Availability: {availability ? <FontAwesomeIcon className=' text-green-500' icon={faCheck} /> : <FontAwesomeIcon className=' text-red-600' icon={faXmark} />}</span>
-            <span className="related_books text-amber-700 mt-2 ">Related books</span>
-            <div className="related_books flex flex-wrap flex-row">
-              {Object.entries(relatedBookList).map(([isbn, book]) => (
+            <span className='place_holder mt-2'>Description:
+
+            <span className='description place_value ml-1 font-light'>{details.length > 200 ? details : details + "...."}</span>
+            </span>
+            {des.length > 30 ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef}/><ExpandLessOutlinedIcon ref={upRef} style={{display:'none'}}/> </div> : null}
+
+            <span className="related_books_heading mt-2 ">Related books</span>
+            <div className="related_books flex flex-wrap flex-row mt-4">
+              {loading === false?Object.entries(relatedBookList).map(([isbn, book]) => (
                 <MediaCard key={isbn} isbn={isbn} book={book} />
-              ))}
+            )):<Box sx={{ display: 'flex' }} className="loading_style">
+            <CircularProgress />
+          </Box>}
 
             </div>
           </div>
-          <div onClick={handleBackButton} className="back_button border h-8 p-2 rounded-full flex justify-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
-            <FontAwesomeIcon icon={faArrowLeft} className='' />
+          <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
+            <ArrowBackOutlinedIcon/>
           </div>
         </div>
 

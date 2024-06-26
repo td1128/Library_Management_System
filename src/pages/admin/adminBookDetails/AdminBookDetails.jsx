@@ -49,7 +49,6 @@ const style = {
 };
 
 import { fetchRelatedBookList } from '../../../features/relatedBoolReducer/RelatedBookReducer';
-import { setInitialState } from '../../../features/relatedBoolReducer/RelatedBookReducer';
 
 //This component accepts ISBN no of the book as props.
 export default function AdminBookDetails(props) {

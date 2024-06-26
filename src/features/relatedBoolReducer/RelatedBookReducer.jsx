@@ -10,23 +10,21 @@ const initialArray = [
 
 // Convert array to object
 const initialState = {
-    books: initialArray.reduce((acc, item) => {
-        // console.log("item: ",item);
-        acc[item.isbn] = item;
-        return acc;
-    }, {})
+    books: [],
+    loading: true
 };
 
 const relatedBookListSlice = createSlice({
     name: 'bookList',
     initialState,
     reducers: {
-        setInitialState: (state, action)=>{
+        setRelatedBookList: (state, action)=>{//change the action name(done)
             const bookArray = action.payload;
             state.books = bookArray.reduce((acc, item) => {
                 acc[item.isbn] = item;
                 return acc;
-            }, {})
+            }, {});
+            state.loading = false;
         },
         setBookDetails: (state, action) => {
             const { key, value } = action.payload;
@@ -39,7 +37,7 @@ const relatedBookListSlice = createSlice({
     }
 });
 
-export const { setBookDetails, removeBookDetails, setInitialState } = relatedBookListSlice.actions;
+export const { setBookDetails, removeBookDetails, setRelatedBookList } = relatedBookListSlice.actions;
 export default relatedBookListSlice.reducer;
 
 export const fetchRelatedBookList =
@@ -50,7 +48,7 @@ export const fetchRelatedBookList =
         `${apiURL}/api/user/books/related-books/isbn/${isbn}`
       )
       const data = await response.json()
-      dispatch(setInitialState(data))
+      dispatch(setRelatedBookList(data))
     } catch (error) {
       console.log('Error while fetching related books: ', error)
     }
