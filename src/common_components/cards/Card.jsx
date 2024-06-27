@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import './style.css'
+import './cardStyle.css'
 import { useSelector, useDispatch } from 'react-redux'
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone'
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
 
 const Card = ({ pic, isbn_no }) => {
+  
   const [isFavorite, setIsFavorite] = useState(false)
 
   const toggleFavorite = () => {
@@ -40,11 +41,11 @@ const Card = ({ pic, isbn_no }) => {
       </div>
       <div className="flex gap-x-px custom-buttons">
         <button className="custom-stylebtn" onClick={toggleFavorite}>
-          <FavoriteTwoToneIcon
+          <FavoriteIcon
             style={{
               width: '1.5vw',
               height: '1.5vw',
-              color: isFavorite ? 'rgb(174, 39, 61)' : 'grey',
+              color: isFavorite ? '#d2324e' : 'grey',
             }}
           />
           <p>WishList</p>

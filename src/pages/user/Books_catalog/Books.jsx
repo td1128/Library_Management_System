@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
 
-import './style.css'
+import './bookStyle.css'
 
 
 const Books = () => {
