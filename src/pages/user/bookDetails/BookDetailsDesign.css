@@ -11,17 +11,12 @@
     width: 100%;
     height: 92vh;
   }
-  /* .navbar{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    background-color: grey;
-  } */
+
   .book_section{
     grid-column-start: 1;
     grid-column-end: 3;
     padding: 8px;
-    margin-top: 50px;
-    /* background-color: blue; */
+    margin-top: 12px;
   }
   .book_details_section{
     padding: 10px;
@@ -49,12 +44,7 @@
     border-radius: 15px;
 
   }
-  .icon{
-    color: rgb(235, 215, 215);
-  }
-  .icon:hover{
-    color: rgb(241, 134, 134);
-  }
+
   .buttons_section{
     margin-top: 1.8rem;
     margin-left: 1.5rem;
@@ -66,9 +56,7 @@
     /* font-weight: bolder; */
     color: rgb(128, 16, 16);
 }
-.green_dot{
-  box-shadow: 2px 8px green ;
-}
+
 .author{
     /* font-family: "Lora", "serif"; */
     font-family: "Merriweather", "serif";
@@ -86,6 +74,10 @@
 .share_hover:hover{
   color: white;
 
+}
+.heart_icon{
+  color: rgb(241, 134, 134);
+  font-size: 2rem;
 }
 
 .related_books_heading{
@@ -146,4 +138,8 @@
 .out_stock{
   border: 2px solid rgb(222, 76, 76);
   background-color: rgb(230, 180, 180);
+}
+
+.margin_left{
+  margin-left: 8px;
 }

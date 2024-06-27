@@ -20,8 +20,7 @@
     grid-column-start: 1;
     grid-column-end: 3;
     padding: 8px;
-    margin-top: 50px;
-    /* background-color: blue; */
+    margin-top: 12px;
   }
   .book_details_section{
     padding: 10px;
@@ -40,7 +39,7 @@
   }
 
   .book_image{
-    height: 70%;
+    height: 60%;
     width: 100%;
 }
 .image{
@@ -49,12 +48,7 @@
     border-radius: 15px;
 
   }
-  .icon{
-    color: rgb(235, 215, 215);
-  }
-  .icon:hover{
-    color: rgb(241, 134, 134);
-  }
+
   .buttons_section{
     margin-top: 1.8rem;
     margin-left: 1.5rem;
@@ -77,24 +71,6 @@
 .more:hover{
     cursor: pointer;
 }
-.share_icon{
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-.share_hover:hover{
-  color: white;
-
-}
-.related_books{
-  /* font-family: "Libre Baskerville", "serif"; */
-  /* font-family: "Lobster", "sans-serif"; */
-  /* font-family: "Satisfy", "cursive"; */
-    font-family: "Lora", "serif";
-
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
-}
 
 .heading{
   font-size: 1.6rem;
@@ -114,7 +90,7 @@
 }
 
 .edit_button{
-    width: 30%;
+    width: 80%;
 }
 .input_field{
     border: 1px solid black;

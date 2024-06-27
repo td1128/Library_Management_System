@@ -84,9 +84,10 @@ export default function ShowBookDetails(props) {
 
 
   //Share modal details for thumbnail
-  const currentPage = window.location.href;// Page location.
+  // const currentPage = window.location.href;// Page location.
+  const currentPage = 'https://images.app.goo.gl/zSMvgT6JDKijd8VL9';
   console.log("page: ",currentPage);
-  const title = 'Check out this amazing book ';
+  const title = ' Check out this amazing book \n';
   const DESCRIPTION_LAST = "share a book with you.";
   const USER_NAME = 'Animesh';//This will come from profile reducer.
   const description = USER_NAME+DESCRIPTION_LAST;
@@ -106,6 +107,7 @@ export default function ShowBookDetails(props) {
   const description_length = 150;
   const [details, setDetails] = useState(des.substring(0, description_length));
   const [read, setRead] = useState("More");
+  const [heart_class, setHeartClass] = useState('');
 
   const handleMoreDetails = () => {
     details == des ? setDetails(des.substring(0, 150)) : setDetails(des);
@@ -116,21 +118,19 @@ export default function ShowBookDetails(props) {
   }
 
   const handleAddtoWishlist = async () => {
-    heartRef.current.style.color = 'rgb(241, 134, 134)';//classname added 
+    setHeartClass('heart_icon')
     const apiURL = import.meta.env.VITE_APP_API_URL
-    // console.log("api url: ", apiURL);
     const memberId = 28;//TODO 
-    const data = { "sub_name": `${book_title}` };
-    try {//change api call 
-      const response = await fetch(`${apiURL}/api/user/profile/add/fav-sub/${memberId}`, {
+
+    try {
+      const response = await fetch(`${apiURL}/api/user/books/wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data), // Convert the data object to a JSON string
       });
       const json = await response.json()
-      console.log("Response for add to favorite books : ", json);
+      console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json}`);
     } catch (error) {
       console.log('Error while requesing for add to favorite books: ', error)
     }
@@ -158,29 +158,29 @@ export default function ShowBookDetails(props) {
               Share one item
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <EmailShareButton quote={`${title} ${description}`}
+              <EmailShareButton title={title}
                 hashtag="#example" url={currentPage}>
                 <EmailIcon size={40} round={true} />
               </EmailShareButton>
 
               <WhatsappShareButton title={title} descriptionWrapper={description}
-                hashtag="#share" url={currentPage} style={{ marginLeft: '8px' }}>
+                hashtag="#share" url={currentPage} className='margin_left'>
                 <WhatsappIcon size={40} round={true} />
               </WhatsappShareButton>
 
-              <FacebookShareButton url={currentPage} style={{ marginLeft: '8px' }}>
-                <FacebookIcon size={40} round={true} />
+              <FacebookShareButton title={title} url={currentPage} >
+                <FacebookIcon size={40} round={true} className='margin_left'/>
               </FacebookShareButton>
 
-              <LinkedinShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+              <LinkedinShareButton title={title} url={currentPage} className='margin_left'>
                 <LinkedinIcon size={40} round={true} />
               </LinkedinShareButton>
 
-              <TelegramShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+              <TelegramShareButton title={title} url={currentPage} className='margin_left'>
                 <TelegramIcon size={40} round={true} />
               </TelegramShareButton>
 
-              <TwitterShareButton url={currentPage} style={{ marginLeft: '8px' }}>
+              <TwitterShareButton title={title} url={currentPage} className='margin_left'>
                 <XIcon size={40} round={true} />
               </TwitterShareButton>
             </Typography>
@@ -194,7 +194,7 @@ export default function ShowBookDetails(props) {
             <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
           </div>
           <div className="buttons_section">
-            <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full hover:text-red-300"> <FavoriteIcon ref={heartRef} className='icon'/> Add to wish list</button>
+            <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded-full" ><FavoriteIcon ref={heartRef} className={`${heart_class} `}/>  Add to wish list</button>
             <div onClick={handleShare} className="share_hover bg-blue-100 ml-4  inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
               <ShareOutlinedIcon className='share_icon share_hover'/>
             </div>
