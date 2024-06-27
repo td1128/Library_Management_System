@@ -49,6 +49,7 @@
   padding: 0px;
   font-size: var(--font2);
   max-height: 3.5vw;
+  max-width: fit-content;
   overflow: hidden;
 }
 
@@ -56,6 +57,7 @@
   padding: 0px;
   font-size: var(--font1);
   max-height: 1.4vw;
+  max-width: fit-content;
   overflow: hidden;
 }
 
