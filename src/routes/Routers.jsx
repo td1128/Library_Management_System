@@ -13,7 +13,7 @@ const Routers = () => {
         <Route index element={<h1> Library Management System </h1>} />
         <Route path="/user/*" element={<UserLayout />}>
           <Route index element={<UserHome />} />
-          <Route path="book/viewdetails" element={<ShowBookDetails />} />  
+          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails />} />  
           <Route path="profile" element={<Profile />} />
           <Route path="help" element={<Help />} />
         </Route>

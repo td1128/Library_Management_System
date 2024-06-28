@@ -1,8 +1,6 @@
 import { React, useState, useRef, useEffect } from 'react'
 import './BookDetailsDesign.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faAngleDown, faAngleUp, faShareNodes, faArrowLeft, faCheck, faXmark, faCircleDot, faCircle, faL } from '@fortawesome/free-solid-svg-icons'//Use material ui;
-import { unstable_useViewTransitionState, useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRelatedBookList } from '../../../features/relatedBoolReducer/RelatedBookReducer';
 
@@ -60,8 +58,18 @@ export default function ShowBookDetails(props) {
   const isbn_no = "978-0-19-852663-6";//TODO pops.book.isbn
   const dispatch = useDispatch();
 
+  const params = useParams();
+  const isbn = params.isbn;
+  console.log("isbn: ",isbn);
+
   useEffect(() => {
-    dispatch(fetchRelatedBookList(isbn_no));
+    if(isbn.length === 0){
+      navigate("/")
+    }
+    else{
+
+      dispatch(fetchRelatedBookList(isbn_no));
+    }
   }, [dispatch])
 
 // dispatch(fetchRelatedBookList(isbn_no))
@@ -84,8 +92,8 @@ export default function ShowBookDetails(props) {
 
 
   //Share modal details for thumbnail
-  // const currentPage = window.location.href;// Page location.
-  const currentPage = 'https://images.app.goo.gl/zSMvgT6JDKijd8VL9';
+  const currentPage = window.location.href;// Page location.
+  // const currentPage = 'https://images.app.goo.gl/zSMvgT6JDKijd8VL9';
   console.log("page: ",currentPage);
   const title = ' Check out this amazing book \n';
   const DESCRIPTION_LAST = "share a book with you.";
