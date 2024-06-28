@@ -57,26 +57,20 @@ const style = {
 
 //This component accepts ISBN no of the book as props.
 export default function ShowBookDetails(props) {
-  const isbn_no = "978-0-19-852663-6";//TODO pops.book.isbn
+  const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
   const dispatch = useDispatch();
 
-  const params = useParams();
-  const isbn = params.isbn;
-  console.log("isbn: ",isbn);
+  // const params = useParams();
+  // const isbn = params.isbn;
+  // console.log("isbn: ",isbn);
 
   useEffect(() => {
-    if(isbn.length === 0){
-      navigate("/")
-    }
-    else{
-
-      dispatch(fetchRelatedBookList(isbn_no));
-    }
+    dispatch(fetchRelatedBookList(isbn_no));
   }, [dispatch])
 
 // dispatch(fetchRelatedBookList(isbn_no))
   // const book = bookList[isbn_no];//TODO props.book
-  const book = {shelving_no: "sh-2-4", isbn: '978-3-16-148410-1', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", no_of_copies: 1 };
+  const book = {shelving_no: "sh-2-4", isbn: '978-0-07-140194-4', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", no_of_copies: 1 };
 
   //Book details
   const shelVingNo = book.shelving_no;
