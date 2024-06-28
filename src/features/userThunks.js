@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchUserDetails } from '../api';
+import { fetchUserDetails, updateUserDetails } from '../api';
 
 export const fetchUserData = createAsyncThunk(
   'user/fetchData',
@@ -8,7 +8,19 @@ export const fetchUserData = createAsyncThunk(
       const data = fetchUserDetails( studentID );
       return data;
     } catch( error ) {
-      return thunkAPI.rejectWithValue( error.response )
+      return thunkAPI.rejectWithValue( error.response );
+    }
+  }
+)
+
+export const updateUserData = createAsyncThunk(
+  'user/updateUserDetails',
+  async ( studentDetails, thunkAPI ) => {
+    try {
+      const updateResponse = updateUserDetails( studentDetails );
+      return updateResponse;
+    } catch ( error ) {
+      return thunkAPI.rejectWithValue( error.message );
     }
   }
 )
