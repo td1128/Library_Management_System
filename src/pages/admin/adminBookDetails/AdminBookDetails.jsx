@@ -1,6 +1,4 @@
 import { React, useState, useRef, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -17,31 +15,24 @@ import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ModeIcon from '@mui/icons-material/Mode';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 //This component accepts ISBN no of the book as props.
 export default function AdminBookDetails(props) {
   const dispatch = useDispatch();
-  const book = { shelving_no: "sh-2-4", isbn: '978-3-16-148410-1', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", date_of_publication: "2023", publisher: "Mc Graw Hill", no_of_copies: 10 };
+  const apiURL= import.meta.env.VITE_APP_API_URL;
 
-
-  const isbn_no = "978-3-16-148410-1";//TODO pops.isbn
+  
+  const book = { shelving_no: "sh-2-4", isbn: '978-0-19-852663-6', cover_img: "https://www.pngkey.com/png/detail/350-3500680_placeholder-open-book-silhouette-vector.png", author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", date_of_publication: "2023", publisher: "Mc Graw Hill", no_of_copies: 10, edition:6 };//TODO props.book
 
   //Book details
   const des = book.description;
   const avl = book.availability;
+
+  //use state for the plus and minus buttons
+  const [isClickEnabled, setIsClickEnabled] = useState(false);
+  const [bgclass, setBgclass] = useState('bg-grey')
+
 
   const [author, setAuthor] = useState(book.author);
   const [book_title, setBookTitle] = useState(book.title);
@@ -51,6 +42,8 @@ export default function AdminBookDetails(props) {
   const [isbn, setIsbn] = useState(book.isbn);
   const [shelVingNo, setShelVingNo] = useState(book.shelving_no);
   const [noOfCopies, setNoOfCopies] = useState(book.no_of_copies);
+  const [edition, setEdition] = useState(book.edition);
+  const [cover_image, setCoverImage] = useState(book.cover_img);
 
   const [details, setDetails] = useState(book_description.substring(0, 150));
 
@@ -72,11 +65,12 @@ export default function AdminBookDetails(props) {
   const handleDescriptionChange = (e) => {
     setBookDescription(e.target.value);
     setDetails(e.taret.value)
-    console.log("des: ", book_description);
   }
   const handleDateOfPublicationChange = (e) => {
     setDateOfPublication(e.target.value);
-    console.log("date: ", date_publication);
+  }
+  const handleEditionChange = (e)=>{
+    setEdition(e.target.value);
   }
 
 
@@ -98,13 +92,14 @@ export default function AdminBookDetails(props) {
   const downRef = useRef();
   const editButtonRef = useRef();
 
-  // const cd = ["abc","cddd","dkj","knf","klfjaoj","kfaoj",";lkjfja","kofajf"];
+
+  const plusRef = useRef();
+  const minusRef = useRef();
 
   const [read, setRead] = useState("More");
 
   const handleMoreDetails = () => {
     details == book_description ? setDetails(book_description.substring(0, 150)) : setDetails(book_description);
-    // book_description.length<250 ? setDetails(des.substring(0, 150)) : setDetails(des);
     read == "More" ? setRead("Less") : setRead("More");
 
     upRef.current.style.display == "none" ? upRef.current.style.display = "inline" : upRef.current.style.display = "none";
@@ -119,22 +114,68 @@ export default function AdminBookDetails(props) {
     editButtonRef.current.click();
     console.log("called handle edit book");
   }
-  const handleSaveEditDetails = () => {
+  const handleSaveEditDetails = async() => {
     setShow(false);
-    console.log("called handle save edit details");
+    const data = {
+      "shelving_no": shelVingNo,
+      "isbn": isbn,
+      "date_of_publication": date_publication,
+      "edition": edition,
+      "description": book_description,
+      "title": book_title,
+      "cover_img": cover_image,
+      "author_name" : author,
+      "sub_name" : book_title
+    }
 
-    //put request body
-    // {
-    //   "shelving_no": "sh-0-5",
-    //   "isbn": "123-1-12755-028-0",
-    //   "date_of_publication": "18-09-2010",
-    //   "edition": 6,
-    //   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac tellus eget tortor commodo condimentum a ac odio",
-    //   "title": "myBook2",
-    //   "cover_img": "https://www.pngkey.com/png/detail/350-3500680_placeholder-open-book-silhouette-vector.png",
-    // "author_name" : "Abir",
-    //   "sub_name" : "Science"
-    // }
+    try {
+      const response = await fetch(`${apiURL}/api/admin/book/edit`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      const json = await response.text()
+      console.log(`Response for edit book details, isbn - ${isbn} :  ${json}`);
+    } catch (error) {
+      console.log('Error while requesing for edit book details: ', error)
+    }
+  }
+
+  const handleEditAvailability = ()=>{
+    setIsClickEnabled(true);
+    setBgclass('bg-red')
+  }
+  const handleSaveAvailability = async()=>{//Api respond with status code 500
+    setIsClickEnabled(false);
+    setBgclass('bg-grey');
+    try {
+      const response = await fetch(`${apiURL}/api/admin/book/update-availability?updated-count=${noOfCopies}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "isbn":{isbn}
+        })
+      });
+      if(response.status === 200){
+        //TODO dispatch(action)
+      }
+      const json = response.json();
+      console.log(`Response for update book availability, isbn - ${isbn} :  ${json}`);
+    } catch (error) {
+      console.log('Error while requesing for update book availability: ', error)
+    }
+  }
+
+  const handleIncrement= ()=>{
+    setNoOfCopies(noOfCopies+1);
+  }
+
+  const handleDecrement = ()=>{
+    setNoOfCopies(noOfCopies-1);
   }
 
   return (
@@ -172,6 +213,11 @@ export default function AdminBookDetails(props) {
             </div>
 
             <div className="take_input flex flex-row">
+              <label htmlFor="edition" className=' text-lg mr-2'>Edition:</label>
+              <input id='edition' type="text" className='input_field' value={edition} onChange={handleEditionChange} />
+            </div>
+
+            <div className="take_input flex flex-row">
               <label htmlFor="isbn" className=' text-lg mr-2'>ISBN:</label>
               <input id='isbn' type="text" className='input_field' value={isbn} onChange={handleIsbnChange} />
             </div>
@@ -195,8 +241,6 @@ export default function AdminBookDetails(props) {
       </div>
 
       <div className="container">
-        {/* <div className="navbar">This is navbar</div> */}
-
         <div className="book_section">
           <div className="book_image">
             <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
@@ -205,11 +249,13 @@ export default function AdminBookDetails(props) {
             <div className="flex flex-row  items-center">
               <span className='mr-2 text-red-900 font-bold text-lg'>Availability: </span>
               <div className=' w-24 h-8 flex flex-row justify-between items-center'>
-                <span className='flex justify-center items-center text-lg font-bold  w-8 h-8 bg-red-300'>-</span>
+                <span ref={minusRef} onClick={isClickEnabled===true?handleDecrement:null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${bgclass}`}>-</span>
                 <span className='flex justify-center items-center text-lg font-bold bg-red-200 w-8 h-8'>{noOfCopies}</span>
-                <span className='flex justify-center items-center text-lg font-bold  w-8 h-8 bg-red-300'>+</span>
+                <span ref={plusRef} onClick={isClickEnabled===true?handleIncrement:null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${bgclass}`}>+</span>
               </div>
-              <DriveFileRenameOutlineIcon className=' text-red-900 text-lg'/>
+              {
+                isClickEnabled===false?<DriveFileRenameOutlineIcon onClick={handleEditAvailability} className=' text-red-900 text-2xl cursor-pointer border-2 border-red-800 ml-2 rounded-sm hover:bg-red-100'/>:<DoneAllIcon onClick={handleSaveAvailability} className=' text-red-900 text-2xl cursor-pointer border-2 border-red-800 ml-2 rounded-sm hover:bg-red-100'/>
+              }
             </div>
             <button onClick={handleEditBook} className='edit_button bg-red-900 hover:bg-red-800 text-white font-bold p-2 rounded-full mt-3'> Edit book details <ModeIcon className='pen_icon'/></button>
 
@@ -226,7 +272,7 @@ export default function AdminBookDetails(props) {
 
             <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{publisher}</span></span>
             <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{date_publication}</span></span>
-            <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{isbn_no}</span></span>
+            <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{isbn}</span></span>
             <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{shelVingNo}</span></span>
 
 

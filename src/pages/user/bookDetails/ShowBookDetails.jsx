@@ -11,6 +11,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import AddIcon from '@mui/icons-material/Add';
+
 //Modal component material ui
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -138,13 +140,31 @@ export default function ShowBookDetails(props) {
         },
       });
       const json = await response.json()
-      console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json}`);
+      console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
     } catch (error) {
       console.log('Error while requesing for add to favorite books: ', error)
     }
   }
   const handleShare = () => {
     shareRef.current.click();
+  }
+  const handleReserveBook = async()=>{
+    console.log("called handle reserve book");
+    const apiURL = import.meta.env.VITE_APP_API_URL
+    const memberId = 28;//TODO 
+
+    try {
+      const response = await fetch(`${apiURL}/api/user/books/reserve/isbn/${isbn_no}/memberId/${memberId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const text = await response.text()
+      console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${text}`);
+    } catch (error) {
+      console.log('Error while requesing for reserving the book: ', error)
+    }
   }
 
   const handleBackButton = () => {
@@ -202,6 +222,7 @@ export default function ShowBookDetails(props) {
             <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
           </div>
           <div className="buttons_section">
+            <button onClick={handleReserveBook} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 mb-2 rounded-full" ><AddIcon/>Reserve Book</button>
             <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded-full" ><FavoriteIcon ref={heartRef} className={`${heart_class} `}/>  Add to wish list</button>
             <div onClick={handleShare} className="share_hover bg-blue-100 ml-4  inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
               <ShareOutlinedIcon className='share_icon share_hover'/>

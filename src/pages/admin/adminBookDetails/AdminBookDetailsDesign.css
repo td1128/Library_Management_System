@@ -98,3 +98,14 @@
     padding: 2px;
     margin-bottom: 5px;
 }
+
+.bg-red{
+  background-color: rgb(230, 150, 150);
+  cursor: pointer;
+}
+.bg-red:hover{
+  background-color: rgb(234, 129, 129);
+}
+.bg-grey{
+  background-color: rgb(230, 230, 230);
+}
