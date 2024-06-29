@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import { Help, Profile, UserHome } from '../pages/user';
 import { AdminHome, Transaction, Settings } from '../pages/admin';
-import UserLayout from './UserLayout';
-import AdminLayout from './AdminLayout';
+import Layout from './Layout';
+import { userNavItems, adminNavItems } from './NavigationPaths';
 import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
 
 const Routers = () => {
