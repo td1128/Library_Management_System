@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
 import { TextField, Button, Container, Stack } from '@mui/material';
 import { Link } from "react-router-dom"
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
 
-const ReturnForm = () => {
+const IssueForm = () => {
 
     const [memberID, setMemberID] = useState('')
     const [name, setName] = useState('')
@@ -17,26 +12,25 @@ const ReturnForm = () => {
     const [copyNumber, setCopyNumber] = useState('')
     const [issueDate, setIssueDate] = useState('')
     const [returnDate, setReturnDate] = useState('')
-    const [rnwRtrn, setRnwRtrn] = useState('')
 
     const handleMemberSearch = async () => {
         const res = await fetch(`https://library-management-system-f9gh.onrender.com/api/user/profile/${memberID}`)
         .then(res => res.json())
 
+        console.log(res);
+
         setName(res.member.first_name + ' ' + res.member.last_name) 
-
-        const books = await fetch(`https://library-management-system-f9gh.onrender.com/api/user/myBooks/current_books/memberId/${memberID}`)
-        .then(res => res.json())
-
-        console.log(books);
 
     }
 
     const handleBookSearch = async () => {
-        const res = await fetch(`https://library-management-system-ce6z.onrender.com/book/isbn/${isbn}`)
+        const res = await fetch(`https://library-management-system-ce6z.onrender.com/api/common/book/isbn/${isbn}`)
         .then(res => res.json())
 
         console.log(res);
+
+        setBook(res.book.title)
+        setCopyNumber(res.book.shelving_no)
     }
 
   return (
@@ -101,24 +95,9 @@ const ReturnForm = () => {
                         onChange={(e) => setCopyNumber(e.target.value)}
                     />
                 </div>
-                <div>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Renew/Return</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={rnwRtrn}
-                    label="Renew/Return"
-                    onChange={(event) => setRnwRtrn(event.target.value)}
-                    >
-                    <MenuItem value={"Renew"}>Renew</MenuItem>
-                    <MenuItem value={"Return"}>Return</MenuItem>
-                    </Select>
-                </FormControl>
-                </div>
                 <Button variant="outlined" color="secondary" type="submit">Issue</Button>
         </div>
   )
 }
 
-export default ReturnForm
+export default IssueForm

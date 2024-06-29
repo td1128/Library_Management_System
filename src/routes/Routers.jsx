@@ -2,6 +2,8 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 import { UserHome } from "../pages/user";
 import { AdminHome, Transaction } from "../pages/admin";
 import { Routes } from "react-router-dom";
+import IssueBook from "../pages/admin/transactions/routes/IssueBook";
+import ReturnBook from "../pages/admin/transactions/routes/ReturnBook";
 
 
 const Routers = () => {
@@ -16,7 +18,11 @@ const Routers = () => {
             </Route>
             <Route path="admin">
               <Route index element={<AdminHome />} />
-              <Route path="transactions" element={<Transaction />} />
+              <Route path="transactions">
+                <Route index element={<Transaction />} />
+                <Route path="issue" element={<IssueBook/>}/>
+                <Route path="return" element={<ReturnBook/>}/>
+              </Route>
               {/* <Route path="settings" element={<Settings />} /> */}
             </Route>
           </Route> 
