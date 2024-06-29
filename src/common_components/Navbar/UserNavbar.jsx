@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import NavbarOption from './NavbarOption'
 import NavbarMenu from './NavbarMenu'
-import {  useNavigate } from "react-router-dom";
 
 const userNavItems = [
   {
@@ -37,13 +36,6 @@ const userNavItems = [
 ]
 
 const UserNavbar = () => {
-  const navigate = useNavigate();
-  useEffect(()=>{
-    const location = window.location.href;
-    if(location === 'http://localhost:5173/user/book/viewdetails'){
-      navigate("/")
-    }
-  })
   const [open, setOpen] = useState(true)
   return (
     <NavbarMenu open={open} setOpen={setOpen}>
