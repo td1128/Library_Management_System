@@ -46,8 +46,10 @@ const style = {
     p: 4,
 };
 
+//Expect isbn no of the book as props.
 export default function UserButtonSection(props) {
-    const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
+    // const isbn_no = "978-0-07-140194-4";//TODO pops.isbn
+    const isbn_no = props.isbn;
 
     const heartRef = useRef();
     const shareRef = useRef();

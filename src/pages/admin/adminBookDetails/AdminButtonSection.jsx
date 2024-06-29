@@ -11,11 +11,13 @@ import './AdminBookDetailsDesign.css'
 
 import { toast } from 'react-toastify';
 
+//Expect the book object as props.
 export default function AdminButtonSection(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
 
   //TODO props.book
-  const book = { shelving_no: "sh-2-4", isbn: '978-0-19-852663-6', cover_img: "https://www.pngkey.com/png/detail/350-3500680_placeholder-open-book-silhouette-vector.png", author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", date_of_publication: "2023", publisher: "Mc Graw Hill", no_of_copies: 10, edition: 6 };//TODO props.book
+  // const book = { shelving_no: "sh-2-4", isbn: '978-0-19-852663-6', cover_img: "https://www.pngkey.com/png/detail/350-3500680_placeholder-open-book-silhouette-vector.png", author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", date_of_publication: "2023", publisher: "Mc Graw Hill", no_of_copies: 10, edition: 6 };//TODO props.book
+  const book = props.book;
 
   //use state for the plus and minus buttons
   const [isClickEnabled, setIsClickEnabled] = useState(false);
@@ -102,6 +104,7 @@ export default function AdminButtonSection(props) {
 
       if(response.status === 200){
         toast.success("Book details updated successfully.")
+        //TODO dispatch(action)
       }
       else{
         toast.error("Error! updating book details.");

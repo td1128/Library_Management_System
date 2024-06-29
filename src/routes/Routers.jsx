@@ -20,7 +20,7 @@ const Routers = () => {
           <Route index element={<AdminHome />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="book/viewdetails" element={<ShowBookDetails type={'admin'}/>} />  
+          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'admin'}/>} />  
         </Route>
       </Route>
     </Routes>
