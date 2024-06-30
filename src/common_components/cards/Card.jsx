@@ -5,17 +5,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
 
-const Card = ({ pic, isbn_no }) => {
+const Card = ({ pic, title, author }) => {
   
   const [isFavorite, setIsFavorite] = useState(false)
-
+  
   const toggleFavorite = () => {
     setIsFavorite((prevState) => !prevState)
   }
-
-  const dispatch = useDispatch()
-  const bookList = useSelector((state) => state.relatedBookList.books)
-  const book = bookList[isbn_no];
 
   return (
     <div className="custom-background">
@@ -32,11 +28,11 @@ const Card = ({ pic, isbn_no }) => {
       ></div>
       <div className="custom-name_section">
         
-        <Tooltip title={book.title} arrow style={{margin:'0px 0px',padding:'0px 0px'}}>
-          <h1 className="custom-book_name">{book.title}</h1>
+        <Tooltip title={title} arrow style={{margin:'0px 0px',padding:'0px 0px'}}>
+          <h1 className="custom-book_name">{title}</h1>
         </Tooltip>
-        <Tooltip title={book.author} arrow>
-          <h1 className="custom-author_name">{book.author}</h1>
+        <Tooltip title={author} arrow>
+          <h1 className="custom-author_name">{author}</h1>
         </Tooltip>
       </div>
       <div className="flex gap-x-px custom-buttons">
