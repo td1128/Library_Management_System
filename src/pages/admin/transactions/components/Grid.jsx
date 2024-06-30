@@ -1,33 +1,42 @@
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TemporaryDrawer from './Drawer';
 
 
 
 export const Grid = () => {
     // Row Data: The data to be displayed.
-    const [rowData, setRowData] = useState([
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-      { 'member id': 234, 'issue date': '25/06/2024', book: 'The Alchemist', 'due date': '25/07/2024', 'return date': '25/07/2024', status: 'Returned', fine: '0', actions: 'Renew/Return' },
-    ]);
+    const [rowData, setRowData] = useState([]);
+
+    useEffect(() => {
+      // fetch data
+      const dataFetch = async () => {
+        const data = await (
+          await fetch(
+            'https://library-management-system-f9gh.onrender.com/api/admin/transaction/history',
+          )
+        ).json();
+  
+        const newData = data.map((item) => {
+          return {
+            'member id': item.memberId,
+            'issue date': item.transaction.issue_date,
+            book: item.isbn,
+            'due date': item.transaction.due_date,
+            'return date': item.transaction.return_date,
+            status: item.transaction.status,
+            fine: item.transaction.fine,
+            actions: 'Renew/Return',
+          };
+        });
+
+        setRowData(newData);
+      };
+  
+      dataFetch();
+    }, []);
     
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([

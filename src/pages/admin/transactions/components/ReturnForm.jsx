@@ -6,16 +6,18 @@ import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { toast } from 'react-toastify';
 
 
 const ReturnForm = () => {
+
+    const date = new Date();
 
     const [memberID, setMemberID] = useState('')
     const [name, setName] = useState('')
     const [isbn, setIsbn] = useState('')
     const [book, setBook] = useState('')
     const [copyNumber, setCopyNumber] = useState('')
-    const [issueDate, setIssueDate] = useState('')
     const [returnDate, setReturnDate] = useState('')
     const [rnwRtrn, setRnwRtrn] = useState('')
 
@@ -23,21 +25,64 @@ const ReturnForm = () => {
         const res = await fetch(`https://library-management-system-f9gh.onrender.com/api/user/profile/${memberID}`)
         .then(res => res.json())
 
+        if(res.member){
+            toast.success('Member Found')
+        } else {
+            toast.error('Member Not Found')
+        }
+
         setName(res.member.first_name + ' ' + res.member.last_name) 
-
-        const books = await fetch(`https://library-management-system-f9gh.onrender.com/api/user/myBooks/current_books/memberId/${memberID}`)
-        .then(res => res.json())
-
-        console.log(books);
 
     }
 
     const handleBookSearch = async () => {
-        const res = await fetch(`https://library-management-system-ce6z.onrender.com/book/isbn/${isbn}`)
+        const res = await fetch(`https://library-management-system-ce6z.onrender.com/api/common/book/isbn/${isbn}`)
         .then(res => res.json())
 
         console.log(res);
+
+        if(res.book){
+            toast.success('Book Found')
+        } else {
+            toast.error('Book Not Found')
+        }
+
+        setBook(res.book.title)
     }
+
+    const handleSubmit = async (rtrnRnw) => { 
+
+        if(rtrnRnw === 'Return'){
+            const res = await fetch("https://library-management-system-f9gh.onrender.com/api/admin/transaction/return", {
+                method: "POST",
+                body: JSON.stringify({
+                    "membership_id" : memberID,
+                    "isbn" : isbn,
+                    "return_date" : `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+                    "copy_no" : 1,
+                    "lib_card_no" : 1
+            }),
+              });
+    
+              console.log(res);
+        } else {
+        const res = await fetch("https://library-management-system-f9gh.onrender.com/api/admin/transaction/issue", {
+            method: "PUT",
+            body: JSON.stringify({
+                    "membership_id": memberID,
+                    "isbn": isbn,
+                    "issue_date" : `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+                    "copy_no" : copyNumber,
+                    "status" : "issued",
+                    "lib_card_no" : 1,
+                    "due_date" : returnDate
+                    
+                }),
+          });
+
+          console.log(res);
+    }
+}
 
   return (
     <div>
@@ -101,22 +146,32 @@ const ReturnForm = () => {
                         onChange={(e) => setCopyNumber(e.target.value)}
                     />
                 </div>
-                <div>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Renew/Return</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={rnwRtrn}
-                    label="Renew/Return"
-                    onChange={(event) => setRnwRtrn(event.target.value)}
-                    >
-                    <MenuItem value={"Renew"}>Renew</MenuItem>
-                    <MenuItem value={"Return"}>Return</MenuItem>
-                    </Select>
-                </FormControl>
+                <div className=' flex space-x-4 mt-4'>
+                    <FormControl sx={{ minWidth: 240 }}>
+                        <InputLabel id="demo-simple-select-helper-label">Renew/Return</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="demo-simple-select-helper"
+                        value={rnwRtrn}
+                        label="Renew/Return"
+                        onChange={(event) => setRnwRtrn(event.target.value)}
+                        >
+                        <MenuItem value={"Renew"}>Renew</MenuItem>
+                        <MenuItem value={"Return"}>Return</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <TextField
+                        type="text"
+                        variant='outlined'
+                        color='secondary'
+                        label="DD-MM-YYYY"
+                        required
+                        fullWidth
+                        value={returnDate}
+                        onChange={(e) => setReturnDate(e.target.value)}
+                    />
                 </div>
-                <Button variant="outlined" color="secondary" type="submit">Issue</Button>
+                <Button variant="outlined" color="secondary" type="submit" onClick={() => {handleSubmit(rtrnRnw)}}>Submit</Button>
         </div>
   )
 }

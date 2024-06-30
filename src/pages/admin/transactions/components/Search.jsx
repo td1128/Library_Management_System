@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 export const Search = ()=>  {
   return (
@@ -14,6 +15,8 @@ export const Search = ()=>  {
             </Box>
         </Box>
         <Button sx={{width: '20ch', height: '5ch'}} variant="contained">Search</Button>
+        <Link to='/admin/transactions/issue'><Button sx={{width: '20ch', height: '5ch'}} variant="contained">Issue</Button></Link>
+        <Link to='/admin/transactions/return'><Button sx={{width: '20ch', height: '5ch'}} variant="contained">Return</Button></Link>
     </div>
   );
 }

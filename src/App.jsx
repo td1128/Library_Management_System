@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MuiBreadcrumbs from './common_components/breadcrumbs/MuiBreadcrumbs';
 import Routers from './routes/Routers';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <Provider store={store}>
@@ -13,6 +16,18 @@ function App() {
       <BrowserRouter >
         <Routers/>
       </BrowserRouter>
+      <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
     </Provider>
   )
 }
