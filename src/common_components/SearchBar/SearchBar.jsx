@@ -80,7 +80,7 @@ export const SearchBar = () => {
           />
         </Box>
       </Box>
-      <SearchBookList />
+      {/* <SearchBookList /> */}
     </Box>
   )
 }
