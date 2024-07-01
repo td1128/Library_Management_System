@@ -16,8 +16,8 @@ import RelatedBookSection from '../../pages/user/bookDetails/RelatedBookSection'
 
 //This component accepts the book as props.
 export default function ShowBookDetails(props) {
-  // const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
-  const isbn_no = props.book.isbn;
+  const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
+  // const isbn_no = props.book.isbn;
   const dispatch = useDispatch();
 
   // const params = useParams();
@@ -31,8 +31,8 @@ export default function ShowBookDetails(props) {
   }, [dispatch])
 
   //TODO props.book
-  // const book = { shelving_no: "sh-2-4", isbn: '978-0-07-140194-4', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", no_of_copies: 1 };
-  const book = props.book;
+  const book = { shelving_no: "sh-2-4", isbn: '978-0-07-140194-4', author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", dateOfPublication: "2023", publisher: "Mc Graw Hill", no_of_copies: 1 };
+  // const book = props.book;
 
   //Book details
   const shelVingNo = book.shelving_no;
