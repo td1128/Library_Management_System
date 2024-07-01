@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Help, Profile, UserHome } from '../pages/user';
-import { AdminHome, Transaction, Settings } from '../pages/admin';
+import { AdminHome, Transaction, Settings, AddBook } from '../pages/admin';
 import ShowBookDetails from '../pages/user/bookDetails/ShowBookDetails'
 import { userNavItems, adminNavItems } from './NavigationPaths'
 import Layout from './Layout'
@@ -20,6 +20,9 @@ const Routers = () => {
           <Route index element={<AdminHome />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="books">
+            <Route path="add" element={<AddBook />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
