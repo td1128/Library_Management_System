@@ -1,0 +1,24 @@
+.inputfield {
+    @apply flex flex-col justify-center gap-2 pr-4 
+}
+
+.image-upload {
+  @apply flex flex-col align-middle justify-between w-[95%] h-full max-h-[75vh];
+}
+
+.image-upload .placeholder {
+  @apply flex justify-center items-center w-full h-full bg-gray-300 cursor-auto
+}
+
+.image-upload .image-preview {
+  @apply w-full h-full object-cover
+}
+
+.image-upload .upload-button {
+  @apply flex justify-center bg-blue-500 text-white py-1 px-2 rounded-md cursor-pointer mt-10
+}
+
+.image-upload .upload-button:hover {
+  background-color: #0056b3;
+}
+
