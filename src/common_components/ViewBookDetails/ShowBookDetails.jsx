@@ -20,9 +20,9 @@ export default function ShowBookDetails(props) {
   // const isbn_no = props.book.isbn;
   const dispatch = useDispatch();
 
-  // const params = useParams();
-  // const isbn = params.isbn;
-  // console.log("isbn: ",isbn);
+  const params = useParams();
+  const isbn = params.isbn;
+  console.log("isbn: ",isbn);
 
   useEffect(() => {
     if (props.type === 'user') {
