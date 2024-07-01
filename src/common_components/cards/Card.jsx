@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
 
-const Card = ({ pic, isbn_no }) => {
+const Card = (props) => {
   
   const [isFavorite, setIsFavorite] = useState(false)
 
@@ -13,9 +13,10 @@ const Card = ({ pic, isbn_no }) => {
     setIsFavorite((prevState) => !prevState)
   }
 
-  const dispatch = useDispatch()
-  const bookList = useSelector((state) => state.relatedBookList.books)
-  const book = bookList[isbn_no];
+  // const dispatch = useDispatch()
+  // const bookList = useSelector((state) => state.relatedBookList.books)
+  // const book = bookList[isbn_no];
+  const book = props.book;
 
   return (
     <div className="custom-background">
@@ -27,7 +28,7 @@ const Card = ({ pic, isbn_no }) => {
           borderRadius: '1vw',
           aspectRatio: '2/2.5',
           width: '97%',
-          backgroundImage: `url(${pic})`,
+          backgroundImage: `url(${book.cover_img})`,
         }}
       ></div>
       <div className="custom-name_section">

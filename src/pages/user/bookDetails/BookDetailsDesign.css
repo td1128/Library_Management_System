@@ -143,3 +143,8 @@
 .margin_left{
   margin-left: 8px;
 }
+
+.overlay {
+  opacity: 0.2;
+  z-index: -1;
+}
