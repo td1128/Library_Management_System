@@ -1,30 +1,33 @@
-import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import { UserHome } from "../pages/user";
-import { AdminHome } from "../pages/admin";
-import { Routes } from "react-router-dom";
-import { MyBook } from "../pages/user";
+import { Route, Routes } from 'react-router-dom'
+import { Help, Profile, UserHome } from '../pages/user';
+import { AdminHome, Transaction, Settings } from '../pages/admin';
+import Layout from './Layout';
+import { userNavItems, adminNavItems } from './NavigationPaths';
+import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
 import {Etasks} from "../pages/admin/etasks/Etasks";
+import { MyBook } from "../pages/user";
 import {Settings} from "../pages/admin/Settings"
 const Routers = () => {
   return (
     <Routes>
-          <Route path="/">
-            <Route index element={<h1> Library Management System </h1>} />
-            <Route path="user">
-              <Route index element={<UserHome />} />
-              <Route path="mybook" element={<MyBook />} />
-              {/* <Route path="profile" element={<Profile />} /> */}
-              {/* <Route path="help" element={<Help />} /> */}
-            </Route>
-            <Route path="admin">
-              <Route index element={<AdminHome />} /> 
-              <Route path="settings" element = {<Settings/>} />
-              <Route path="etasks" element = {<Etasks/>} />
-              {/* <Route path="transaction" element={<Transaction />} /> */}
-              {/* <Route path="settings" element={<Settings />} /> */}
-            </Route>
-          </Route> 
-      </Routes>
+      <Route path="/">
+        <Route index element={<h1> Library Management System </h1>} />
+        <Route path="/user/*" element={<Layout rootPath="/user" navItems={userNavItems} />}>
+          <Route index element={<UserHome />} />
+          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'user'}/>} />  
+          <Route path="profile" element={<Profile />} />
+          <Route path="help" element={<Help />} />
+            <Route path="mybook" element={<MyBook />} />
+        </Route>
+        <Route path="/admin/*" element={<Layout rootPath="/admin" navItems={adminNavItems} />}>
+          <Route index element={<AdminHome />} />
+          <Route path="transaction" element={<Transaction />} />
+          <Route path="settings" element={<Settings />} />
+             <Route path="etasks" element = {<Etasks/>} />
+          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'admin'}/>} />  
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 

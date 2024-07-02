@@ -1,7 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --heading-2: Inter;
+
+  /* font sizes */
+  --heading-2-size: 35px;
+  --font-size-2xl: 21px;
+  --font-size-9xl: 28px;
+  --sub-heading-1-size: 20px;
+  --font-size-base: 16px;
+
+  /* Colors */
+  --color-gainsboro: #d9d9d9;
+  --cccccc: #ccc;
+  --color: #333;
+  --color-black: #000;
+  --color-dimgray: #666;
+
+  /* Gaps */
+  --gap-lgi: 19px;
+  --gap-xl: 20px;
+  --gap-2xl: 21px;
+
+  /* Paddings */
+  --padding-4xl: 23px;
+  --padding-mini: 15px;
+  --padding-2xs: 11px;
+  --padding-xs: 12px;
+  --padding-xl: 20px;
+  --padding-274xl: 293px;
+  --padding-171xl: 190px;
+
+  /* Border radiuses */
+  --br-19xl: 38px;
+}
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -25,14 +72,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -72,6 +111,11 @@ button:focus-visible {
   }
 } */
 
+
+/* react toastify css */
+.toastBody {
+  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
 .header{
   margin-top: 0%;
   margin-left: 250px;
