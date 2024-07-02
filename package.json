@@ -22,6 +22,8 @@
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "ag-grid-react": "^31.3.2",
+    "axios": "^1.7.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.3",
     "react-dom": "^18.2.0",
