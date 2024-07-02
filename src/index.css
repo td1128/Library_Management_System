@@ -71,3 +71,38 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+.header{
+  margin-top: 0%;
+  margin-left: 250px;
+  /* border: dashed red; */
+  margin-right:  800px;;
+}
+
+.statistics{
+  margin-left: 250px;
+  margin-right: 250px;
+  justify-content: center;
+  align-items: center;
+  border-color: aquamarine;
+}
+
+
+.currentBookHeading{
+  margin-left : 240px;
+  font-size: 40px;
+  font-display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ag-theme-quartz, .ag-theme-quartz-dark {
+  /* Changes the color of the grid text */
+  --ag-foreground-color: rgb(14, 68, 145);
+  /* Changes the color of the grid background */
+  --ag-background-color: rgb(241, 247, 255);
+  /* Changes the header color of the top row */
+  --ag-header-background-color: rgb(228, 237, 250);
+  /* Changes the hover color of the row*/
+  --ag-row-hover-color: rgb(216, 226, 255);
+}
