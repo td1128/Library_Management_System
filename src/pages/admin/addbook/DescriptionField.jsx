@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 const DescriptionField = ({ bookDescription, setBookDescription }) => {
   return (
     <>
-      <h1 className="text-md my-auto"> Description </h1>
+      <h1 className="text-md"> Description </h1>
       <TextField
         id="outlined-basic"
         placeholder="Description"

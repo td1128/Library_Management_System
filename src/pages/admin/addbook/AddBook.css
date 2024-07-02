@@ -1,9 +1,9 @@
 .inputfield {
-    @apply flex flex-col justify-center gap-2 pr-4 
+    @apply flex flex-col gap-2 pr-4 h-fit 
 }
 
 .image-upload {
-  @apply flex flex-col align-middle justify-between w-[95%] h-full max-h-[75vh];
+  @apply flex flex-col align-middle justify-between w-[95%] h-[70vh];
 }
 
 .image-upload .placeholder {
