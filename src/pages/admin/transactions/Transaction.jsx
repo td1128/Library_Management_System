@@ -5,11 +5,8 @@ import { Search } from "./components/Search";
 export const Transaction = () => {
   return (
     <div className=" w-full flex">
-      <div className=" w-[25%]">
-        Navbar
-      </div>
       <div className=" w-full p-5 flex-col space-y-10">
-        <Search/>
+        {/* <Search/> */}
         <Grid/>
       </div>
     </div>

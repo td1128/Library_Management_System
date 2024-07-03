@@ -15,8 +15,6 @@ export const Search = ()=>  {
             </Box>
         </Box>
         <Button sx={{width: '20ch', height: '5ch'}} variant="contained">Search</Button>
-        <Link to='/admin/transactions/issue'><Button sx={{width: '20ch', height: '5ch'}} variant="contained">Issue</Button></Link>
-        <Link to='/admin/transactions/return'><Button sx={{width: '20ch', height: '5ch'}} variant="contained">Return</Button></Link>
     </div>
   );
 }

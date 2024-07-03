@@ -5,9 +5,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const ReturnBook = () => {
   return (
     <div className=" w-full flex">
-      <div className=" w-[25%]">
-        Navbar
-      </div>
       <div className=" w-full p-5 flex-col space-y-10">
         <div className=' flex h-20 items-center'>
                 <ArrowBackIcon className=' mr-5'/>
