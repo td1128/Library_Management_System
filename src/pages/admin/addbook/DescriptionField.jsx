@@ -10,7 +10,7 @@ const DescriptionField = ({ bookDescription, setBookDescription }) => {
         variant="outlined"
         value={bookDescription}
         onChange={(e) => setBookDescription(e.target.value)}
-        sx={{ width: '90%', maxWidth: '600px' }}
+        sx={{ width: '50%', minWidth: '35vw' }}
         multiline
       />
     </>

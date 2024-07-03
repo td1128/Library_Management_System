@@ -1,5 +1,25 @@
+.input-form {
+    @apply flex gap-10 ml-10 mt-2 pb-4;
+}
+
+.upload-container {
+    @apply w-3/4 max-w-96 flex flex-col h-full justify-between items-center
+}
+
 .inputfield {
     @apply flex flex-col gap-2 pr-4 h-fit 
+}
+
+.form-button {
+    @apply w-64 bg-red-500 text-white text-2xl rounded-md mt-10 py-1
+}
+
+.form-grid {
+    @apply w-full grid grid-cols-1 lg:grid-cols-2 gap-10 h-fit;
+}
+
+.form-container {
+    @apply flex flex-col lg:flex-row gap-10 w-fit
 }
 
 .image-upload {

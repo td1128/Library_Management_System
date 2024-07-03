@@ -24,3 +24,20 @@ export const shelves = [
     { title: "sh-43-48" },
     { title: "sh-49-54" },
 ]
+
+export const authors = [
+    { title: "J.K. Rowling" },
+    { title: "Stephen Hawking" },
+    { title: "Richard Feynman" },
+    { title: "Albert Einstein" },
+    { title: "Isaac Newton" },
+    { title: "Galileo Galilei" },
+    { title: "Aristotle" },
+    { title: "Plato" },
+    { title: "Socrates" },
+    { title: "Confucius" },
+    { title: "Laozi" },
+    { title: "Sun Tzu" },
+    { title: "Niccolò Machiavelli" },
+    { title: "Thomas Hobbes" },
+]

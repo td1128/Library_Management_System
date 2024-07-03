@@ -4,8 +4,10 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
 const filter = createFilterOptions();
 
-export default function DropdownSearch({ title, suggestions, value, setValue }) {
+export default function DropdownSearch({ title, suggestions, value, setValue, maxWidth }) {
   return (
+    <>
+    <h1 className="text-md"> {title} </h1>
     <Autocomplete
       value={value}
       onChange={(event, newValue) => {
@@ -61,12 +63,13 @@ export default function DropdownSearch({ title, suggestions, value, setValue }) 
           </li>
         );
       }}
-      sx={{ width: 300 }}
+      sx={{ width: '90%', maxWidth: maxWidth }}
       freeSolo
       renderInput={(params) => (
         <TextField {...params} placeholder={title} />
       )}
     />
+    </>
   );
 }
 
