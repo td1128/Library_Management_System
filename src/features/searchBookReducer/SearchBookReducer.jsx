@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   books: {},
+  loading: false,
 }
 
 const searchBookListSlice = createSlice({
@@ -14,11 +15,15 @@ const searchBookListSlice = createSlice({
         acc[item.book.isbn] = item
         return acc
       }, {})
+      state.loading = false
     },
+    setLoading: (state) => {
+      state.loading = true
+    }
   },
 })
 
-export const { setSearchQueryResult } = searchBookListSlice.actions
+export const { setSearchQueryResult, setLoading } = searchBookListSlice.actions
 export default searchBookListSlice.reducer
 
 export const fetchSearchQueryResult =
@@ -27,6 +32,7 @@ export const fetchSearchQueryResult =
     availability = availability ? 'true' : 'false'
     sortBy = sortBy.toLowerCase()
     //searchQuery = searchQuery === '' ? 'a' : searchQuery
+    dispatch(setLoading())
     try {
       const response = await fetch(
         `${apiURL}/api/common/book/search/input/${searchQuery}?availability=${availability}&sortby=${sortBy}`
