@@ -214,10 +214,10 @@ export default function AdminButtonSection(props) {
               <label htmlFor="author" className=' text-lg mr-2'>Author:</label>
               <input id='author' type="text" className='input_field' value={author} onChange={handleAuthorChange} />
             </div>
-            <div className="take_input flex flex-row">
+            {publisher!==undefined? <div className="take_input flex flex-row">
               <label htmlFor="publisher" className=' text-lg mr-2' >Publisher:</label>
               <input id='publisher' type="text" className='input_field' value={publisher} onChange={handlePublisherChange} />
-            </div>
+            </div> :null}
 
             <div className="take_input flex flex-row">
               <label htmlFor="date" className=' text-lg mr-2'>Date of publication:</label>

@@ -75,9 +75,6 @@ export default function UserButtonSection(props) {
 
     const handleAddtoWishlist = async () => {
         if (isAdded == false) {
-
-            setHeartClass('heart_icon');
-
             const apiURL = import.meta.env.VITE_APP_API_URL
             const memberId = 28;//TODO 
 
@@ -90,14 +87,16 @@ export default function UserButtonSection(props) {
                         'Content-Type': 'application/json',
                     },
                 });
-                if (response.status === 200) {
+                const json = await response.json()
+                if (response.status === 200 && json.message != "Member does not exist") {
                     setIsAdded(true);
-                    toast.success("Book added to wishlist successfully.")
+                    setHeartClass('heart_icon');
+
+                    toast.success("Book added to your wishlist.");
                 }
                 else {
-                    toast.error("Something went wrong. Please try again later.")
+                    toast.error(json.message);
                 }
-                const json = await response.json()
                 console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
             } catch (error) {
                 toast.error("Something went wrong. Please try again later.")

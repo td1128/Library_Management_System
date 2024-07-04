@@ -20,7 +20,8 @@ import Button from '@mui/material/Button';
 import UserButtonSection from '../../pages/user/bookDetails/UserButtonSection';
 import AdminButtonSection from '../../pages/admin/adminBookDetails/AdminButtonSection';
 import RelatedBookSection from '../../pages/user/bookDetails/RelatedBookSection';
-import { responsiveFontSizes } from '@mui/material';
+
+import Footer from '../footer/Footer';
 
 //This component accepts the book as props.
 export default function ShowBookDetails(props) {
@@ -32,7 +33,7 @@ export default function ShowBookDetails(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   // console.log("Api url: ",apiURL);
 
-  const [book, setBook] = useState(props.book === undefined?props.book:null);
+  const [book, setBook] = useState(props.book === undefined ? props.book : null);
   const [loading, setLoading] = useState(true);
 
 
@@ -63,21 +64,21 @@ export default function ShowBookDetails(props) {
     if (props.type === 'user' && loading === false) {
       dispatch(fetchRelatedBookList(isbn_no));
     }
-  }, [dispatch, params,loading])
+  }, [dispatch, params, loading])
 
   if (params.isbn === undefined) {
     setBook(props.book);
     // console.log("Entered");
   }
 
-  console.log("book: ",book);
+  console.log("book: ", book);
 
   //Book details
   // const shelVingNo = book.shelving_no;
   // const author = book.author;
   // const book_title = book.title;
   // const date_publication = book.date_of_publication;
-  const des = book!==undefined? book.description:"dummy description";
+  const des = book !== undefined ? book.description : "dummy description";
 
   // const publisher = book.publisher;
   // const noOfCopies = book.no_of_copies;
@@ -107,57 +108,58 @@ export default function ShowBookDetails(props) {
 
   return (
     <>
-    <div>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
-    </div>
+      <div>
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color='inherit' />
+        </Backdrop>
+      </div>
 
-      {loading===false?<div className={`container `}>
-        <div className="book_section">
-          <div className="book_image">
-            <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+        {loading === false ? <div className={`container `}>
+          <div className="book_section">
+            <div className="book_image">
+              <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+            </div>
+            {
+              props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />
+            }
           </div>
-          {
-            props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />
-          }
-        </div>
 
-        <div className="book_details_section">
-          <div className="book_features">
+          <div className="book_details_section">
+            <div className="book_features">
 
-            <span className="book_title">{book.title} <span className={`noOfCopies ${book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
+              <span className="book_title">{book.title} <span className={`noOfCopies ${book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
 
-            <span className='author'>by  {book.author}</span>
+              <span className='author'>by  {book.author}</span>
 
 
-            <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{book.shelving_no}</span></span>
+              <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{book.shelving_no}</span></span>
 
-            <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{book.isbn}</span></span>
+              <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{book.isbn}</span></span>
 
-            <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{book.date_of_publication}</span></span>
+              <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{book.date_of_publication}</span></span>
 
-            {book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.publisher}</span></span>}
-          
-            {/* <span className='place_holder mt-1'>No of copies: <span className='place_value'>{book.no_of_copies}</span></span> */}
+              {book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.publisher}</span></span>}
 
-            <span className='place_holder mt-2'>Description:
-              <span className='description place_value ml-1 font-light'>{details.length === description_length ? details + "...." : details}</span>
-            </span>
-            {des.length > description_length ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef} /><ExpandLessOutlinedIcon ref={upRef} style={{ display: 'none' }} /> </div> : null}
+              {/* <span className='place_holder mt-1'>No of copies: <span className='place_value'>{book.no_of_copies}</span></span> */}
 
-            {/* Related Books Section */}
-            {props.type === 'user' && loading === false ? <RelatedBookSection/> : null}
+              <span className='place_holder mt-2'>Description:
+                <span className='description place_value ml-1 font-light'>{details.length === description_length ? details + "...." : details}</span>
+              </span>
+              {des.length > description_length ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef} /><ExpandLessOutlinedIcon ref={upRef} style={{ display: 'none' }} /> </div> : null}
+
+              {/* Related Books Section */}
+              {props.type === 'user' && loading === false ? <RelatedBookSection /> : null}
+            </div>
+            <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
+              <ArrowBackOutlinedIcon />
+            </div>
           </div>
-          <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
-            <ArrowBackOutlinedIcon />
-          </div>
-        </div>
 
-      </div>:null}
+        </div> : null}
+        {/* <Footer /> */}
     </>
   )
 }
