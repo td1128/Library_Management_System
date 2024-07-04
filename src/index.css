@@ -5,14 +5,8 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-body {
-  margin: 0;
+  margin: 0px;
+  padding: 0px;
   line-height: normal;
 }
 :root {
@@ -117,28 +111,5 @@ button:focus-visible {
 .toastBody {
   font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
   font-size: 1rem;
-}
-
-body {
-  margin: 0;
-  line-height: normal;
-}
-:root {
-  /* fonts */
-  --font-jost: Jost;
-
-  /* font sizes */
-  --font-size-9xl: 28px;
-  --font-size-3xl: 22px;
-  --font-size-13xl: 32px;
-  --font-size-lgi: 19px;
-  --font-size-7xl: 26px;
-
-  /* Colors */
-  --ffffff: #fff;
-  --bold-theme: #761236;
-
-  /* Paddings */
-  --padding-10xs: 3px;
 }
 
