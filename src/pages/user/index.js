@@ -1,5 +1,5 @@
 import { Help } from './Help';
-import { Profile } from './Profile/Profile';
+import { Profile } from './Profile/index';
 import { UserHome } from './UserHome'; 
 import { LandingPage } from './LandingPage';
 

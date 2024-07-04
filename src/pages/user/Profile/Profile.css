@@ -1,6 +1,6 @@
 .horizontal-scroll-container {
     overflow-x: auto;
-    margin-bottom: 15px;
+    margin-bottom: 4%;
     position: relative;
 }
 
@@ -9,7 +9,7 @@
 }
   
 .custom-list-group-item {
-    padding: 10px 0;
+    padding: 2% 0;
 }
 
 .profile__card {
@@ -31,13 +31,18 @@
 .profile__image-container {
     flex: 0 0 33%; 
     margin-right: 3%;
+    margin-left: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
 .profile__image {
     border-radius: 50%;
-    height: 55%; 
-    width: 80%; 
+    height: 50%; 
+    width: 40%; 
+    margin-top: 1%;
     padding-bottom: 10%;
 }
 
@@ -55,7 +60,7 @@
 }
   
 .profile__list-group {
-    margin-top: 4%; 
+    margin-top: 1%; 
 }
   
 .profile__list-group-item {
@@ -90,30 +95,36 @@
 }
 
 .library-card-section__card {
-    width: 1200px;
-    height: 450px;
-    padding-top: 20px;
-    margin-top: 9px;
-    margin-right: 0px;
-    margin-left: 8px;
+    width: 95%;
+    max-width: 1200px;
+    padding-top: 1%;
+    margin-top: 2%;
+    margin-bottom: 3%;
 }
 
 .library-card-section__title {
-    font-size: 40px;
-    margin-left: 1.5rem; 
-    margin-top: 1rem; 
+    font-size: 50px;
+    margin-left: 2%; 
+    margin-top: 4%; 
 }
   
 .library-card-section__overview-text {
-    font-size: 1.25rem;
-    margin-left: 1.5rem;
-    margin-top: 1rem; 
+    font-size: 1.50rem;
+    margin-left: 2%;
+    margin-top: 1%; 
     color: #4a4a4a; 
     font-weight: 500;
 }
 
 .library-card-section__slider {
-    margin: 0 2rem; 
-    margin-top: 0.75rem;
-    margin-bottom: 1.25rem; 
+    margin: 0 2%; 
+    margin-top: 1%;
+    margin-bottom: 2%; 
+}
+
+.centered-container {
+    width: 80%;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
 }
