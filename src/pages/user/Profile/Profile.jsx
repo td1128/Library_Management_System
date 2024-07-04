@@ -5,17 +5,17 @@ import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import Stack from 'react-bootstrap/Stack';
-import JULOGO from '../../assets/Jadavpur_University_Logo.webp';
-import { LibraryCard, EditSubjects } from '../../components';
+import JULOGO from '../../../assets/Jadavpur_University_Logo.webp';
+import { LibraryCard, EditSubjects } from '../../../components';
 import Slider from "react-slick";
-import { fetchUserData, updateUserData } from '../../features/userThunks';
+import { fetchUserData, updateUserData } from '../../../features/userThunks';
 import { useSelector, useDispatch } from 'react-redux';
-import ChangeConfirmationModal from '../../common_components/modals/ChangeConfirmationModal';
-import { setEmail, setPhoneNumber, setAddress } from '../../features/userSlice';
-import infinityLoader from '../../assets/icons/infinity-loader.svg';
+import ChangeConfirmationModal from '../../../common_components/modals/ChangeConfirmationModal';
+import { setEmail, setPhoneNumber, setAddress } from '../../../features/userSlice';
+import infinityLoader from '../../../assets/icons/infinity-loader.svg';
 import toast from 'react-hot-toast';
 
-import '../../assets/style/style.css';
+import './Profile.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -48,7 +48,6 @@ function Profile() {
   const [ isEditing, setIsEditing ] = useState( false );
   const [ isAddingSubjects, setIsAddingSubjects ] = useState( false);
   const [ isMakeChangesConfirmationOpen, setIsMakeChangesConfirmationOpen ] = useState( false );
-  const [ toChange, setToChange ] = useState( false );
 
   const handleAddingSubjects = () => setIsAddingSubjects( true );
 
@@ -139,112 +138,133 @@ function Profile() {
   
 
   return (
-    <div>
-        <div>
-        <Card style={{ width: '1200px', height: '400px', marginRight: '2px', marginLeft: '8px' }}>
-          <Card.Body>
-            {loading ? (
-              <div style={ { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: 'auto' } }>
-                <img src={infinityLoader} alt="Loading..." />
-              </div>
+    <div className='h-full overflowY-scroll'>
+      <div>
+        <Card className='profile__card'>
+          <Card.Body className='flex flex-row'>
+            {
+              loading ? (
+                <div className='.profile__loader '>
+                  <img src={infinityLoader} alt="Loading..." />
+                </div>
             ) : (
               <Row>
-                <div style={{ width: '280px' }}>
-                  <Card.Img
-                    variant='top'
-                    src={JULOGO}
-                    alt='profile image'
-                    style={{ borderRadius: '50%', height: '150px', width: '150px', marginBottom: '25px' }}
-                  />
-                  <Card.Text className='mb-2'>
+                <div className='profile__image-container'>
+                  <img className='profile__image' height='150px' width='250px' src="https://img.icons8.com/ios-filled/100/user-male-circle.png" alt="user-male-circle"/>
+                  <Card.Text className='profile__text'>
                     Student ID: &thinsp;{`${studentID}`}
                   </Card.Text>
-                  <Card.Text className='mb-2'>
+                  <Card.Text className='profile__text'>
                     Joining Date: &thinsp;{`${joiningDate}`}
                   </Card.Text>
-                  <Card.Text className='mb-2'>
+                  <Card.Text className='profile__text'>
                     Roll Number: &thinsp;{`${rollNo}`}
                   </Card.Text>
-                  <Button variant='info' className='mt-2'>
+                  <Button variant='info' className='profile__button'>
                     Change Password
                   </Button>
                 </div>
-                <div style={{ width: '800px' }}>
-                  <Card.Title>Name: &thinsp;{`${name}`}</Card.Title>
-                  <Card.Text>Department: &thinsp;{`${department}`}</Card.Text>
-                  <ListGroup className="list-group-flush">
-                    <ListGroup.Item>
-                      Email:
+                <div className='profile__info-container'>
+                  <ListGroup className='profile__list-group custom-list-group'>
+                    <ListGroup.Item className='profile__list-group-item profile__name-label'>
+                      <span>
+                        Name:
+                      </span>
                       <input
                         type="text"
                         name="email"
-                        value={`${userCopy.email}`}
-                        className='pl-2 ml-0.5'
+                        value={`${name}`}
+                        className='profile__input'
                         readOnly={!isEditing}
                         onChange={handleChange}
                         style={{ width: '80%' }}
                       />
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item className='custom-list-group-item'>
+                      <span>
+                        Department:
+                      </span>
+                      <input
+                        type="text"
+                        name="email"
+                        value={`${department}`}
+                        className='profile__input'
+                        readOnly={!isEditing}
+                        onChange={handleChange}
+                        style={{ width: '80%' }}
+                      />
+                    </ListGroup.Item>
+                    <ListGroup.Item className='custom-list-group-item'>
+                      Email:
+                      <input
+                        type="text"
+                        name="email"
+                        value={`${userCopy.email}`}
+                        className='profile__input'
+                        readOnly={!isEditing}
+                        onChange={handleChange}
+                        style={{ width: '80%' }}
+                      />
+                    </ListGroup.Item>
+                    <ListGroup.Item className='custom-list-group-item'>
                       Phone:
                       <input
                         type="text"
                         name="phoneNumber"
                         value={`${userCopy.phoneNumber}`}
-                        className='pl-2 ml-0.5'
+                        className='profile__input'
                         readOnly={!isEditing}
                         onChange={handleChange}
                       />
                     </ListGroup.Item>
-                    <ListGroup.Item className='flex align-items-start'>
+                    <ListGroup.Item className='flex align-items-start custom-list-group-item'>
                       Address:
                       <input
                         type="text"
                         name="address"
                         value={`${userCopy.address}`}
-                        className='pl-2 ml-0.5 flex-grow-1'
+                        className='profile__input flex-grow-1'
                         readOnly={!isEditing}
                         onChange={handleChange}
                       />
                     </ListGroup.Item>
-                    <ListGroup.Item>
-                      <span>Subjects of Interest:</span>
-                      <Stack direction='horizontal' gap={2} className='w-[80%] flex-wrap'>
-                        {subjectsOfInterest.map((subject, index) => (
-                          <Badge bg='success' key={index}>
-                            {`${subject}`}
-                            <Button variant='success' className='pl-2 pt-0 pr-0 pb-0'>
-                              ❌
-                            </Button>
-                          </Badge>
-                        ))}
-                        <Button variant='light' onClick={handleAddingSubjects}>
-                          ➕
-                        </Button>
-                      </Stack>
-                    </ListGroup.Item>
                   </ListGroup>
-                  <Button className='w-full justify-center' variant='primary' onClick={handleSubmit}>
+                  <Button className='profile__button-edit' variant='primary' onClick={handleSubmit}>
                     {isEditing ? 'Save Profile' : 'Edit Profile'}
                   </Button>
+                  <ListGroup className='custom-list-group'>
+                    <ListGroup.Item className='custom-list-group-item'>
+                      <span className='p-2'>Subjects of Interest:</span>
+                        <Stack direction='horizontal' gap={2} className='profile__subjects-stack'>
+                          {subjectsOfInterest.map((subject, index) => (
+                            <Badge bg='success' key={index} className='p-3 m-1'>
+                              {`${subject}`}
+                            </Badge>
+                          ))}
+                          <Button variant='light' onClick={handleAddingSubjects}>
+                            ✏️ Edit
+                          </Button>
+                        </Stack>
+                      </ListGroup.Item>
+                  </ListGroup>
                 </div>
               </Row>
             )}
           </Card.Body>
         </Card>
-          <Card style={ { width: '1200px', height: '400px', marginTop: '9px', marginRight: '2px', marginLeft: '8px' } } >
-            <Card.Title className='text-3xl ml-6 mt-4'>
-              Library Cards
-            </Card.Title>
-            <Card.Text className='text-xl ml-6 mt-4 text-stone-700 font-medium'>
-              Cards Overview
-            </Card.Text>
-                <Slider {...settings} className='mx-4 mt-3 mb-5'>
-                  <LibraryCard cardNo={'JU-3452/01'} cardStatus={'inactive'}/>
-                    <LibraryCard cardNo={'JU-3452/02'} cardStatus={'active'} bookName={'Data Structures and Algorithms with C/C++'} dueDate={'30/06/24'}/>
-                    <LibraryCard cardNo={'JU-3452/03'} cardStatus={'overdue'} bookName={'HeadFirst System Design'} dueDate={'03/06/24'}/>
-                </Slider>
-          </Card>
+        <Card className='library-card-section__card' >
+          <Card.Title className='library-card-section__title'>
+            Library Cards
+          </Card.Title>
+          <Card.Text className='library-card-section__overview-text'>
+            Cards Overview
+          </Card.Text>
+          <Slider {...settings} className='library-card-section__slider '>
+            <LibraryCard cardNo={'JU-3452/01'} cardStatus={'inactive'}/>
+            <LibraryCard cardNo={'JU-3452/02'} cardStatus={'active'} bookName={'Data Structures and Algorithms with C/C++'} dueDate={'30/06/24'}/>
+            <LibraryCard cardNo={'JU-3452/03'} cardStatus={'overdue'} bookName={'HeadFirst System Design'} dueDate={'03/06/24'}/>
+          </Slider>
+        </Card>
         </div>
         <div>
           <EditSubjects show={ isAddingSubjects } onHide={ () => setIsAddingSubjects(false) } />

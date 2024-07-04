@@ -27,7 +27,7 @@ function LibraryCard({ cardNo, cardStatus, bookName, dueDate }) {
   return (
     <Card style={{ width: '400px', height: 'auto', overflow: 'hidden', marginBottom: '5px', marginRight: '20px' }}>
       <Card.Title className='text-center text-2xl'>
-        Card Number: {`${cardNo}`}
+        {`${cardNo}`}
       </Card.Title>
       <Card.Body>
         {cardStatus === 'inactive' ? (

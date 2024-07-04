@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUserData, updateUserData } from './userThunks.js';
+import { fetchUserData, updateUserData, updateFavSubjectData } from './userThunks.js';
 
 const initialState = {
   details: {
@@ -12,6 +12,7 @@ const initialState = {
     phoneNumber: '',
     address: '',
     subjectsOfInterest: [],
+    libraryCardDetails: []
   },
   loading: false,
   error: null,
@@ -30,11 +31,8 @@ const userSlice = createSlice({
     setAddress: (state, action) => {
       state.details.address = action.payload;
     },
-    addSubjectOfInterest: (state, action) => {
-      state.details.subjectsOfInterest.push(action.payload);
-    },
-    removeSubjectOfInterest: (state, action) => {
-      state.details.subjectsOfInterest = state.details.subjectsOfInterest.filter(subject => subject !== action.payload);
+    updateSubjectOfInterest: (state, action) => {
+      state.details.subjectsOfInterest = [...action.payload];
     },
   },
   extraReducers: builder =>
@@ -52,48 +50,59 @@ const userSlice = createSlice({
           email,
           phone_number: phoneNumber,
           address,
-        } = action.payload?.member;
+          roll: rollNo
+        } = action.payload?.user.member;
 
         state.details = {
           name: `${firstName} ${lastName}`,
           department: 'Computer Science',
           studentID,
           joiningDate,
-          rollNo: '05011001087',
+          rollNo,
           email,
           phoneNumber,
-          address,
-          subjectsOfInterest: ['Data Structures and Algorithms', 'Computer Organization and Architecture', 'Database Management System', 'Software Engineering'],
+          address
         };
+
+        state.details.subjectsOfInterest = action.payload?.user.favSub;
+
+        state.details.libraryCardDetails = action.payload?.libraryCards;
+
         state.error = null;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Something went wrong';
+        state.error = action.payload || 'User data couldnot be fetched';
       })
       .addCase(updateUserData.pending, (state) => {
         state.loading = true;
       })
       .addCase(updateUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.details = {
-          ...state.details,
-          ...action.payload,
-        }
         state.error = null;
       })
       .addCase(updateUserData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to update user details';
-      }),
+      })
+      .addCase(updateFavSubjectData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateFavSubjectData.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateFavSubjectData.rejected, (state) => {
+        state.loading = false;
+        state.error = action.payload || 'Subjects couldnot be updated'
+      })
 });
 
 export const {
   setEmail,
   setPhoneNumber,
   setAddress,
-  addSubjectOfInterest,
-  removeSubjectOfInterest,
+  updateSubjectOfInterest,
 } = userSlice.actions;
 
 export default userSlice.reducer;
