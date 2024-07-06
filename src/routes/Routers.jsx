@@ -4,7 +4,7 @@ import { AdminHome, Transaction, Settings } from '../pages/admin';
 import Layout from './Layout';
 import { userNavItems, adminNavItems } from './NavigationPaths';
 import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
-
+import Footer from '../common_components/footer/Footer';
 const Routers = () => {
   return (
     <Routes>
@@ -20,7 +20,8 @@ const Routers = () => {
           <Route index element={<AdminHome />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'admin'}/>} />  
+          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'admin'}/>} />
+
         </Route>
       </Route>
     </Routes>

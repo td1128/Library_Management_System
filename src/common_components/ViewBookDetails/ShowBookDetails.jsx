@@ -157,9 +157,8 @@ export default function ShowBookDetails(props) {
               <ArrowBackOutlinedIcon />
             </div>
           </div>
-
         </div> : null}
-        {/* <Footer /> */}
+        <Footer/>
     </>
   )
 }
