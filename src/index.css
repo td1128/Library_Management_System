@@ -110,3 +110,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+
+/* react toastify css */
+.toastBody {
+  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}

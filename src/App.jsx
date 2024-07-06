@@ -6,6 +6,9 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Toaster } from 'react-hot-toast';
 
+
+import Books from './pages/user/Books_catalog/Books'
+
 function App() {
   return (
     <>
@@ -13,9 +16,10 @@ function App() {
         <BrowserRouter>
           <Routers />
         </BrowserRouter>
+        {/* <Books/> */}
       </Provider>
       <Toaster/>
-    </>
+   </>
   )
 }
 
