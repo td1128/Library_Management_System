@@ -19,7 +19,7 @@ const ProfileCard = ({
   handleSubmit,
   handleAddingSubjects
 }) => (
-  <Card className='profile__card'>
+  <Card className='profile__card border-none'>
     <Card.Body className='flex-row'>
       <Row>
         <div className='profile__image-container'>

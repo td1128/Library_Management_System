@@ -39,7 +39,7 @@ const settings = {
 };
 
 const LibraryCards = ({ libraryCardDetails }) => (
-  <Card className='library-card-section__card'>
+  <Card className='library-card-section__card border-none'>
     <Card.Title className='library-card-section__title text-4xl'>Library Cards</Card.Title>
     <Card.Text className='library-card-section__overview-text'>Cards Overview</Card.Text>
     <Slider {...settings} className='library-card-section__slider'>
