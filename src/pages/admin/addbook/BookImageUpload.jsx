@@ -1,8 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './AddBook.css'
 
-const BookImageUpload = ({ setImage }) => {
+const BookImageUpload = ({ setImage, loading }) => {
   const [imagePreview, setImagePreview] = useState(null)
+
+  useEffect(() => {
+    if (loading) {
+      setImagePreview(null)
+    }
+  }, [loading])
 
   const handleImageChange = (event) => {
     const file = event.target.files[0]
@@ -16,13 +22,17 @@ const BookImageUpload = ({ setImage }) => {
     }
   }
 
-return (
+  const handleTriggerInput = () => {
+      document.getElementById('upload-button').click()
+  }
+
+  return (
     <div className="image-upload">
       {imagePreview ? (
-        <img src={imagePreview} alt="Book Cover" className="image-preview" />
+        <img src={imagePreview} alt="Book Cover" className="image-preview" onClick={handleTriggerInput}/>
       ) : (
-        <div className="placeholder">
-          <span>Book Image</span>
+        <div className="placeholder" onClick={handleTriggerInput}>
+          <span className="text-xl">Select an image</span>
         </div>
       )}
       <input
@@ -32,11 +42,8 @@ return (
         style={{ display: 'none' }}
         id="upload-button"
       />
-      <label htmlFor="upload-button" className="upload-button">
-        Upload Image
-      </label>
     </div>
-  );
+  )
 }
 
 export default BookImageUpload

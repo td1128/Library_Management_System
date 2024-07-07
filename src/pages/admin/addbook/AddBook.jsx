@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { TextField } from '@mui/material'
+import { useState, useEffect } from 'react'
+import { CircularProgress } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 
 import CopyCounter from './CopyCounter'
 import BookImageUpload from './BookImageUpload'
-import fileUpload from '/src/services/fileUpload'
 import InputTextField from './InputTextField'
 import DescriptionField from './DescriptionField'
 import DropdownSearch from './DropdownSearch'
 
 import addBook from '/src/services/addBook'
+import fileUpload from '/src/services/fileUpload'
 
 import dayjs from 'dayjs'
 import { subjects, shelves, authors } from './searchdata'
@@ -26,6 +26,7 @@ export const AddBook = () => {
   const [bookImage, setBookImage] = useState(null)
   const [shelvingNumber, setShelvingNumber] = useState('')
   const [bookEdition, setBookEdition] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const inputFields = [
     {
@@ -58,7 +59,7 @@ export const AddBook = () => {
       value: bookEdition,
       setValue: setBookEdition,
       maxWidth: '200px',
-      pattern: /^\d+$/,
+      pattern: /[\s\S]+/,
     },
     {
       type: 'search',
@@ -78,14 +79,27 @@ export const AddBook = () => {
     },
   ]
 
+  useEffect(() => {
+    if (loading) {
+      inputFields.map((field) => {
+        field.setValue('')
+      })
+      setBookPublicationDate(null)
+      setBookCopies(1)
+      setBookImage(null)
+    }
+  }, [loading])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    // Checking for missing fields
     inputFields.map((field) => {
-        if (!field.value) return;
-    });
-    if (!bookImage) return;
+      if (!field.value) return
+    })
+    if (!bookImage) return
 
+    setLoading(true)
     try {
       const url = await fileUpload({ file: bookImage })
 
@@ -97,7 +111,7 @@ export const AddBook = () => {
         no_of_copies: bookCopies,
         title: bookTitle,
         cover_img: url,
-        author_name: bookAuthor,
+        author_name: bookAuthor.title,
         sub_name: bookSubject.title,
         description: bookDescription,
       }
@@ -106,6 +120,7 @@ export const AddBook = () => {
       addBook(req)
         .then((res) => {
           console.log(res)
+          setLoading(false)
         })
         .catch((err) => {
           console.log(err)
@@ -117,17 +132,27 @@ export const AddBook = () => {
 
   return (
     <form onSubmit={handleSubmit} className="input-form">
+      {loading && (
+        <div className="loading-overlay">
+          {' '}
+          <CircularProgress />{' '}
+        </div>
+      )}
       <div className="upload-container">
-        <BookImageUpload setImage={setBookImage} />
-        <button type="submit" className="form-button">
+        <BookImageUpload setImage={setBookImage} loading={loading} />
+        <button
+          type="submit"
+          className={`form-button ${loading ? 'active' : ''}`}
+          disabled={loading}
+        >
           Add Book
         </button>
       </div>
       <div className="form-grid">
         {inputFields.map((field, index) => (
           <div key={index} className="inputfield">
-            {field.type==='text' && <InputTextField {...field} />}
-            {field.type==='search' && <DropdownSearch {...field} />}
+            {field.type === 'text' && <InputTextField {...field} />}
+            {field.type === 'search' && <DropdownSearch {...field} />}
           </div>
         ))}
         <div className="inputfield col-span-1 lg:col-span-2">
