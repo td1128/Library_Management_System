@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&family=Satisfy&display=swap');
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 100%;
+    height: 92vh;
+  }
+  /* .navbar{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: grey;
+  } */
+  .book_section{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 8px;
+    margin-top: 12px;
+  }
+  .book_details_section{
+    padding: 10px;
+    grid-column-start: 3;
+    grid-column-end: 9;
+    /* background-color: green; */
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .book_features{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .book_image{
+    height: 60%;
+    width: 100%;
+}
+.image{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+
+  }
+
+  .buttons_section{
+    margin-top: 1.8rem;
+    margin-left: 1.5rem;
+  }
+.book_title{
+    font-size: 2.5rem;
+    /* font-family: "Lora", "serif"; */
+    font-family: "Noto Serif", "serif";
+    font-weight: bolder;
+}
+.green_dot{
+  box-shadow: 2px 8px green ;
+}
+.author{
+    /* font-family: "Lora", "serif"; */
+    font-family: "Merriweather", "serif";
+    font-size: 1.8rem;
+    margin-right: 1rem;
+}
+.more:hover{
+    cursor: pointer;
+}
+
+.heading{
+  font-size: 1.6rem;
+  font-family: "Libre Baskerville", "serif";
+  font-weight: bold;
+}
+
+.value{
+  font-size: 1.2rem;
+  font-family: "Satisfy", "cursive";
+}
+
+/* Edit pencil design */
+.pen_icon{
+    cursor: pointer;
+    font-size: 0.3rem;
+}
+
+.edit_button{
+    width: 80%;
+}
+.input_field{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+.bg-red{
+  background-color: rgb(230, 150, 150);
+  cursor: pointer;
+}
+.bg-red:hover{
+  background-color: rgb(234, 129, 129);
+}
+.bg-grey{
+  background-color: rgb(230, 230, 230);
+}

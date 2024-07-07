@@ -7,16 +7,20 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/de'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
-    <Provider store={store}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <BrowserRouter>
-          <Routers />
-        </BrowserRouter>
-      </LocalizationProvider>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <BrowserRouter>
+            <Routers />
+          </BrowserRouter>
+        </LocalizationProvider>
+      </Provider>
+      <Toaster />
+    </>
   )
 }
 

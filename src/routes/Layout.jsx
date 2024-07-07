@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import { json, Outlet } from 'react-router-dom'
 import MuiBreadcrumbs from '../common_components/breadcrumbs/MuiBreadcrumbs'
 import ProfileMenu from '../common_components/ProfileMenu/ProfileMenu'
 import Navbar from '../common_components/Navbar/Navbar'
+
 
 const Layout = ({ rootPath, navItems }) => {
   return (
