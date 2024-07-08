@@ -5,15 +5,17 @@ import { toast } from 'react-toastify';
 
 
 
-const IssueForm = () => {
+const IssueForm2 = () => {
 
     const date = new Date();
 
     const [memberID, setMemberID] = useState('')
-    const [name, setName] = useState('')
+    const [member, setMember] = useState('')
     const [isbn, setIsbn] = useState('')
     const [book, setBook] = useState('')
     const [copyNumber, setCopyNumber] = useState('')
+    const [bookAvailable, setBookAvailable] = useState(false)
+    const [cardAvailable, setCardAvailable] = useState(false)
 
     const handleMemberSearch = async () => {
         const res = await fetch(`https://library-management-system-f9gh.onrender.com/api/user/profile/${memberID}`)
@@ -23,11 +25,14 @@ const IssueForm = () => {
 
         if(res.member){
             toast.success('Member Found')
+            if(res.member.library_card_string.includes('0')){
+                setCardAvailable(true)
+            }
+            setMember(res);
+            console.log(member.member.library_card_string.indexOf('0'))
         } else {
             toast.error('Member Not Found')
         }
-
-        setName(res.member.first_name + ' ' + res.member.last_name) 
 
     }
 
@@ -39,25 +44,34 @@ const IssueForm = () => {
 
         if(res.book){
             toast.success('Book Found')
-            
+            setBook(res)
+            if(res.book.no_of_copies != 0){
+                setBookAvailable(true)
+            }
         } else {
             toast.error('Book Not Found')
         }
-
-        setBook(res.book.title)
     }
 
     const handleSubmit = async (e) => { 
-        const res = await fetch("https://library-management-system-f9gh.onrender.com/api/admin/transaction/issue", {
-            method: "POST",
+        if(!member || !book){
+            toast.error('Member or Book not found')
+            return;
+        }
+        const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/issue", {
+            method: "PUT", // Specify the method
+            headers: {
+              'Content-Type': 'application/json' // Specify the content type
+            },
             body: JSON.stringify({
-                "membership_id" : memberID,
-                "isbn" : isbn,
-               "issue_date" : `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
-                "copy_no" : 1,
-                "lib_card_no" : 1
+                membership_id : String(memberID),
+                isbn : String(isbn),
+                copy_no : 1,
+                lib_card_no : member?.member?.library_card_string.indexOf('0') + 1
         }),
-          });
+          })
+          .then(res => res.json())
+          .then(response => { toast.info(response.message) });
 
           console.log(res);
     }
@@ -78,16 +92,13 @@ const IssueForm = () => {
                         />
                         <Button sx={{width: '20ch', height: '5ch'}} variant="contained" onClick={handleMemberSearch}>Search</Button>
                     </div>
-                    <TextField
-                        type="text"
-                        variant='outlined'
-                        color='secondary'
-                        label="Name"
-                        fullWidth
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
+                    <div>
+                        <div>Name: {member?.member?.first_name || '' + ' ' + member?.member?.last_name || ''}</div>
+                        <div>Email: {member?.member?.email || ''}</div>
+                        <div>Phone: {member?.member?.phone_number || ''}</div>
+                        <div>Address: {member?.member?.address || ''}</div>
+                        <div>Cards available: {cardAvailable? 'Available' : 'Unavailable'} : {member?.member?.library_card_string || '0'}</div>
+                    </div>
                 </div>
                 <div className=' flex flex-col space-y-6'>
                     <div className=' space-x-4 flex'>
@@ -103,16 +114,13 @@ const IssueForm = () => {
                         />
                         <Button sx={{width: '20ch', height: '5ch'}} variant="contained" onClick={handleBookSearch}>Search</Button>
                     </div>
-                    <TextField
-                        type="text"
-                        variant='outlined'
-                        color='secondary'
-                        label="Book"
-                        fullWidth
-                        required
-                        value={book}
-                        onChange={(e) => setBook(e.target.value)}
-                    />
+                    <div>
+                        <div>Book Name: {book?.book?.title || ''}</div>
+                        <div>Authon: {book?.author_name || ''}</div>
+                        <div>Subject: {book?.sub_name || ''}</div>
+                        <div>Date of Publication: {book?.book?.date_of_publication || ''}</div>
+                        <div>Availability: {bookAvailable? 'Available' : 'Unavailable'} : {book?.book?.no_of_copies || '0'}</div>
+                    </div>
                     <TextField
                         type="text"
                         variant='outlined'
@@ -129,4 +137,4 @@ const IssueForm = () => {
   )
 }
 
-export default IssueForm
+export default IssueForm2

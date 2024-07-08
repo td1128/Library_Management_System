@@ -19,7 +19,7 @@ export const Grid = () => {
 
 
     // Search params and filters
-    const [searchBy, setSearchBy] = useState('');
+    const [searchBy, setSearchBy] = useState(1);
     const [filterByTime, setFilterByTime] = useState('');
     const [status, setStatus] = useState('');
     const [searchText, setSearchText] = useState('');
@@ -100,16 +100,9 @@ export const Grid = () => {
           url += `&status=${status}`;
         }
 
-        const data = await (
-          await fetch(url)
-          .then(response => {
-            console.log(response);
-            if (!response.ok) {
-              throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-          })
-        );
+        const data = await fetch(url)
+        .then(res =>  res.json())
+        .then(response => { console.log(response) });
 
         
   
@@ -136,11 +129,9 @@ export const Grid = () => {
     useEffect(() => {
       // fetch data
       const dataFetch = async () => {
-        const data = await (
-          await fetch(
+        const data = await fetch(
             'https://library-management-system-f9gh.onrender.com/api/admin/transaction/history',
-          )
-        ).json();
+          ).then(req => req.json());
   
         const newData = data.map((item) => {
           return {

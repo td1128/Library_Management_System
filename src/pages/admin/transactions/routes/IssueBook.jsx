@@ -1,6 +1,7 @@
 import React from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IssueForm from '../components/IssueForm';
+import IssueForm2 from '../components/IssueForm2';
 
 const ReturnBook = () => {
   return (
@@ -10,7 +11,8 @@ const ReturnBook = () => {
                 <ArrowBackIcon className=' mr-5'/>
                 <h1 className=' font-bold text-2xl'>Issue Book</h1>
         </div>
-        <IssueForm/>
+        <IssueForm2/>
+        {/* <IssueForm/> */}
       </div>
     </div>
   )
