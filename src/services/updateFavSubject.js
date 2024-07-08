@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { UPDATE_USER_SUBJECT_END_POINT } from './constants/constants';
 
 const updateFavSubject = async (membershipId, subjects) => {
     const userRootUrl = import.meta.env.VITE_APP_USER_ROOT_URL_2;
-    const addSubUrl = import.meta.env.VITE_APP_UPDATE_USER_SUBJECT;
+    const updateSubUrl = UPDATE_USER_SUBJECT_END_POINT;
 
     try {
-      const response = await axios.put(`${userRootUrl}/${addSubUrl}/${membershipId}`, { sub_list: subjects });
+      const response = await axios.put(`${userRootUrl}/${updateSubUrl}/${membershipId}`, { sub_list: subjects });
       return response.data;
     } catch (error) {
       if (error.response) {

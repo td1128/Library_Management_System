@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { GET_USER_DETAILS_END_POINT } from './constants/constants';
 
 const fetchUserDetails = async ( studentID ) => {
     const userRootUrl = import.meta.env.VITE_APP_USER_ROOT_URL;
-    const getUserDetails = import.meta.env.VITE_APP_GET_USER_DETAILS;
+    const getUserDetails = GET_USER_DETAILS_END_POINT;
 
     try {
         const response = await axios.get( `${userRootUrl}/${getUserDetails}/${studentID}` );
