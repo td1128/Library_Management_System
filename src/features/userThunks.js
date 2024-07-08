@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateFavSubject, fetchUserDetails, updateUserDetails, getLibraryCards } from '../api';
+import { updateFavSubject, fetchUserDetails, updateUserDetails, getLibraryCards } from '../services';
 
 export const fetchUserData = createAsyncThunk(
   'user/fetchData',

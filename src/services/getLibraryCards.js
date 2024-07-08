@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { GET_LIBRARY_CARDS_END_POINT } from './constants/constants';
 
 const getLibraryCards = async ( membershipId ) => {
     const userRootUrl = import.meta.env.VITE_APP_USER_ROOT_URL_2;
-    const getLibraryCardsUrl = import.meta.env.VITE_APP_GET_LIBRARY_CARDS;
+    const getLibraryCardsUrl = GET_LIBRARY_CARDS_END_POINT;
 
     try {
         const response = await axios.get( `${ userRootUrl }/${ getLibraryCardsUrl }/${ membershipId }` );
