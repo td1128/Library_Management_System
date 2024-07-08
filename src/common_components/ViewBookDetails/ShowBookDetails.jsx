@@ -158,7 +158,7 @@ export default function ShowBookDetails(props) {
             </div>
           </div>
         </div> : null}
-        <Footer/>
+        {loading === false?<Footer/>:null}
     </>
   )
 }

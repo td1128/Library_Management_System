@@ -2,7 +2,7 @@
   /* background-color: gold; */
   color: white;
   background-color: rgb(71, 7, 7);
-  height: 40%;
+  height: 20%;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 }
