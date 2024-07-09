@@ -33,7 +33,7 @@ export default function ShowBookDetails(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   // console.log("Api url: ",apiURL);
 
-  const [book, setBook] = useState(props.book === undefined ? props.book : null);
+  const [book, setBook] = useState(props.book);
   const [loading, setLoading] = useState(true);
 
 
@@ -120,7 +120,7 @@ export default function ShowBookDetails(props) {
         {loading === false ? <div className={`container `}>
           <div className="book_section">
             <div className="book_image">
-              <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+              <img src={book.cover_img} alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
               props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />
@@ -158,6 +158,7 @@ export default function ShowBookDetails(props) {
             </div>
           </div>
         </div> : null}
+        {loading === false?<Footer/>:null}
     </>
   )
 }

@@ -10,10 +10,12 @@ const relatedBookListSlice = createSlice({
     name: 'bookList',
     initialState,
     reducers: {
-        setRelatedBookList: (state, action)=>{//change the action name(done)
+        setRelatedBookList: (state, action)=>{
             const bookArray = action.payload;
             state.books = bookArray.reduce((acc, item) => {
-                acc[item.isbn] = item;
+                item.book['author'] = item.author_name;
+                acc[item.book.isbn] = item;
+                console.log("item: ", item);
                 return acc;
             }, {});
             state.loading = false;

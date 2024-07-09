@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip'
 const Card = (props) => {
   
   const [isFavorite, setIsFavorite] = useState(false)
-
+  
   const toggleFavorite = () => {
     setIsFavorite((prevState) => !prevState)
   }

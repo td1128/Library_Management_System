@@ -1,0 +1,130 @@
+.horizontal-scroll-container {
+    overflow-x: auto;
+    margin-bottom: 4%;
+    position: relative;
+}
+
+.custom-list-group .list-group-item {
+    border: none;
+}
+  
+.custom-list-group-item {
+    padding: 2% 0;
+}
+
+.profile__card {
+    display: flex;
+    width: 95%;
+    height: 35%; 
+    margin-bottom: 2%;
+}
+
+.profile__loader {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile__image-container {
+    flex: 0 0 33%; 
+    margin-right: 3%;
+    margin-left: 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.profile__image {
+    border-radius: 50%;
+    height: 50%; 
+    width: 40%; 
+    margin-top: 1%;
+    padding-bottom: 10%;
+}
+
+
+.profile__text {
+    margin-bottom: 4%;
+}
+
+.profile__button {
+    margin-top: 8%; 
+}
+
+.profile__info-container {
+    flex: 1;
+}
+  
+.profile__list-group {
+    margin-top: 1%; 
+}
+  
+.profile__list-group-item {
+    border: none;
+}
+  
+.profile__name-label {
+    font-size: 30px; 
+    font-weight: bold;
+}
+  
+.profile__input {
+    padding-left: 1%; 
+    margin-left: 0.5%; 
+    width: 80%;
+}
+  
+.profile__button-edit {
+    width: 100%; 
+    margin-top: 1%; 
+}
+  
+.profile__subjects-container {
+    margin-top: 5%; 
+    margin-right: 0%;
+}
+  
+.profile__subjects-stack {
+    width: 80%;
+    flex-wrap: wrap;
+    display: inline-flex;
+}
+
+.library-card-section__card {
+    width: 95%;
+    max-width: 1200px;
+    padding-top: 1%;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+.library-card-section__title {
+    font-size: 50px;
+    margin-left: 2%; 
+    margin-top: 4%; 
+}
+  
+.library-card-section__overview-text {
+    font-size: 1.50rem;
+    margin-left: 2%;
+    margin-top: 1%; 
+    color: #4a4a4a; 
+    font-weight: 500;
+}
+
+.library-card-section__slider {
+    margin: 0 2%; 
+    margin-top: 1%;
+    margin-bottom: 2%; 
+}
+
+.centered-container {
+    width: 80%;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+}

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUserData } from './userThunks.js'
+import { fetchUserData, updateUserData, updateFavSubjectData } from './userThunks.js';
 
 const initialState = {
   details: {
@@ -12,9 +12,10 @@ const initialState = {
     phoneNumber: '',
     address: '',
     subjectsOfInterest: [],
+    libraryCardDetails: []
   },
   loading: false,
-  error: null
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -22,63 +23,86 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setEmail: (state, action) => {
-      state.email = action.payload;
+      state.details.email = action.payload;
     },
     setPhoneNumber: (state, action) => {
-      state.phoneNumber = action.payload;
+      state.details.phoneNumber = action.payload;
     },
     setAddress: (state, action) => {
-      state.address = action.payload;
+      state.details.address = action.payload;
     },
-    addSubjectOfInterest: (state, action) => {
-      state.subjectsOfInterest.push(action.payload);
-    },
-    removeSubjectOfInterest: (state, action) => {
-      state.subjectsOfInterest = state.subjectsOfInterest.filter(subject => subject !== action.payload);
+    updateSubjectOfInterest: (state, action) => {
+      state.details.subjectsOfInterest = [...action.payload];
     },
   },
-  extraReducers: builder => 
+  extraReducers: builder =>
     builder
-      .addCase( fetchUserData.pending, ( state ) => {
+      .addCase(fetchUserData.pending, (state) => {
         state.loading = true;
-      } )
-      .addCase( fetchUserData.fulfilled, ( state, action ) => {
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
         state.loading = false;
         const {
           first_name: firstName,
           last_name: lastName,
-          membership_id: studentID,
+          id: studentID,
           join_date: joiningDate,
           email,
           phone_number: phoneNumber,
           address,
-        } = action.payload;
+          roll: rollNo
+        } = action.payload?.user.member;
 
         state.details = {
           name: `${firstName} ${lastName}`,
           department: 'Computer Science',
           studentID,
           joiningDate,
-          rollNo: '05011001087', 
+          rollNo,
           email,
           phoneNumber,
-          address,
-          subjectsOfInterest: ['Data Structures and Algorithms', 'Computer Organization and Architecture', 'Database Management System', 'Software Engineering'],
+          address
         };
 
-      } )
-      .addCase( fetchUserData.rejected, ( state, action ) => {
+        state.details.subjectsOfInterest = action.payload?.user.favSub;
+
+        state.details.libraryCardDetails = action.payload?.libraryCards;
+
+        state.error = null;
+      })
+      .addCase(fetchUserData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Something went wrong'
-      } )
+        state.error = action.payload || 'User data couldnot be fetched';
+      })
+      .addCase(updateUserData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUserData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateUserData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || 'Failed to update user details';
+      })
+      .addCase(updateFavSubjectData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateFavSubjectData.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateFavSubjectData.rejected, (state) => {
+        state.loading = false;
+        state.error = action.payload || 'Subjects couldnot be updated'
+      })
 });
 
 export const {
   setEmail,
   setPhoneNumber,
   setAddress,
-  addSubjectOfInterest,
-  removeSubjectOfInterest,
+  updateSubjectOfInterest,
 } = userSlice.actions;
 
 export default userSlice.reducer;

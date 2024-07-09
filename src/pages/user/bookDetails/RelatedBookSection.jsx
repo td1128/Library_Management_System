@@ -17,7 +17,7 @@ export default function RelatedBookSection() {
             <span className="related_books_heading mt-2 ">Related books</span>
             <div className="related_books flex flex-wrap flex-row mt-4">
                 {loading === false ? Object.entries(relatedBookList).map(([isbn, book]) => (
-                    <Card key={isbn} book={book } />
+                    <Card key={isbn} book={book.book } />
                 )) : <Box sx={{ display: 'flex' }} className="loading_style">
                     <CircularProgress />
                 </Box>}

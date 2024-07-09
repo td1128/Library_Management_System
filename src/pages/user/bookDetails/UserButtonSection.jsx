@@ -124,14 +124,14 @@ export default function UserButtonSection(props) {
                     'Content-Type': 'application/json',
                 },
             });
-            const text = await response.text()
+            const json = await response.json()
             if (response.status === 200) {
-                toast.success(text)
+                toast.success(json.message)
             }
             else {
                 toast.error("Something went wrong. Please try again later.")
             }
-            console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${text}`);
+            console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json}`);
         } catch (error) {
             toast.error("Something went wrong. Please try again later.")
             console.log('Error while requesing for reserving the book: ', error)
