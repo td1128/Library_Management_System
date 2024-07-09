@@ -120,7 +120,7 @@ export default function ShowBookDetails(props) {
         {loading === false ? <div className={`container `}>
           <div className="book_section">
             <div className="book_image">
-              <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+              <img src={book.cover_img} alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
               props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />

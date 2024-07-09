@@ -17,6 +17,7 @@ export default function AdminButtonSection(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   const dispatch = useDispatch();
   const book = props.book;
+  console.log("book in admin section: ",book);
 
   //use state for the plus and minus buttons
   const [isClickEnabled, setIsClickEnabled] = useState(false);

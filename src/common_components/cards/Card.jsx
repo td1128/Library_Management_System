@@ -17,8 +17,6 @@ const Card = (props) => {
   // const bookList = useSelector((state) => state.relatedBookList.books)
   // const book = bookList[isbn_no];
   const book = props.book;
-  // book.author = props.book.author_name;
-  console.log("book in card component: ",props.book);
 
   return (
     <div className="custom-background">
