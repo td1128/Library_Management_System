@@ -1,0 +1,33 @@
+.heading{
+    border: 2px solid;
+    border-radius: 1vw;
+    padding: 0.8vw;
+    width: fit-content;
+    margin: 1vw;
+    font-size: 1.2vw;
+}
+
+.custom-BookBackground {
+  /* background-color: #ebebeb; */
+  border-radius: 1vw;
+  height: 55vh;
+  overflow-y: scroll;
+  margin: 0px 0.5vw;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-BookBackground::-webkit-scrollbar {
+  display: block;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.custom-BookBackground {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.custom-Bookrows {
+  width:calc(fit-content);
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -1,17 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
 import './cardStyle.css'
 import { useSelector, useDispatch } from 'react-redux'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
+import image from '/src/common_components/cards/image.jpeg'
+import "/src/common_components/ViewBookDetails/ShowBookDetails"
 
-const Card = ({ pic, title, author }) => {
-  
+const Card = ({Object}) => {
+
+  // const [author, setAuthor] = useState(Object===undefined?"":Object.author_name);
+  // const [title, setTitle] = useState(Object===undefined?"":Object.book.title);
+  // const [cover_image, setCoverImage] = useState(Object===undefined?"":Object.book.cover_image);
+  // const [isbn, setIsbn] = useState(Object===undefined?0:Object.book.isbn);
+
+  // useEffect(()=>{
+  //   setAuthor(Object===undefined?"":Object.author_name);
+  //   setTitle(Object===undefined?"":Object.book.title);
+  //   setCoverImage(Object===undefined?"":Object.book.cover_image);
+  //   setIsbn(Object===undefined?0:Object.book.isbn);
+  // },[Object])
+
   const [isFavorite, setIsFavorite] = useState(false)
-  
+
   const toggleFavorite = () => {
     setIsFavorite((prevState) => !prevState)
   }
+  console.log("Object at card: ",Object)
+  // console.log(Object)
+  const path = `/user/book/viewdetails/${Object.book.isbn}`
 
   return (
     <div className="custom-background">
@@ -23,20 +41,20 @@ const Card = ({ pic, title, author }) => {
           borderRadius: '1vw',
           aspectRatio: '2/2.5',
           width: '97%',
-          backgroundImage: `url(${pic})`,
+          backgroundImage: `url(${Object.book.cover_img})`
         }}
       ></div>
       <div className="custom-name_section">
         
-        <Tooltip title={title} arrow style={{margin:'0px 0px',padding:'0px 0px'}}>
-          <h1 className="custom-book_name">{title}</h1>
+        <Tooltip title={Object.book.title} arrow>
+          <p className="custom-book_name">{Object.book.title}</p>
         </Tooltip>
-        <Tooltip title={author} arrow>
-          <h1 className="custom-author_name">{author}</h1>
+        <Tooltip title={Object.author_name} arrow>
+          <p className="custom-author_name">{Object.author_name}</p>
         </Tooltip>
       </div>
       <div className="flex gap-x-px custom-buttons">
-        <button className="custom-stylebtn" onClick={toggleFavorite}>
+        <button className="custom-stylebtn" onClick={toggleFavorite} style={{justifyContent:'center'}}>
           <FavoriteIcon
             style={{
               width: '1.5vw',
@@ -46,12 +64,12 @@ const Card = ({ pic, title, author }) => {
           />
           <p>WishList</p>
         </button>
-        <button className="custom-stylebtn">
+        <NavLink to={path} className="custom-stylebtn">
           <TravelExploreTwoToneIcon
             style={{ width: '1.5vw', height: '1.5vw' }}
           />
           <p>Details</p>
-        </button>
+        </NavLink>
       </div>
     </div>
   )

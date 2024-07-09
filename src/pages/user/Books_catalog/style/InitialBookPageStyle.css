@@ -1,11 +1,21 @@
 .custom-Book_catalog_background {
-  top: 7vw;
-  position: absolute;
-  right: 10px;
+  height: 92vh;
+  overflow-y: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-Book_catalog_background::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.custom-Book_catalog_background {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 
 .custom-Recommended_section {
-  width: fit-content;
+  width: auto;
+  margin: 1vw;
   background-color: #ebebeb;
   border-radius: 1vw;
   height: auto;
@@ -26,5 +36,6 @@
   display: flex;
   align-items: center;
   height: auto;
+  justify-content: space-evenly;
 }
 
