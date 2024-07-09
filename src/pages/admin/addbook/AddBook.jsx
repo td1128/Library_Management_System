@@ -11,6 +11,7 @@ import DropdownSearch from './DropdownSearch'
 import addBook from '/src/services/addBook'
 import fileUpload from '/src/services/fileUpload'
 
+import toast from 'react-hot-toast'
 import dayjs from 'dayjs'
 import { subjects, shelves, authors } from './searchdata'
 import './AddBook.css'
@@ -27,6 +28,7 @@ export const AddBook = () => {
   const [shelvingNumber, setShelvingNumber] = useState('')
   const [bookEdition, setBookEdition] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [formValidity, setFormValidity] = useState(false)
 
   const inputFields = [
     {
@@ -36,6 +38,7 @@ export const AddBook = () => {
       setValue: setBookTitle,
       maxWidth: '40vw',
       pattern: /[\s\S]+/,
+      required: true,
     },
     {
       type: 'search',
@@ -44,6 +47,7 @@ export const AddBook = () => {
       value: bookAuthor,
       setValue: setBookAuthor,
       maxWidth: '40vw',
+      required: true,
     },
     {
       type: 'text',
@@ -52,6 +56,7 @@ export const AddBook = () => {
       setValue: setBookISBN,
       maxWidth: '40vw',
       pattern: /^[0-9]+(-[0-9]+)+$/,
+      required: true,
     },
     {
       type: 'text',
@@ -60,6 +65,7 @@ export const AddBook = () => {
       setValue: setBookEdition,
       maxWidth: '200px',
       pattern: /[\s\S]+/,
+      required: true,
     },
     {
       type: 'search',
@@ -68,6 +74,7 @@ export const AddBook = () => {
       value: bookSubject,
       setValue: setBookSubject,
       maxWidth: '40vw',
+      required: true,
     },
     {
       type: 'search',
@@ -76,8 +83,33 @@ export const AddBook = () => {
       value: shelvingNumber,
       setValue: setShelvingNumber,
       maxWidth: '40vw',
+      required: false,
     },
   ]
+
+  useEffect(() => {
+    if (
+      bookImage &&
+      bookTitle &&
+      bookAuthor &&
+      bookSubject &&
+      bookISBN &&
+      bookEdition &&
+      bookPublicationDate
+    ) {
+      setFormValidity(true)
+    } else {
+      setFormValidity(false)
+    }
+  }, [
+    bookImage,
+    bookTitle,
+    bookAuthor,
+    bookSubject,
+    bookISBN,
+    bookEdition,
+    bookPublicationDate,
+  ])
 
   useEffect(() => {
     if (loading) {
@@ -87,6 +119,7 @@ export const AddBook = () => {
       setBookPublicationDate(null)
       setBookCopies(1)
       setBookImage(null)
+      setBookDescription('')
     }
   }, [loading])
 
@@ -121,9 +154,11 @@ export const AddBook = () => {
         .then((res) => {
           console.log(res)
           setLoading(false)
+          toast.success('Book added successfully')
         })
         .catch((err) => {
           console.log(err)
+          toast.error(err.message)
         })
     } catch (error) {
       console.log(error)
@@ -142,8 +177,8 @@ export const AddBook = () => {
         <BookImageUpload setImage={setBookImage} loading={loading} />
         <button
           type="submit"
-          className={`form-button ${loading ? 'active' : ''}`}
-          disabled={loading}
+          className={`form-button ${!formValidity ? 'active' : ''}`}
+          disabled={!formValidity}
         >
           Add Book
         </button>
@@ -163,7 +198,10 @@ export const AddBook = () => {
         </div>
         <div className="form-container">
           <div className="inputfield">
-            <h1 className="text-md"> {`Publication Date`} </h1>
+            <div className="flex gap-2">
+              <h1 className="text-md"> {`Publication Date`} </h1>
+              <h1 className="text-md text-red-500"> * </h1>
+            </div>
             <DatePicker
               sx={{ width: '11rem' }}
               value={bookPublicationDate}

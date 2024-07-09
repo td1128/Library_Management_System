@@ -10,10 +10,14 @@ export default function DropdownSearch({
   value,
   setValue,
   maxWidth,
+  required,
 }) {
   return (
     <>
-      <h1 className="text-md"> {title} </h1>
+      <flex className="flex gap-2">
+        <h1 className="text-md"> {title} </h1>
+        <h1 className="text-md text-red-400"> {required ? '*' : ''} </h1>
+      </flex>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {

@@ -1,7 +1,14 @@
 import { TextField } from '@mui/material'
 import { useState } from 'react'
 
-const InputTextField = ({ title, value, setValue, maxWidth, pattern }) => {
+const InputTextField = ({
+  title,
+  value,
+  setValue,
+  maxWidth,
+  pattern,
+  required,
+}) => {
   const [valid, setValid] = useState(true)
 
   const handleChange = (e) => {
@@ -9,8 +16,7 @@ const InputTextField = ({ title, value, setValue, maxWidth, pattern }) => {
 
     if (e.target.value === '' || !pattern.test(e.target.value)) {
       setValid(false)
-    }
-    else {
+    } else {
       setValid(true)
     }
 
@@ -19,7 +25,10 @@ const InputTextField = ({ title, value, setValue, maxWidth, pattern }) => {
 
   return (
     <>
-      <h1 className="text-md"> {title} </h1>
+      <flex className="flex gap-2">
+        <h1 className="text-md"> {title} </h1>
+        <h1 className="text-md text-red-400"> {required ? '*' : ''} </h1>
+      </flex>
       <TextField
         id="outlined-basic"
         variant="outlined"
