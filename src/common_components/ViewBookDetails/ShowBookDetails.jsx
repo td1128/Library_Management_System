@@ -28,24 +28,28 @@ export default function ShowBookDetails(props) {
   //TODO props.book
   const dummy_book = { shelving_no: "sh-2-4", isbn: '978-0-07-140194-4', author: "Sanjay Saha", title: "Data base management system", description: "Animesh ipsum dolor sit amet consectetur adipisicing elit. Maiores, modi veniam nostrum repudiandae officia dolorum sit aliquid asperiores nemo necessitatibus nam eaque voluptatibus blanditiis voluptatem vero eius accusamus velit vitae quos tempore! Autem temporibus dolor expedita earum enim, ullam suscipit voluptate hic aliquid vitae dignissimos officiis accusamus quas, velit veritatis.", dateOfPublication: "2020", publisher: "Mc Graw Hill", no_of_copies: 1 };
   const dispatch = useDispatch();
-  const params = useParams();
-  // console.log("header isbn: ",params.isbn);
+  const {isbn} = useParams();
+  console.log("header isbn: ",isbn);
+
+
   const apiURL = import.meta.env.VITE_APP_API_URL;
   // console.log("Api url: ",apiURL);
 
-  const [book, setBook] = useState(props.book);
+  const [book, setBook] = useState(props.book === undefined ? props.book : null);
   const [loading, setLoading] = useState(true);
 
 
   const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
   // const isbn_no = props.book.isbn;
   useEffect(() => {
+    console.log("isbn changed: ",isbn);
     const fetchBook = async (isbn) => {
       try {
         const response = await fetch(`${apiURL}/api/common/book/isbn/${isbn}`
         );
         if (response.status === 200) {
           const data = await response.json();
+          console.log("data at fetch by isbn: ",data);
           data.book.author = data.author_name;
           setBook(data.book);
           setDetails(data.book.description.substring(0, 150));
@@ -58,15 +62,17 @@ export default function ShowBookDetails(props) {
     }
 
 
-    if (params.isbn !== undefined && loading === true && props.book === undefined) {
-      fetchBook(params.isbn);
+    // if (isbn !== undefined && loading === true && props.book === undefined) {
+    //   fetchBook(isbn);
+    // }
+    setLoading(true);
+    fetchBook(isbn);
+    if (props.type === 'user' ) {
+      dispatch(fetchRelatedBookList(isbn));
     }
-    if (props.type === 'user' && loading === false) {
-      dispatch(fetchRelatedBookList(isbn_no));
-    }
-  }, [dispatch, params, loading])
+  }, [isbn])
 
-  if (params.isbn === undefined) {
+  if (isbn === undefined) {
     setBook(props.book);
     // console.log("Entered");
   }
@@ -120,7 +126,7 @@ export default function ShowBookDetails(props) {
         {loading === false ? <div className={`container `}>
           <div className="book_section">
             <div className="book_image">
-              <img src={book.cover_img} alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+              <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
               props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />
@@ -151,7 +157,7 @@ export default function ShowBookDetails(props) {
               {des.length > description_length ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef} /><ExpandLessOutlinedIcon ref={upRef} style={{ display: 'none' }} /> </div> : null}
 
               {/* Related Books Section */}
-              {props.type === 'user' && loading === false ? <RelatedBookSection /> : null}
+              {props.type === 'user'  ? <RelatedBookSection /> : null}
             </div>
             <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
               <ArrowBackOutlinedIcon />

@@ -1,0 +1,23 @@
+.custom-Book_Background {
+  /* background-color: #ebebeb; */
+  border-radius: 1vw;
+  height: 92vh;
+  overflow-y: scroll;
+  margin: 0px 0.5vw;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.custom-Book_Background::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.custom-Book_Background {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+.custom-Book_rows {
+  display: flex;
+  justify-content: space-evenly;
+}

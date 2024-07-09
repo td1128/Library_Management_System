@@ -17,7 +17,7 @@ export default function AdminButtonSection(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   const dispatch = useDispatch();
   const book = props.book;
-  console.log("book in admin section: ",book);
+  console.log(book)
 
   //use state for the plus and minus buttons
   const [isClickEnabled, setIsClickEnabled] = useState(false);
@@ -74,7 +74,7 @@ export default function AdminButtonSection(props) {
     editButtonRef.current.click();
     console.log("called handle edit book");
   }
-  const handleSaveEditDetails = async () => {
+  const handleSaveEditDetails = async () => {//TODO change the format of the data when I send this data to the dispatch method in search book reducer.
     setShow(false);
     const data = {
       "shelving_no": shelVingNo,
@@ -113,7 +113,7 @@ export default function AdminButtonSection(props) {
         book.sub_name = book_title;
         book.no_of_copies = noOfCopies;
 
-        dispatch(updateSearchBookDetails(book));
+        // dispatch(updateSearchBookDetails(book)); // TODO
       
       }
       else{
