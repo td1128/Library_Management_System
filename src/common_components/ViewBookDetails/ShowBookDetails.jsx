@@ -33,7 +33,7 @@ export default function ShowBookDetails(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   // console.log("Api url: ",apiURL);
 
-  const [book, setBook] = useState(props.book === undefined ? props.book : null);
+  const [book, setBook] = useState(props.book);
   const [loading, setLoading] = useState(true);
 
 
