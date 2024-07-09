@@ -17,6 +17,8 @@ const Card = (props) => {
   // const bookList = useSelector((state) => state.relatedBookList.books)
   // const book = bookList[isbn_no];
   const book = props.book;
+  // book.author = props.book.author_name;
+  console.log("book in card component: ",props.book);
 
   return (
     <div className="custom-background">
@@ -55,7 +57,7 @@ const Card = (props) => {
           <TravelExploreTwoToneIcon
             style={{ width: '1.5vw', height: '1.5vw' }}
           />
-          <p>description</p>
+          <p>Details</p>
         </button>
       </div>
     </div>
