@@ -1,58 +1,26 @@
-import React from 'react'
-
+import React, { } from 'react'
+import RecommendedPage from './RecommendedPage'
+import {SearchBar} from  '../../../common_components/SearchBar/SearchBar'
+import { useSelector, useDispatch } from 'react-redux';
 import Card from '../../../common_components/cards/Card'
 
-import image from '../../../common_components/cards/image.jpeg';
-import image2 from '../../../common_components/cards/image2.webp';
-
-import { useSelector, useDispatch } from 'react-redux';
-
-import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
-import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
-
-import './bookStyle.css'
-
+import image from '../../../common_components/cards/image.jpeg'
 
 const Books = () => {
+  const dispatch = useDispatch();
+  const bookList = useSelector((state) => state.searchBookList.books);
+  console.log("book list at books.js: ",bookList);
+  const bookArray = Object.values(bookList)
+  console.log("bookArray: ",bookArray);
 
-    const dispatch = useDispatch();
-    const bookList = useSelector((state) => state.relatedBookList.books);
-    const bookArray = Object.values(bookList);
-    
-    return (
-        <div className='custom-Book_catalog_background'>
-            <div className='custom-Recommended_section'>
-                <p className='custom-head'>Recommended For You</p>
-                <div className='custom-card'>
-                    <button>
-                    <SkipPreviousRoundedIcon style={{width:'3vw',height:'3vw'}}/>
-                    </button>
-                    {bookArray.map((book) => (
-                        <Card pic={image} isbn_no={book.isbn} key={book.isbn} />
-                    ))}
-                    <button>
-                    <SkipNextRoundedIcon style={{width:'3vw',height:'3vw'}}/>
-                    </button>
-
-                </div>
-            </div>
-            <div className='custom-Recommended_section'>
-                <p className='custom-head'> Popular Among Your Peers</p>
-                <div className='custom-card'>
-                    <button>
-                    <SkipPreviousRoundedIcon style={{width:'3vw',height:'3vw'}}/>
-                    </button>
-                    {bookArray.map((book) => (
-                        <Card pic={image2} isbn_no={book.isbn} key={book.isbn} />
-                    ))}
-                    <button>
-                    <SkipNextRoundedIcon style={{width:'3vw',height:'3vw'}}/>
-                    </button>
-
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <>
+    <SearchBar/>
+    {/* <RecommendedPage bookArray={bookArray}/> */}
+    {bookArray.length >0? <RecommendedPage bookArray={bookArray} condition='After_Search'/> : <RecommendedPage condition='Before_Search'/>}
+    {/* <Initial_page/> */}
+    </>
+  )
 }
 
 export default Books
