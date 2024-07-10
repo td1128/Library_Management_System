@@ -12,7 +12,7 @@ const navstyles = {
     transition: 'width 0.3s',
     overflowX: 'hidden',
     bgcolor: '#4F0C24',
-    overflow: 'visible',
+    overflow: 'hidden',
     color: 'white',
   },
   list: { height: '100%', display: 'flex', flexDirection: 'column' },
@@ -92,17 +92,6 @@ const navstyles = {
     },
     marginX: 'auto',
     width: '90%',
-  },
-  overlay: {
-    elevation: 1,
-    position: 'absolute',
-    left: '100%',
-    zIndex: 0,
-    paddingTop: 1,
-    paddingX: 2,
-    boxShadow: 3,
-    bgcolor: '#4F0C24',
-    color: 'white',
   },
 }
 

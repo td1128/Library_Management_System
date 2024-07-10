@@ -29,7 +29,7 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           <ListItem
             button
             onClick={handleDrawerToggle}
-            sx={{ justifyContent: 'right', marginBottom: 6, marginTop: 'auto' }}
+            sx={{ justifyContent: 'right', marginBottom: 6, marginTop: 'auto' }} // Push to bottom
           >
             {open ? (
               <Icon fontSize="large">
