@@ -9,6 +9,9 @@ import { Toaster } from 'react-hot-toast';
 
 import Books from './pages/user/Books_catalog/Books'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <>
@@ -17,6 +20,18 @@ function App() {
           <Routers />
         </BrowserRouter>
         {/* <Books/> */}
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
       </Provider>
       <Toaster/>
    </>

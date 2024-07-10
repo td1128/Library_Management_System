@@ -22,22 +22,22 @@ export const adminNavItems = [
         },
     ]
   },
-  {
-    navPath: '/admin/transaction',
+ {
+    navPath: '/admin/transactions',
     navTitle: 'Transactions',
     navIcon: '/src/assets/icons/transaction-white.png',
     navIconHover: '/src/assets/icons/transaction-white.png',
     subPaths: [
         {
-            subPath: '/admin/transaction/issue',
+            subPath: '/admin/transactions/issue',
             subTitle: 'Issue a Book',
         },
         {
-            subPath: '/admin/transaction/return',
+            subPath: '/admin/transactions/return',
             subTitle: 'Return a book',
         },
         {
-            subPath: '/admin/transaction/history',
+            subPath: '/admin/transactions',
             subTitle: 'Transaction History',
         },
     ]
@@ -104,5 +104,4 @@ export const userNavItems = [
     subPaths: [],
   },
 ]
-
 
