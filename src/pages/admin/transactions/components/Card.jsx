@@ -4,34 +4,55 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+
+
+export const handleReturn = async (memberID, isbn) =>  { 
+    console.log(memberID, isbn);
+    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+        method: "PUT", // Specify the method
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type
+        },
+        body: JSON.stringify({
+            membership_id : String(memberID),
+            isbn : String(isbn)
+    }),
+      })
+      .then(res => res.json())
+      .then(response => { toast.info(response.message) });
+
+      console.log(res);
+}
+export const handleRenew = async (memberID, isbn) =>  { 
+    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+        method: "PUT", // Specify the method
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type
+        },
+        body: JSON.stringify({
+            membership_id : String(memberID),
+            isbn : String(isbn)
+    }),
+      })
+      .then(res => res.json())
+      .then(response => { toast.info(response.message) });
+
+      console.log(res);
+}
 
 
 
 const Card = (props) => {
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [openRenew, setOpenRenew] = React.useState(false);
+    const [openReturn, setOpenReturn] = React.useState(false);
+    const handleOpenRenew = () => setOpenRenew(true);
+    const handleCloseRenew = () => setOpenRenew(false);
+    const handleOpenReturn = () => setOpenReturn(true);
+    const handleCloseReturn = () => setOpenReturn(false);
 
-    const handleReturn = async () =>  { 
-        const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
-            method: "PUT", // Specify the method
-            headers: {
-              'Content-Type': 'application/json' // Specify the content type
-            },
-            body: JSON.stringify({
-                membership_id : String(memberID),
-                isbn : String(isbn),
-                copy_no : 1,
-                lib_card_no : member?.member?.library_card_string.indexOf('0') + 1
-        }),
-          })
-          .then(res => res.json())
-          .then(response => { toast.info(response.message) });
 
-          console.log(res);
-    }
-    const handleRenew = async () => {};
 
     const style = {
         position: 'absolute',
@@ -55,10 +76,10 @@ const Card = (props) => {
         <div>Issue Date: {props.book.issue_date}</div>
         <div>Return Date: {props.book.due_date}</div>
         <div className='flex justify-between'>
-        <Button onClick={handleOpen}>Return</Button>
+        <Button onClick={handleOpenReturn}>Return</Button>
         <Modal
-            open={open}
-            onClose={handleClose}
+            open={openReturn}
+            onClose={handleCloseReturn}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
@@ -67,15 +88,15 @@ const Card = (props) => {
                 Are you sure you want to return this book?
             </Typography>
             <div className='flex'>
-                <Button onClick={handleReturn}>Yes</Button>
-                <Button onClick={handleClose}>No</Button>
+                <Button onClick={() => handleReturn(props.member, props.book.isbn)}>Yes</Button>
+                <Button onClick={handleCloseReturn}>No</Button>
             </div>
             </Box>
         </Modal>
-        <Button onClick={handleOpen}>Renew</Button>
+        <Button onClick={handleOpenRenew}>Renew</Button>
         <Modal
-            open={open}
-            onClose={handleClose}
+            open={openRenew}
+            onClose={handleCloseRenew}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
@@ -84,8 +105,8 @@ const Card = (props) => {
                 Are you sure you want to renew this book?
             </Typography>
             <div className='flex'>
-                <Button onClick={handleRenew}>Yes</Button>
-                <Button onClick={handleClose}>No</Button>
+                <Button onClick={() => handleRenew(props.member, props.book.isbn)}>Yes</Button>
+                <Button onClick={handleCloseRenew}>No</Button>
             </div>
             </Box>
         </Modal>
