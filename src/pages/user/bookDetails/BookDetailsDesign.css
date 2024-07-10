@@ -10,8 +10,6 @@
     grid-template-columns: repeat(8, 1fr);
     width: 100%;
     height: 92vh;
-    overflow-y: scroll;
-
   }
 
   .book_section{
@@ -145,15 +143,3 @@
 .margin_left{
   margin-left: 8px;
 }
-
-.overlay {
-  opacity: 0.2;
-  z-index: -1;
-}
-
-/* .footer{
-  grid-row-start: 13;
-  grid-row-end: 17;
-  grid-column-start: 1;
-  grid-column-end: 9;
-} */

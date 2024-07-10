@@ -22,7 +22,7 @@ export const adminNavItems = [
         },
     ]
   },
- {
+  {
     navPath: '/admin/transactions',
     navTitle: 'Transactions',
     navIcon: '/src/assets/icons/transaction-white.png',
@@ -104,4 +104,5 @@ export const userNavItems = [
     subPaths: [],
   },
 ]
+
 

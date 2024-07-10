@@ -1,72 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
 import './cardStyle.css'
 import { useSelector, useDispatch } from 'react-redux'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
-import image from '/src/common_components/cards/image.jpeg'
-import { useNavigate } from 'react-router-dom';
-import "/src/common_components/ViewBookDetails/ShowBookDetails"
 
-import { toast } from 'react-toastify';
-
-const Card = ({ Object }) => {
-
-  const isbn_no = Object.book.isbn;
-  const navigate = useNavigate();
-
-  const heartRef = useRef();
-
-  const [isAdded, setIsAdded] = useState(false);
-  const handleAddtoWishlist = async () => {
-    if (isAdded == false) {
-      const apiURL = import.meta.env.VITE_APP_API_URL
-      const memberId = 'm_11111';//TODO 
-
-      toast.info("Request sent to the server.");
-
-      try {
-        const response = await fetch(`${apiURL}/api/user/books/wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const json = await response.json()
-        if (response.status === 200 && json.message != "Member does not exist") {
-          setIsAdded(true);
-          // setIsFavorite((prevState) => !prevState)
-          setIsFavorite(true)
-
-          toast.success("Book added to your wishlist.");
-        }
-        else {
-          toast.error(json.message);
-        }
-        console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
-      } catch (error) {
-        toast.error("Something went wrong. Please try again later.")
-        console.log('Error while requesing for add to favorite books: ', error)
-      }
-    }
-    else {
-      navigate("/")
-    }
-  }
-
+const Card = ({ pic, isbn_no }) => {
+  
   const [isFavorite, setIsFavorite] = useState(false)
 
   const toggleFavorite = () => {
-    handleAddtoWishlist();
+    setIsFavorite((prevState) => !prevState)
   }
-  console.log("Object at card: ", Object)
-  // console.log(Object)
-  const path = `/user/book/viewdetails/${Object.book.isbn}`
+
+  const dispatch = useDispatch()
+  const bookList = useSelector((state) => state.relatedBookList.books)
+  const book = bookList[isbn_no];
 
   return (
     <div className="custom-background">
-      <div className="custom-availability" style={{background: Object.book.no_of_copies>0 ? '#3fd43f':'#d32e0d'}}/>
+      <div className="custom-availability" />
       <div
         className="custom-image"
         style={{
@@ -74,16 +27,16 @@ const Card = ({ Object }) => {
           borderRadius: '1vw',
           aspectRatio: '2/2.5',
           width: '97%',
-          backgroundImage: `url(${Object.book.cover_img})`
+          backgroundImage: `url(${pic})`,
         }}
       ></div>
       <div className="custom-name_section">
-
-        <Tooltip title={Object.book.title} arrow>
-          <p className="custom-book_name">{Object.book.title}</p>
+        
+        <Tooltip title={book.title} arrow style={{margin:'0px 0px',padding:'0px 0px'}}>
+          <h1 className="custom-book_name">{book.title}</h1>
         </Tooltip>
-        <Tooltip title={Object.author_name} arrow>
-          <p className="custom-author_name">{Object.author_name}</p>
+        <Tooltip title={book.author} arrow>
+          <h1 className="custom-author_name">{book.author}</h1>
         </Tooltip>
       </div>
       <div className="flex gap-x-px custom-buttons">
@@ -92,17 +45,17 @@ const Card = ({ Object }) => {
             style={{
               width: '1.5vw',
               height: '1.5vw',
-              color: isFavorite ? 'red' : 'grey',
+              color: isFavorite ? '#d2324e' : 'grey',
             }}
           />
           <p>WishList</p>
         </button>
-        <NavLink to={path} className="custom-stylebtn">
+        <button className="custom-stylebtn">
           <TravelExploreTwoToneIcon
             style={{ width: '1.5vw', height: '1.5vw' }}
           />
           <p>Details</p>
-        </NavLink>
+        </button>
       </div>
     </div>
   )
