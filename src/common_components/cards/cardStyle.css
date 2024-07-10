@@ -50,7 +50,7 @@
 .custom-book_name {
   padding: 0px;
   font-size: var(--font2);
-  max-height: 3.30vw;
+  max-height: 3.1vw;
   max-width: fit-content;
   overflow: hidden;
 }
