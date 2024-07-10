@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import './cardStyle.css'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,67 +6,34 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 import Tooltip from '@mui/material/Tooltip'
 import image from '/src/common_components/cards/image.jpeg'
-import { useNavigate } from 'react-router-dom';
 import "/src/common_components/ViewBookDetails/ShowBookDetails"
 
-import { toast } from 'react-toastify';
+const Card = ({Object}) => {
 
-const Card = ({ Object }) => {
+  // const [author, setAuthor] = useState(Object===undefined?"":Object.author_name);
+  // const [title, setTitle] = useState(Object===undefined?"":Object.book.title);
+  // const [cover_image, setCoverImage] = useState(Object===undefined?"":Object.book.cover_image);
+  // const [isbn, setIsbn] = useState(Object===undefined?0:Object.book.isbn);
 
-  const isbn_no = Object.book.isbn;
-  const navigate = useNavigate();
-
-  const heartRef = useRef();
-
-  const [isAdded, setIsAdded] = useState(false);
-  const handleAddtoWishlist = async () => {
-    if (isAdded == false) {
-      const apiURL = import.meta.env.VITE_APP_API_URL
-      const memberId = 'm_11111';//TODO 
-
-      toast.info("Request sent to the server.");
-
-      try {
-        const response = await fetch(`${apiURL}/api/user/books/wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const json = await response.json()
-        if (response.status === 200 && json.message != "Member does not exist") {
-          setIsAdded(true);
-          // setIsFavorite((prevState) => !prevState)
-          setIsFavorite(true)
-
-          toast.success("Book added to your wishlist.");
-        }
-        else {
-          toast.error(json.message);
-        }
-        console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
-      } catch (error) {
-        toast.error("Something went wrong. Please try again later.")
-        console.log('Error while requesing for add to favorite books: ', error)
-      }
-    }
-    else {
-      navigate("/")
-    }
-  }
+  // useEffect(()=>{
+  //   setAuthor(Object===undefined?"":Object.author_name);
+  //   setTitle(Object===undefined?"":Object.book.title);
+  //   setCoverImage(Object===undefined?"":Object.book.cover_image);
+  //   setIsbn(Object===undefined?0:Object.book.isbn);
+  // },[Object])
 
   const [isFavorite, setIsFavorite] = useState(false)
 
   const toggleFavorite = () => {
-    handleAddtoWishlist();
+    setIsFavorite((prevState) => !prevState)
   }
-  console.log("Object at card: ", Object)
+  console.log("Object at card: ",Object)
   // console.log(Object)
   const path = `/user/book/viewdetails/${Object.book.isbn}`
 
   return (
     <div className="custom-background">
-      <div className="custom-availability" style={{background: Object.book.no_of_copies>0 ? '#3fd43f':'#d32e0d'}}/>
+      <div className="custom-availability" />
       <div
         className="custom-image"
         style={{
@@ -78,7 +45,7 @@ const Card = ({ Object }) => {
         }}
       ></div>
       <div className="custom-name_section">
-
+        
         <Tooltip title={Object.book.title} arrow>
           <p className="custom-book_name">{Object.book.title}</p>
         </Tooltip>
@@ -87,12 +54,12 @@ const Card = ({ Object }) => {
         </Tooltip>
       </div>
       <div className="flex gap-x-px custom-buttons">
-        <button className="custom-stylebtn" onClick={toggleFavorite}>
+        <button className="custom-stylebtn" onClick={toggleFavorite} style={{justifyContent:'center'}}>
           <FavoriteIcon
             style={{
               width: '1.5vw',
               height: '1.5vw',
-              color: isFavorite ? 'red' : 'grey',
+              color: isFavorite ? '#d2324e' : 'grey',
             }}
           />
           <p>WishList</p>

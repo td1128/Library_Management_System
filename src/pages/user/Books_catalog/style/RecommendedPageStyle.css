@@ -27,6 +27,7 @@
 }
 
 .custom-Bookrows {
+  width:calc(fit-content);
   display: flex;
   justify-content: space-evenly;
 }
