@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 10000,
+    port: 5173,
   },
   define: {
     'process.env': {},
