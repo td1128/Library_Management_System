@@ -9,16 +9,19 @@ import image from '/src/common_components/cards/image.jpeg'
 import { useNavigate } from 'react-router-dom';
 import "/src/common_components/ViewBookDetails/ShowBookDetails"
 
+import ShortcutIcon from '@mui/icons-material/Shortcut';
+
 import { toast } from 'react-toastify';
 
 const Card = ({ Object }) => {
-
+  const wishList = useSelector((state)=>state.user.wishList);
   const isbn_no = Object.book.isbn;
   const navigate = useNavigate();
 
   const heartRef = useRef();
 
-  const [isAdded, setIsAdded] = useState(false);
+  const [isAdded, setIsAdded] = useState(isbn_no in wishList?true:false);
+
   const handleAddtoWishlist = async () => {
     if (isAdded == false) {
       const apiURL = import.meta.env.VITE_APP_API_URL
@@ -55,10 +58,15 @@ const Card = ({ Object }) => {
     }
   }
 
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(isbn_no in wishList?true:false)
 
   const toggleFavorite = () => {
-    handleAddtoWishlist();
+    if(isFavorite === false){
+      handleAddtoWishlist();
+    }
+    else {
+      navigate("/user/books/goto-wishlist")
+    }
   }
   console.log("Object at card: ", Object)
   // console.log(Object)
@@ -87,15 +95,17 @@ const Card = ({ Object }) => {
         </Tooltip>
       </div>
       <div className="flex gap-x-px custom-buttons">
-        <button className="custom-stylebtn" onClick={toggleFavorite}>
-          <FavoriteIcon
+        <button className="custom-stylebtn" onClick={toggleFavorite} >
+
+          {isFavorite?<ShortcutIcon/>:<FavoriteIcon
             style={{
               width: '1.5vw',
               height: '1.5vw',
               color: isFavorite ? 'red' : 'grey',
             }}
-          />
-          <p>WishList</p>
+          />}
+          <p>{isFavorite? "Show list":"Wishlist"}</p>
+
         </button>
         <NavLink to={path} className="custom-stylebtn">
           <TravelExploreTwoToneIcon
