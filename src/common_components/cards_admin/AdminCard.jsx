@@ -1,12 +1,11 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import './AdminCardStyle.css'
 import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
-import { useSelector, useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom';
 
 const AdminCard = ({ Object }) => {
-  const path = `/admin/book/viewdetails/${Object.book.isbn}`
 
+  const path = `/admin/book/viewdetails/${Object.book.isbn}`
   return (
     <div className="custom-frame">
       <div className="custom-image" style={{ backgroundImage: `url(${Object.book.cover_img})` }}></div>
@@ -21,7 +20,7 @@ const AdminCard = ({ Object }) => {
             </p>
             <p>Subject: {Object.sub_name}</p>
             <p>ISBN No: {Object.book.isbn}</p>
-            <p>Availability/Stock</p>
+            <p>In Stock: {Object.book.no_of_copies}</p>
           </div>
         </div>
         <NavLink to={path} className="custom-more">

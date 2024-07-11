@@ -22,7 +22,6 @@
   padding: 0px 0px;
   width: 20%;
   height: 1.5vw;
-  background-color: #3fd43f;
   position: relative;
   left: 10.5vw;
   z-index: 100;
@@ -51,7 +50,7 @@
 .custom-book_name {
   padding: 0px;
   font-size: var(--font2);
-  max-height: 3.45vw;
+  max-height: 3.1vw;
   max-width: fit-content;
   overflow: hidden;
 }
