@@ -92,3 +92,16 @@
   color: aliceblue;
   background-color: rgb(46, 47, 84);
 }
+
+.custom-stylebtn-wishlist{
+  margin: 0px -4px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  place-content: space-evenly;
+  background: aliceblue;
+  width: 45%;
+  height: 1.5vw;
+  border-radius: 0.8vw;
+  font-size: var(--font1);
+}

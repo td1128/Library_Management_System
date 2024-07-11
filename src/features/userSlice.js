@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUserData, updateUserData, updateFavSubjectData } from './userThunks.js';
+import { fetchUserData, updateUserData, updateFavSubjectData, fetchWishList } from './userThunks.js';
 
 const initialState = {
   details: {
@@ -16,6 +16,7 @@ const initialState = {
   },
   loading: false,
   error: null,
+  wishList:{},
 };
 
 const userSlice = createSlice({
@@ -95,6 +96,27 @@ const userSlice = createSlice({
       .addCase(updateFavSubjectData.rejected, (state) => {
         state.loading = false;
         state.error = action.payload || 'Subjects couldnot be updated'
+      })
+
+      .addCase(fetchWishList.pending, (state)=>{
+        state.loading = true;
+      })
+      .addCase(fetchWishList.fulfilled, (state,action)=>{
+        state.loading = false;
+        state.error = null;
+
+        const wishListBooks = action.payload;
+        console.log("wishListBooks in fetchWishlist: ",wishListBooks);
+        const size = Object.keys(wishListBooks).length;
+        state.wishList =size>=1? wishListBooks.reduce((acc, item) => {
+            acc[item.book.isbn] = item;
+            return acc;
+        }, {}):{};
+        console.log("wish list state: ",state.wishList);
+      })
+      .addCase(fetchWishList.rejected, (state)=>{
+        state.loading = false;
+        state.error = action.payload || 'Wishlist couldnot be fetched'
       })
 });
 

@@ -1,6 +1,7 @@
 import { React, useState, useRef, useEffect } from 'react'
 import './BookDetailsDesign.css'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 //Material ui icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -50,14 +51,16 @@ const style = {
 //Expect isbn no of the book as props.
 export default function UserButtonSection(props) {
     // const isbn_no = "978-0-07-140194-4";//TODO pops.isbn
+    const noOfCopies = props.no_of_copies;
     const isbn_no = props.isbn;
     const navigate = useNavigate();
+    const wishListBook = useSelector((state)=> state.user.wishList);
 
     const heartRef = useRef();
     const shareRef = useRef();
 
     const [heart_class, setHeartClass] = useState('');
-    const [isAdded, setIsAdded] = useState(false);
+    const [isAdded, setIsAdded] = useState(isbn_no in wishListBook?true:false);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -183,10 +186,10 @@ export default function UserButtonSection(props) {
             </div>
 
             <div className="buttons_section">
-                <button onClick={handleReserveBook} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 mb-2 rounded-full" ><AddIcon />Reserve Book</button>
-                <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded-full" > {isAdded ? <ShortcutIcon /> : <FavoriteIcon ref={heartRef} className={`${heart_class} `} />}  {isAdded ? "Go to wishlist" : "Add to wish list"}</button>
-                <div onClick={handleShare} className="share_hover bg-blue-100 ml-4  inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
-                    <ShareOutlinedIcon className='share_icon share_hover' />
+                <button onClick={handleReserveBook} className={`${noOfCopies > 0?'bg-red-900 hover:bg-red-800 text-white':'bg-gray-500 text-black'}   font-bold py-2 px-4 mb-2 rounded-full`} disabled = {noOfCopies>0?false:true}><AddIcon />Reserve Book</button>
+                <button onClick={handleAddtoWishlist} className="bg-red-900 hover:bg-red-800  text-white font-bold py-2 px-4 rounded-full" > {isAdded ? <ShortcutIcon /> : <FavoriteIcon ref={heartRef} className={`${heart_class} `} />}  {isAdded ? "Go to wishlist" : "Add to wish list"}</button>
+                <div onClick={handleShare} className="share_hover bg-red-900 ml-4  inline-block border border-red-900 p-2 rounded-full hover:cursor-pointer hover:bg-red-800">
+                    <ShareOutlinedIcon className='share_icon share_hover text-white' />
                 </div>
             </div>
         </>

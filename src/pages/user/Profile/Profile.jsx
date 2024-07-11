@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileCard from './ProfileCard';
 import LibraryCards from './LibraryCards';
 import Loading from './Loading';
-import { fetchUserData, updateUserData } from '../../../features/userThunks';
+import { fetchUserData, updateUserData, fetchWishList } from '../../../features/userThunks';
 import { setEmail, setPhoneNumber, setAddress } from '../../../features/userSlice';
 import ChangeConfirmationModal from '../../../common_components/modals/ChangeConfirmationModal';
 import { EditSubjects } from '../../../components';
@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import './Profile.css';
 
 const Profile = () => {
+  console.log("profile rendered");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { name, department, studentID, joiningDate, rollNo, email, phoneNumber, address, subjectsOfInterest, libraryCardDetails } = user.details;
@@ -29,6 +30,10 @@ const Profile = () => {
   useEffect(() => {
     setUserCopy({ email, phoneNumber, address });
   }, [user.details]);
+
+  useEffect(()=>{
+    dispatch(fetchWishList('m_11201'));// TODO member id.
+  }, [dispatch])
 
   const handleChange = (event) => {
     const { name, value } = event.target;

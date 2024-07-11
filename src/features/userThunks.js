@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateFavSubject, fetchUserDetails, updateUserDetails, getLibraryCards } from '../api';
+import { updateFavSubject, fetchUserDetails, updateUserDetails, getLibraryCards, fetchWishListBook } from '../api';
+
+
 
 export const fetchUserData = createAsyncThunk(
   'user/fetchData',
@@ -37,6 +39,17 @@ export const updateFavSubjectData = createAsyncThunk(
       return subjectAddedResponse;
     } catch( error ) {
       return thunkAPI.rejectWithValue( error.message );
+    }
+  }
+);
+
+export const fetchWishList = createAsyncThunk('user/fetchWishlist',
+  async (memberId, thunkAPI)=>{
+    try{
+      const wishList = await fetchWishListBook(memberId);
+      return wishList;
+    }catch(error){
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

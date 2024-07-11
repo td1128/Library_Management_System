@@ -3,7 +3,6 @@ import '../../pages/user/bookDetails/BookDetailsDesign.css'
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { fetchRelatedBookList } from '../../features/relatedBoolReducer/RelatedBookReducer';
-import { fetchSearchQueryResult } from '../../features/searchBookReducer/SearchBookReducer';
 
 //Material ui icons
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
@@ -13,7 +12,6 @@ import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 // import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
 
 
 //Common components
@@ -25,22 +23,17 @@ import Footer from '../footer/Footer';
 
 //This component accepts the book as props.
 export default function ShowBookDetails(props) {
-  //TODO props.book
-  const dummy_book = { shelving_no: "sh-2-4", isbn: '978-0-07-140194-4', author: "Sanjay Saha", title: "Data base management system", description: "Animesh ipsum dolor sit amet consectetur adipisicing elit. Maiores, modi veniam nostrum repudiandae officia dolorum sit aliquid asperiores nemo necessitatibus nam eaque voluptatibus blanditiis voluptatem vero eius accusamus velit vitae quos tempore! Autem temporibus dolor expedita earum enim, ullam suscipit voluptate hic aliquid vitae dignissimos officiis accusamus quas, velit veritatis.", dateOfPublication: "2020", publisher: "Mc Graw Hill", no_of_copies: 1 };
   const dispatch = useDispatch();
   const {isbn} = useParams();
-  console.log("header isbn: ",isbn);
 
 
   const apiURL = import.meta.env.VITE_APP_API_URL;
-  // console.log("Api url: ",apiURL);
 
-  const [book, setBook] = useState(props.book === undefined ? props.book : null);
+  const [book, setBook] = useState(undefined); //Initially book will be undefined, if changed to null then gives error as we are reading book.description
   const [loading, setLoading] = useState(true);
 
+  const description_length = 50;//Describe description length to be shown in frontend.
 
-  const isbn_no = "978-0-07-140194-4";//TODO pops.book.isbn
-  // const isbn_no = props.book.isbn;
   useEffect(() => {
     console.log("isbn changed: ",isbn);
     const fetchBook = async (isbn) => {
@@ -49,10 +42,9 @@ export default function ShowBookDetails(props) {
         );
         if (response.status === 200) {
           const data = await response.json();
-          console.log("data at fetch by isbn: ",data);
           data.book.author = data.author_name;
           setBook(data.book);
-          setDetails(data.book.description.substring(0, 150));
+          setDetails(data.book.description.substring(0, description_length));
           setLoading(false);
         }
       }
@@ -61,10 +53,6 @@ export default function ShowBookDetails(props) {
       }
     }
 
-
-    // if (isbn !== undefined && loading === true && props.book === undefined) {
-    //   fetchBook(isbn);
-    // }
     setLoading(true);
     fetchBook(isbn);
     if (props.type === 'user' ) {
@@ -74,38 +62,24 @@ export default function ShowBookDetails(props) {
 
   if (isbn === undefined) {
     setBook(props.book);
-    // console.log("Entered");
   }
 
-  console.log("book: ", book);
-
-  //Book details
-  // const shelVingNo = book.shelving_no;
-  // const author = book.author;
-  // const book_title = book.title;
-  // const date_publication = book.date_of_publication;
-  const des = book !== undefined ? book.description : "dummy description";
-
-  // const publisher = book.publisher;
-  // const noOfCopies = book.no_of_copies;
-
-  // console.log("des: ",des);
+  const book_description = book!== undefined?book.description:""; // temporarily storing book description.
   const navigate = useNavigate();
 
   //Used for showing up/down arrow at read more section
   const upRef = useRef();
   const downRef = useRef();
 
-  const description_length = 150;
-  const [details, setDetails] = useState(des.substring(0, description_length));
+  const [details, setDetails] = useState(book_description.substring(0, description_length));
   const [read, setRead] = useState("More");
 
   const handleMoreDetails = () => {
-    details == des ? setDetails(des.substring(0, 150)) : setDetails(des);
-    read == "More" ? setRead("Less") : setRead("More");
+    details === book_description ? setDetails(book_description.substring(0, description_length)) : setDetails(book_description);
+    read === "More" ? setRead("Less") : setRead("More");
 
-    upRef.current.style.display == "none" ? upRef.current.style.display = "inline" : upRef.current.style.display = "none";
-    downRef.current.style.display == "none" ? downRef.current.style.display = "inline" : downRef.current.style.display = "none";
+    upRef.current.style.display === "none" ? upRef.current.style.display = "inline" : upRef.current.style.display = "none";
+    downRef.current.style.display === "none" ? downRef.current.style.display = "inline" : downRef.current.style.display = "none";
   }
 
   const handleBackButton = () => {
@@ -129,7 +103,7 @@ export default function ShowBookDetails(props) {
               <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
-              props.type === 'user' ? <UserButtonSection isbn={book.isbn} /> : <AdminButtonSection book={book} />
+              props.type === 'user' ? <UserButtonSection no_of_copies={book.no_of_copies} isbn={book.isbn} /> : <AdminButtonSection book={book} />
             }
           </div>
 
@@ -149,18 +123,16 @@ export default function ShowBookDetails(props) {
 
               {book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.publisher}</span></span>}
 
-              {/* <span className='place_holder mt-1'>No of copies: <span className='place_value'>{book.no_of_copies}</span></span> */}
-
               <span className='place_holder mt-2'>Description:
-                <span className='description place_value ml-1 font-light'>{details.length === description_length ? details + "...." : details}</span>
+                <span className='description place_value ml-1 font-light'>{details !== book_description ? details + "...." : details}</span>
               </span>
-              {des.length > description_length ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef} /><ExpandLessOutlinedIcon ref={upRef} style={{ display: 'none' }} /> </div> : null}
+              {book_description.length > description_length ? <div onClick={handleMoreDetails} className="more text-blue-700 hover:underline">Read {read} <ExpandMoreOutlinedIcon ref={downRef} /><ExpandLessOutlinedIcon ref={upRef} style={{ display: 'none' }} /> </div> : null}
 
               {/* Related Books Section */}
               {props.type === 'user'  ? <RelatedBookSection /> : null}
             </div>
-            <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-blue-300 border-blue-700 hover:bg-blue-400 cursor-pointer fixed right-8">
-              <ArrowBackOutlinedIcon />
+            <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-red-900 border-red-900 hover:bg-red-800 cursor-pointer fixed right-8">
+              <ArrowBackOutlinedIcon className='text-white'/>
             </div>
           </div>
         </div> : null}

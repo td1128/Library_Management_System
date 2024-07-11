@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="logo">
         <div className="logo_img_name">
 
-          <img className='logg-image' src="/book.png" alt="Image loading...." />
+          <img className='logg-image' src="/Book_logo.png" alt="Image loading...." />
           <span className='font-serif text-2xl'>LitLib</span>
         </div>
         <Link to="/" className='text-xl underline hover:text-gray-500'>Contact Support</Link>
