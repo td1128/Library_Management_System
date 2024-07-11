@@ -4,7 +4,9 @@ import { AdminHome, Transaction, Settings, AdminBook} from '../pages/admin';
 import Layout from './Layout';
 import { userNavItems, adminNavItems } from './NavigationPaths';
 import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
+import WishList from '../pages/user/wishlist/WishList';
 import Footer from '../common_components/footer/Footer';
+
 const Routers = () => {
   return (
     <Routes>
@@ -13,8 +15,11 @@ const Routers = () => {
         <Route path="/user/*" element={<Layout rootPath="/user" navItems={userNavItems} />}>
           <Route index element={<UserHome />} />
           <Route path="landing" element={<LandingPage />} /> 
-          <Route path="books" element={<Books />} />  
-          <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'user'}/>} />  
+          <Route path="books" >
+            <Route index element={<Books />} />
+            <Route path="viewdetails/:isbn" element={<ShowBookDetails type={'user'}/>} />  
+            <Route path="goto-wishlist" element={<WishList/>} />  
+          </Route>  
           <Route path="profile" element={<Profile />} />
           <Route path="help" element={<Help />} />
         </Route>

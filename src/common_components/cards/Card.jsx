@@ -62,7 +62,7 @@ const Card = ({ Object }) => {
   }
   console.log("Object at card: ", Object)
   // console.log(Object)
-  const path = `/user/book/viewdetails/${Object.book.isbn}`
+  const path = `/user/books/viewdetails/${Object.book.isbn}`
 
   return (
     <div className="custom-background">

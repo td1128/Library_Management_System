@@ -22,7 +22,7 @@ export default function RelatedBookSection() {
                     <CircularProgress />
                 </Box>}
                 {
-                    Object.keys(relatedBookList).length === 0 && <span className="no_books">No books found!
+                    loading === false && Object.keys(relatedBookList).length === 0 && <span className="no_books">No books found!
                     </span>
                 }
 

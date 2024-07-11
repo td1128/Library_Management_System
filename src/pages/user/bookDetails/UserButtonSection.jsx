@@ -76,7 +76,7 @@ export default function UserButtonSection(props) {
     const handleAddtoWishlist = async () => {
         if (isAdded == false) {
             const apiURL = import.meta.env.VITE_APP_API_URL
-            const memberId = 28;//TODO 
+            const memberId = 'm_11201';//TODO take member id from user slice.
 
             toast.info("Request sent to the server.");
 
@@ -104,7 +104,7 @@ export default function UserButtonSection(props) {
             }
         }
         else {
-            navigate("/")
+            navigate("/user/books/goto-wishlist")
         }
     }
     const handleShare = () => {
@@ -113,7 +113,7 @@ export default function UserButtonSection(props) {
     const handleReserveBook = async () => {
         console.log("called handle reserve book");
         const apiURL = import.meta.env.VITE_APP_API_URL
-        const memberId = 28;//TODO 
+        const memberId = 'm_11201';//TODO take member id from user state.
 
         toast.info("Request sent to the server.");
 
