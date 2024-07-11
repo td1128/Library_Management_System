@@ -9,6 +9,9 @@ export default defineConfig({
       src: './src',
     },
   },
+  server: {
+    port: 10000,
+  },
   define: {
     'process.env': {},
   },
