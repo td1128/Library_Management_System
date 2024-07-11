@@ -9,7 +9,15 @@ export default defineConfig({
       src: './src',
     },
   },
+  server: {
+    port: 10000,
+  },
   define: {
     'process.env': {},
   },
+  esbuild: {
+    supported: {
+      'top-level-await': true //browsers can handle top-level-await features
+    },
+  }
 })

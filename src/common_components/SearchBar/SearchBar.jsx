@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { Box, TextField, Icon, FormControl } from '@mui/material'
 import { SearchDropdown } from './SearchDropdown'
 import { SearchToggle } from './SearchToggle'
-import { SearchBookList } from './SearchBookList'
 import { useDispatch } from 'react-redux'
 import { fetchSearchQueryResult } from '/src/features/searchBookReducer/SearchBookReducer'
 import searchstyles from './SearchStyles';
@@ -11,7 +10,7 @@ export const SearchBar = () => {
   // queryRef is used to store the previous search query
   // on carraiage return, the search query is updated
   // this prevents unnecessary API calls
-  const queryRef = useRef('a')
+  const queryRef = useRef('sa')
 
   const [searchQuery, setSearchQuery] = useState('')
   const [availability, setAvailability] = useState(false)
@@ -80,7 +79,6 @@ export const SearchBar = () => {
           />
         </Box>
       </Box>
-      <SearchBookList />
     </Box>
   )
 }
