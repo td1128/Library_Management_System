@@ -15,13 +15,13 @@ const Routers = () => {
         <Route path="/user/*" element={<Layout rootPath="/user" navItems={userNavItems} />}>
           <Route index element={<UserHome />} />
           <Route path="landing" element={<LandingPage />} /> 
+          <Route path="profile" element={<Profile />} />
+          <Route path="help" element={<Help />} />
           <Route path="books" >
             <Route index element={<Books />} />
             <Route path="viewdetails/:isbn" element={<ShowBookDetails type={'user'}/>} />  
             <Route path="goto-wishlist" element={<WishList/>} />  
           </Route>  
-          <Route path="profile" element={<Profile />} />
-          <Route path="help" element={<Help />} />
         </Route>
         <Route path="/admin/*" element={<Layout rootPath="/admin" navItems={adminNavItems} />}>
           <Route index element={<AdminHome />} />
