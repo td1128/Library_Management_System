@@ -2,15 +2,116 @@ import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import Subjects from '../constants/Subjects';
-import { updateFavSubjectData } from '../features/userThunks';
-import { updateSubjectOfInterest } from '../features/userSlice';
-import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+
+const Subjects = [
+    "algorithms",
+    "data structures",
+    "computer architecture",
+    "operating systems",
+    "computer networks",
+    "database systems",
+    "software engineering",
+    "theory of computation",
+    "artificial intelligence",
+    "machine learning",
+    "computer graphics",
+    "human-computer interaction",
+    "cryptography",
+    "cybersecurity",
+    "programming languages",
+    "compiler design",
+    "distributed systems",
+    "cloud computing",
+    "mobile computing",
+    "parallel computing",
+    "web development",
+    "data science",
+    "big data",
+    "data mining",
+    "natural language processing",
+    "robotics",
+    "digital signal processing",
+    "bioinformatics",
+    "computer vision",
+    "information retrieval",
+    "game development",
+    "software testing",
+    "software project management",
+    "formal methods",
+    "quantum computing",
+    "information theory",
+    "computational complexity",
+    "computer-aided design",
+    "embedded systems",
+    "internet of things",
+    "network security",
+    "wireless networks",
+    "protocol design",
+    "network protocols",
+    "network administration",
+    "cloud security",
+    "web security",
+    "mobile security",
+    "ethical hacking",
+    "digital forensics",
+    "reverse engineering",
+    "social network analysis",
+    "visualization",
+    "multimedia systems",
+    "augmented reality",
+    "virtual reality",
+    "computer simulations",
+    "real-time systems",
+    "fault-tolerant systems",
+    "performance analysis",
+    "distributed algorithms",
+    "sensor networks",
+    "ad-hoc networks",
+    "high-performance computing",
+    "edge computing",
+    "fog computing",
+    "data warehousing",
+    "data analytics",
+    "business intelligence",
+    "knowledge representation",
+    "expert systems",
+    "fuzzy logic",
+    "neural networks",
+    "genetic algorithms",
+    "evolutionary computing",
+    "swarm intelligence",
+    "reinforcement learning",
+    "deep learning",
+    "pattern recognition",
+    "speech recognition",
+    "image processing",
+    "computer animation",
+    "graphics programming",
+    "virtual machines",
+    "operating system design",
+    "memory management",
+    "file systems",
+    "process synchronization",
+    "distributed databases",
+    "database management",
+    "sql programming",
+    "nosql databases",
+    "transaction processing",
+    "concurrency control",
+    "database design",
+    "information systems",
+    "web applications",
+    "web services",
+    "software architecture",
+    "software maintenance",
+    "requirements engineering",
+    "human factors in computing"
+];
+
+
 
 function EditSubjects({ show, onHide }) {
-
-    const dispatch = useDispatch();
 
     const insertRef = useRef(null);
 
@@ -19,13 +120,8 @@ function EditSubjects({ show, onHide }) {
     const [ query, setQuery ] = useState('');
     const [ suggestions, setSuggestions ] = useState([]);
     const [ selectedSubjects, setSelectedSubjects ] = useState([...subjectsOfInterest]);
-    const [ selectedSubjectsSet, setSelectedSubjectsSet ] = useState(new Set(subjectsOfInterest));
+    const [ selectedSubjectsSet, setSelectedSubjectsSet ] = useState(new Set());
     const [ activeIndex, setActiveIndex ] = useState(0);
-
-    useEffect( () => {
-        if( subjectsOfInterest ) setSelectedSubjects( [...subjectsOfInterest] );
-    }, [ subjectsOfInterest ] );
-
 
     useEffect( () => {
         setActiveIndex(0);
@@ -33,38 +129,6 @@ function EditSubjects({ show, onHide }) {
             insertRef.current.focus();
         }
     }, [ selectedSubjects, show ] );
-
-    const handleChangeSubjects =  async () => {
-        handleClose();
-        let changeMade = false;
-        for( const subject in subjectsOfInterest ) {
-            let f = false;
-            for( const selectedSubject in selectedSubjects ) {
-                if( subject === selectedSubject ) {
-                    f = true;
-                    break;
-                }
-            }
-
-            if( f != true ) {
-                changeMade = true;
-                break;
-            }
-        }
-
-        if( changeMade || ( selectedSubjects.length !== subjectsOfInterest ) ) {
-            try {
-                await dispatch( updateFavSubjectData( { subjects: selectedSubjects, membership_id: 'm_01010' } ) ).unwrap();
-                
-                dispatch( updateSubjectOfInterest( selectedSubjects ) );
-                toast.success('Subjects updated successfully.');
-
-            } catch (updateSubjectsError) {
-                console.log( 'Subjects updation failed: ', updateFavSubjectData );
-                toast.error('Subjects couldnot be updated');
-            }
-        }
-    }
 
     const removeSubject = (index = selectedSubjects.length - 1) => {
         const updatedSubjects = [...selectedSubjects];
@@ -98,15 +162,11 @@ function EditSubjects({ show, onHide }) {
     }
 
     const handleAddingSubject = ( subject ) => {
-        if ( selectedSubjects.length === 5 ) {
-            toast.error('You cannot add more than 5 subjects.');
-        } else {
         setSelectedSubjects([ ...selectedSubjects, subject ]);
-            setSelectedSubjectsSet(new Set([...selectedSubjectsSet, subject]));
-            setQuery('');
-            setSuggestions([]);
-            insertRef.current.focus();
-        }
+        setSelectedSubjectsSet(new Set([...selectedSubjectsSet, subject]));
+        setQuery('');
+        setSuggestions([]);
+        insertRef.current.focus();
     }
 
     const handleSearch = ( event ) => {
@@ -134,19 +194,14 @@ function EditSubjects({ show, onHide }) {
         <Modal.Header closeButton>
             <Modal.Title>
                 Add More Subjects
-                <span style={ { fontSize: '15px', marginLeft: '500px' } }>
-                    {
-                        `${ selectedSubjects.length }/5`
-                    }
-                </span>
             </Modal.Title>
         </Modal.Header>
         <Modal.Body className='flex flex-col'>
-            <div className='flex-wrap'>
-                <span className='flex-wrap'>
+            <div className='flex'>
+                <div className='flex-wrap'>
                     {
-                        selectedSubjects?.map( ( subject, index ) => (
-                            <span key={ subject } className='bg-black text-white w-10 mr-2 p-2 rounded-md inline'>
+                        selectedSubjects.map( ( subject, index ) => (
+                            <span key={ subject } className='bg-black text-white w-10 mr-2 p-2 rounded-md'>
                                 {
                                     `${ subject }` 
                                 } 
@@ -156,7 +211,7 @@ function EditSubjects({ show, onHide }) {
                             </span>
                         ) )
                     }
-                </span>
+                </div>
                 <span>
                     <input 
                         type="text" 
@@ -173,7 +228,7 @@ function EditSubjects({ show, onHide }) {
                 {
                     suggestions.map( ( subject, index ) => (
                         !selectedSubjectsSet.has(subject) &&
-                        <div key={ subject } style={ { padding: '4px', backgroundColor: index === activeIndex ? 'rgb(211, 211, 211)' : '' } } onClick={ () => handleAddingSubject( subject ) }>
+                        <div key={ index } style={ { padding: '4px', backgroundColor: index === activeIndex ? 'rgb(211, 211, 211)' : '' } } onClick={ () => handleAddingSubject( subject ) }>
                             {
                                 `${ subject }`
                             }
@@ -183,9 +238,6 @@ function EditSubjects({ show, onHide }) {
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={ handleChangeSubjects }>
-                Make Changes
-            </Button>
             <Button onClick={ handleClose }>
                 Close
             </Button>
