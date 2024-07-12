@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { handleRenew, handleReturn } from './Card';
+import { handleRenew, handleReturn } from './Card';
 
 const style = {
   position: 'absolute',
@@ -17,6 +18,7 @@ const style = {
   p: 4,
 };
 
+export default function FormModal(props) {
 export default function FormModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

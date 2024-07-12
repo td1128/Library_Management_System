@@ -5,6 +5,8 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
+<<<<<<< HEAD
+=======
 
 
 export const handleReturn = async (memberID, isbn) =>  { 
@@ -22,6 +24,43 @@ export const handleReturn = async (memberID, isbn) =>  {
       .then(res => res.json())
       .then(response => { toast.info(response.message) });
 
+      console.log(res);
+}
+export const handleRenew = async (memberID, isbn) =>  { 
+    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+        method: "PUT", // Specify the method
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type
+        },
+        body: JSON.stringify({
+            membership_id : String(memberID),
+            isbn : String(isbn)
+    }),
+      })
+      .then(res => res.json())
+      .then(response => { toast.info(response.message) });
+
+      console.log(res);
+}
+>>>>>>> 4d56c81ef7f633c0bba21ebd7e4adb757d15a213
+
+
+export const handleReturn = async (memberID, isbn) =>  { 
+    console.log(memberID, isbn);
+    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+        method: "PUT", // Specify the method
+        headers: {
+          'Content-Type': 'application/json' // Specify the content type
+        },
+        body: JSON.stringify({
+            membership_id : String(memberID),
+            isbn : String(isbn)
+    }),
+      })
+      .then(res => res.json())
+      .then(response => { toast.info(response.message) });
+
+<<<<<<< HEAD
       console.log(res);
 }
 export const handleRenew = async (memberID, isbn) =>  { 
@@ -53,6 +92,18 @@ const Card = (props) => {
     const handleCloseReturn = () => setOpenReturn(false);
 
 
+=======
+const Card = (props) => {
+
+    const [openRenew, setOpenRenew] = React.useState(false);
+    const [openReturn, setOpenReturn] = React.useState(false);
+    const handleOpenRenew = () => setOpenRenew(true);
+    const handleCloseRenew = () => setOpenRenew(false);
+    const handleOpenReturn = () => setOpenReturn(true);
+    const handleCloseReturn = () => setOpenReturn(false);
+
+
+>>>>>>> 4d56c81ef7f633c0bba21ebd7e4adb757d15a213
 
     const style = {
         position: 'absolute',
