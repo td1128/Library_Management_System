@@ -29,7 +29,7 @@ export default function ShowBookDetails(props) {
 
   const apiURL = import.meta.env.VITE_APP_API_URL;
 
-  const [book, setBook] = useState(undefined); //Initially book will be undefined, if changed to null then gives error as we are reading book.description
+  const [book, setBook] = useState(undefined); //Initially book will be undefined, if changed to null then gives error as we are reading book.book.description
   const [loading, setLoading] = useState(true);
 
   const description_length = 50;//Describe description length to be shown in frontend.
@@ -42,8 +42,7 @@ export default function ShowBookDetails(props) {
         );
         if (response.status === 200) {
           const data = await response.json();
-          data.book.author = data.author_name;
-          setBook(data.book);
+          setBook(data);
           setDetails(data.book.description.substring(0, description_length));
           setLoading(false);
         }
@@ -64,7 +63,7 @@ export default function ShowBookDetails(props) {
     setBook(props.book);
   }
 
-  const book_description = book!== undefined?book.description:""; // temporarily storing book description.
+  const book_description = book!== undefined?book.book.description:""; // temporarily storing book description.
   const navigate = useNavigate();
 
   //Used for showing up/down arrow at read more section
@@ -103,25 +102,25 @@ export default function ShowBookDetails(props) {
               <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
-              props.type === 'user' ? <UserButtonSection no_of_copies={book.no_of_copies} isbn={book.isbn} /> : <AdminButtonSection book={book} />
+              props.type === 'user' ? <UserButtonSection no_of_copies={book.book.no_of_copies} book={book} /> : <AdminButtonSection book={book} />
             }
           </div>
 
           <div className="book_details_section">
             <div className="book_features">
 
-              <span className="book_title">{book.title} <span className={`noOfCopies ${book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
+              <span className="book_title">{book.book.title} <span className={`noOfCopies ${book.book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
 
-              <span className='author'>by  {book.author}</span>
+              <span className='author'>by  {book.author_name}</span>
 
 
-              <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{book.shelving_no}</span></span>
+              <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{book.book.shelving_no}</span></span>
 
-              <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{book.isbn}</span></span>
+              <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{book.book.isbn}</span></span>
 
-              <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{book.date_of_publication}</span></span>
+              <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{book.book.date_of_publication}</span></span>
 
-              {book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.publisher}</span></span>}
+              {book.book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.book.publisher}</span></span>}
 
               <span className='place_holder mt-2'>Description:
                 <span className='description place_value ml-1 font-light'>{details !== book_description ? details + "...." : details}</span>

@@ -5,6 +5,7 @@
   height: 20%;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  padding: 5px;
 }
 
 .logo{
@@ -53,6 +54,5 @@
 }
 .right_text{
   font-size: medium;
-  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }

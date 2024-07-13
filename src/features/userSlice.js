@@ -35,6 +35,13 @@ const userSlice = createSlice({
     updateSubjectOfInterest: (state, action) => {
       state.details.subjectsOfInterest = [...action.payload];
     },
+    addBookToWishList: (state, action)=>{
+      state.wishList = {...state.wishList, [action.payload.book.isbn]: action.payload
+        };
+    },
+    removeBookFromWishList: (state, action)=>{
+      delete state.wishList[action.payload.book.isbn];
+    },
   },
   extraReducers: builder =>
     builder
@@ -125,6 +132,8 @@ export const {
   setPhoneNumber,
   setAddress,
   updateSubjectOfInterest,
+  addBookToWishList,
+  removeBookFromWishList,
 } = userSlice.actions;
 
 export default userSlice.reducer;
