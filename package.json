@@ -5,11 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
     "build": "vite build",
-    "serve": "vite preview"
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
