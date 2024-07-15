@@ -14,7 +14,7 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           <ListItem component={NavLink} to={rootPath} sx={navstyles.titlebox}>
             <Box sx={navstyles.icon}>
               <img
-                src="/Library_Management_System/src/assets/icons/book-black.png"
+                src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/book-bulk.png"
                 width="100%"
                 height="100%"
               />
