@@ -14,7 +14,7 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           <ListItem component={NavLink} to={rootPath} sx={navstyles.titlebox}>
             <Box sx={navstyles.icon}>
               <img
-                src="/src/assets/icons/book-black.png"
+                src="/Library_Management_System/src/assets/icons/book-black.png"
                 width="100%"
                 height="100%"
               />
@@ -33,11 +33,11 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           >
             {open ? (
               <Icon fontSize="large">
-                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%"/>
+                <img src="/Library_Management_System/src/assets/icons/arrow-white.png" height="100%" width="100%"/>
               </Icon>
             ) : (
               <Icon fontSize="large">
-                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%" className="rotate-180"/>
+                <img src="/Library_Management_System/src/assets/icons/arrow-white.png" height="100%" width="100%" className="rotate-180"/>
               </Icon>
             )}
           </ListItem>
