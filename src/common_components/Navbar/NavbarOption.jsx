@@ -68,12 +68,12 @@ const NavbarOption = ({
               {hovered ? (
                 <Icon fontSize="large">
                   {' '}
-                  <img src={"/Library_Management_System/"+navIconHover} width="100%" height="100%" />{' '}
+                  <img src={"https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main"+navIconHover} width="100%" height="100%" />{' '}
                 </Icon>
               ) : (
                 <Icon fontSize="large">
                   {' '}
-                  <img src={"/Library_Management_System/"+navIcon} width="100%" height="100%" />{' '}
+                  <img src={"https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main"+navIcon} width="100%" height="100%" />{' '}
                 </Icon>
               )}
             </ListItemIcon>
@@ -89,7 +89,7 @@ const NavbarOption = ({
         {open && subPaths.length > 0 && (
           <IconButton onClick={handleToggleCollapse} size="small">
             <img
-              src="/Library_Management_System/src/assets/icons/arrow-down-white.png"
+              src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/arrow-down-white.png"
               height="22"
               width="22"
               className={!collapsed ? 'rotate-180' : ''}

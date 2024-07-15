@@ -51,7 +51,7 @@ export const SearchBar = () => {
           InputProps={{
             endAdornment: (
               <Icon>
-                <img src="/src/assets/icons/search-normal.png" />
+                <img src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/search-normal.png" />
               </Icon>
             ),
           }}

@@ -30,13 +30,13 @@ export default function ProfileMenu() {
             <Avatar sx={profilestyles.avatar}>
               <Icon>
                 <img
-                  src="/Library_Management_System/src/assets/icons/profile2-linear.png"
+                  src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/profile2-linear.png"
                   alt="Profile"
                 />
               </Icon>
             </Avatar>
             <Icon>
-              <img src="/Library_Management_System/src/assets/icons/arrow-down.png" />
+              <img src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/arrow-down.png" />
             </Icon>
           </Box>
         </Tooltip>
