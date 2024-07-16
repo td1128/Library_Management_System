@@ -13,10 +13,9 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename="/Library_Management_System">
           <Routers />
         </BrowserRouter>
-        {/* <Books/> */}
       </Provider>
       <Toaster/>
    </>
