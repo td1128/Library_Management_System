@@ -109,3 +109,12 @@
 .bg-grey{
   background-color: rgb(230, 230, 230);
 }
+
+.take_input label{
+  width: 24%;
+}
+
+.take_input input, textarea{
+  padding: 5px;
+  background-color: rgb(246, 226, 226);
+}

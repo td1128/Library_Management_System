@@ -14,11 +14,17 @@
   border-radius: 1vw;
 }
 
+/* Book container */
+.book-card {
+  position: relative;
+  display: inline-block;
+}
+
 /* Image section */
 .custom-image {
-  aspect-ratio: 2/2.5;
-  width: inherit;
-  height: inherit;
+  display: block;
+  width: 100%; 
+  height: auto; 
 }
 
 .custom-name_section {
@@ -64,23 +70,39 @@
   font-size: var(--font1);
 }
 
-.out-of-stock{
-  opacity: 0.5;
-  z-index: -1;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.out-of-stock-overlay{
+.book-card::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1); /* semi-transparent black overlay */
+  border-radius: 8px;
+  z-index: 1;
+  opacity: 0; /* hidden by default */
+  transition: opacity 0.3s ease;
+}
+
+.book-card::after {
+  content: "Out of Stock";
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  background: gray; 
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5em;
-  opacity: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center; 
+  padding: 8px 0; 
+  z-index: 2;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+  white-space: nowrap; 
+}
+
+.book-card.out-of-stock::before,
+.book-card.out-of-stock::after {
+  opacity: 1; 
 }

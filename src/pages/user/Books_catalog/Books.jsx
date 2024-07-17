@@ -9,9 +9,7 @@ import image from '../../../common_components/cards/image.jpeg'
 const Books = () => {
   const dispatch = useDispatch();
   const bookList = useSelector((state) => state.searchBookList.books);
-  console.log("book list at books.js: ",bookList);
   const bookArray = Object.values(bookList)
-  console.log("bookArray: ",bookArray);
 
   return (
     <>

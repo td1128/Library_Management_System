@@ -98,11 +98,11 @@ export default function ShowBookDetails(props) {
 
         {loading === false ? <div className={`container `}>
           <div className="book_section">
-            <div className="book_image">
-              <img src="/book_img2.png" alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
+            <div className={`book_image book-card ${book.book.no_of_copies ===0? 'out-of-stock':''}`}>
+              <img src={book.book.cover_img} alt="Loading image!" className='image shadow-lg border border-blue-700 ' />
             </div>
             {
-              props.type === 'user' ? <UserButtonSection no_of_copies={book.book.no_of_copies} book={book} /> : <AdminButtonSection book={book} />
+              props.type === 'user' ? <UserButtonSection no_of_copies={book.book.no_of_copies} book={book} /> : <AdminButtonSection book={book} isbn= {book.book.isbn}/>
             }
           </div>
 

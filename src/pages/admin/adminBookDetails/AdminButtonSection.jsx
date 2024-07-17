@@ -16,8 +16,14 @@ import { updateSearchBookDetails } from '../../../features/searchBookReducer/Sea
 export default function AdminButtonSection(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
   const dispatch = useDispatch();
-  const book = props.book;
-  console.log(book)
+
+  
+  // const ISBN = props.isbn;
+  // const searchBookList = useSelector((state) => state.searchBookList.books);
+  // const book_data = searchBookList[ISBN];
+
+  const book_data = props.book;//TODO as above
+  console.log("book at admin book details section: ",book_data);
 
   //use state for the plus and minus buttons
   const [isClickEnabled, setIsClickEnabled] = useState(false);
@@ -25,16 +31,17 @@ export default function AdminButtonSection(props) {
   const [minusBgclass, setMinusBgclass] = useState('bg-grey');
 
 
-  const [author, setAuthor] = useState(book.author);
-  const [book_title, setBookTitle] = useState(book.title);
-  const [date_publication, setDateOfPublication] = useState(book.date_of_publication);
-  const [publisher, setPublisher] = useState(book.publisher);
-  const [book_description, setBookDescription] = useState(book.description);
-  const [isbn, setIsbn] = useState(book.isbn);
-  const [shelVingNo, setShelVingNo] = useState(book.shelving_no);
-  const [noOfCopies, setNoOfCopies] = useState(book.no_of_copies);
-  const [edition, setEdition] = useState(book.edition);
-  const [cover_image, setCoverImage] = useState(book.cover_img);
+  const [author, setAuthor] = useState(book_data.author_name);
+  const [book_title, setBookTitle] = useState(book_data.book.title);
+  const [date_publication, setDateOfPublication] = useState(book_data.book.date_of_publication);
+  const [publisher, setPublisher] = useState(book_data.book.publisher);
+  const [book_description, setBookDescription] = useState(book_data.book.description);
+  const [isbn, setIsbn] = useState(book_data.book.isbn);
+  const [shelVingNo, setShelVingNo] = useState(book_data.book.shelving_no);
+  const [noOfCopies, setNoOfCopies] = useState(book_data.book.no_of_copies);
+  const [edition, setEdition] = useState(book_data.book.edition);
+  const [cover_image, setCoverImage] = useState(book_data.book.cover_img);
+  const [sub_name, setSubName] = useState(book_data.sub_name);
 
   const handleShelvingNoChange = (e) => {
     setShelVingNo(e.target.value);
@@ -50,7 +57,7 @@ export default function AdminButtonSection(props) {
   }
   const handleDescriptionChange = (e) => {
     setBookDescription(e.target.value);
-    setDetails(e.taret.value)
+    setDetails(e.target.value)
   }
   const handleDateOfPublicationChange = (e) => {
     setDateOfPublication(e.target.value);
@@ -85,7 +92,7 @@ export default function AdminButtonSection(props) {
       "title": book_title,
       "cover_img": cover_image,
       "author_name": author,
-      "sub_name": book_title
+      "sub_name": sub_name
     }
 
     try {
@@ -101,19 +108,19 @@ export default function AdminButtonSection(props) {
       if(response.status === 200){
         toast.success("Book details updated successfully.")
         //TODO dispatch(action)
-        const book= {};
-        book.shelving_no = shelVingNo;
-        book.isbn = isbn;
-        book.date_of_publication = date_publication;
-        book.edition = edition;
-        book.description = book_description;
-        book.title = book_title;
-        book.cover_img = cover_image;
-        book.author_name = author;
-        book.sub_name = book_title;
-        book.no_of_copies = noOfCopies;
+        const book_details= book_data;
+        book_details.book.shelving_no = shelVingNo;
+        book_details.book.isbn = isbn;
+        book_details.book.date_of_publication = date_publication;
+        book_details.book.edition = edition;
+        book_details.book.description = book_description;
+        book_details.book.title = book_title;
+        book_details.book.cover_img = cover_image;
+        book_details.author_name = author;
+        book_details.sub_name = book_title;
+        book_details.book.no_of_copies = noOfCopies;
 
-        dispatch(updateSearchBookDetails(book));
+        dispatch(updateSearchBookDetails(book_details));
       
       }
       else{
@@ -200,39 +207,39 @@ export default function AdminButtonSection(props) {
 
         <EditModal show={show} onHide={handleCloseEdit}>
           <EditModal.Header closeButton>
-            <EditModal.Title>Enter new details</EditModal.Title>
+            <EditModal.Title className='text-red-900 font-bold text-3xl'>Enter new details</EditModal.Title>
           </EditModal.Header>
           <EditModal.Body className='edit_modal_body'>
             <div className="take_input flex flex-row">
-              <label htmlFor="shelving_no" className=' text-lg mr-2'>Shelving No:</label>
+              <label htmlFor="shelving_no" className=' text-lg mr-2 font-bold text-red-900'>Shelving No:</label>
               <input id='shelving_no' type="text" className='input_field ' value={shelVingNo} onChange={handleShelvingNoChange} />
             </div>
             <div className="take_input flex flex-row">
-              <label htmlFor="title" className=' text-lg mr-2'>Title:</label>
+              <label htmlFor="title" className=' text-lg mr-2 font-bold text-red-900'>Title:</label>
               <input id='title' type="text" className='input_field ' value={book_title} onChange={handleTitleChange} />
             </div>
             <div className="take_input flex flex-row">
-              <label htmlFor="author" className=' text-lg mr-2'>Author:</label>
+              <label htmlFor="author" className=' text-lg mr-2 font-bold text-red-900'>Author:</label>
               <input id='author' type="text" className='input_field' value={author} onChange={handleAuthorChange} />
             </div>
             {publisher!==undefined? <div className="take_input flex flex-row">
-              <label htmlFor="publisher" className=' text-lg mr-2' >Publisher:</label>
+              <label htmlFor="publisher" className=' text-lg mr-2 font-bold text-red-900' >Publisher:</label>
               <input id='publisher' type="text" className='input_field' value={publisher} onChange={handlePublisherChange} />
             </div> :null}
 
             <div className="take_input flex flex-row">
-              <label htmlFor="date" className=' text-lg mr-2'>Date of publication:</label>
+              <label htmlFor="date" className=' text-lg mr-2 font-bold text-red-900'>Publication:</label>
               <input id='date' type="text" className='input_field' value={date_publication} onChange={handleDateOfPublicationChange} />
             </div>
 
             <div className="take_input flex flex-row">
-              <label htmlFor="edition" className=' text-lg mr-2'>Edition:</label>
+              <label htmlFor="edition" className=' text-lg mr-2 font-bold text-red-900'>Edition:</label>
               <input id='edition' type="text" className='input_field' value={edition} onChange={handleEditionChange} />
             </div>
             <div
               className="take_input flex flex-row">
-              <label htmlFor="description" className=' text-lg mr-2'>Description:</label>
-              <textarea name="description" id="description" className='input_field w-3/4 h-28' value={book_description} onChange={handleDescriptionChange}></textarea>
+              <label htmlFor="description" className=' text-lg mr-2 font-bold text-red-900'>Description:</label>
+              <textarea name="description" id="description" className='input_field w-3/4 h-28 p-1' value={book_description} onChange={handleDescriptionChange}></textarea>
             </div>
           </EditModal.Body>
           <EditModal.Footer>

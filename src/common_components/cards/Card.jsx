@@ -138,8 +138,8 @@ const Card = ({ Object }) => {
       </Modal>
 
       <div className="custom-background border-1 border-red-900 shadow-xl">
-        <div className="h-52 w-auto m-2">
-          <img src={Object.book.cover_img} alt="Image loading...." className={`h-full w-full rounded-lg border-1 border-gray-400 ${Object.book.no_of_copies === 0?'out-of-stock':'z-5'}`} />
+        <div className={`h-52 w-auto m-2 book-card ${Object.book.no_of_copies === 0?'out-of-stock':''}`}>
+          <img src={Object.book.cover_img} alt="Image loading...." className={`h-full w-full rounded-lg border-1 border-gray-400 `} />
         </div>
         {/* {Object.book.no_of_copies === 0 && (
         <div className={`${Object.book.no_of_copies === 0?'z-5':'out-of-stock'}`}>Out of Stock</div>

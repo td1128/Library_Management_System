@@ -17,8 +17,8 @@ const searchBookListSlice = createSlice({
     },
 
     updateSearchBookDetails: (state, action)=>{
-      const book = action.payload;
-      state.books[book.isbn] = book;
+      const book_details = action.payload;
+      state.books[book_details.book.isbn] = book_details;
     },
 
   },
