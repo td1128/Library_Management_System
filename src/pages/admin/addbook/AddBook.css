@@ -1,0 +1,61 @@
+.input-form {
+  @apply flex gap-10 ml-10 mt-2 pb-4;
+}
+
+.upload-container {
+  @apply w-3/4 max-w-96 flex flex-col h-full items-center;
+}
+
+.inputfield {
+  @apply flex flex-col gap-2 pr-4 h-fit;
+}
+
+.form-button {
+  @apply w-80 bg-red-500 text-white text-4xl rounded-md mt-10 py-2;
+}
+
+.form-button.active {
+  @apply !bg-red-300;
+}
+
+.form-grid {
+  @apply w-full grid grid-cols-1 lg:grid-cols-2 gap-10 h-fit;
+}
+
+.form-container {
+  @apply flex flex-col lg:flex-row gap-10 w-fit;
+}
+
+.image-upload {
+  @apply flex flex-col align-middle justify-between w-[95%] h-[60vh];
+}
+
+.image-upload .placeholder {
+  @apply flex justify-center items-center w-full h-full bg-gray-300 cursor-pointer;
+}
+
+.image-upload .image-preview {
+  @apply w-full h-full object-cover cursor-pointer;
+}
+
+.image-upload .upload-button {
+  @apply flex justify-center bg-blue-500 text-white py-1 px-2 rounded-md cursor-pointer mt-10;
+}
+
+.image-upload .upload-button:hover {
+  background-color: #0056b3;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+

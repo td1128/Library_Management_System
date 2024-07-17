@@ -7,17 +7,17 @@ export const adminNavItems = [
     subpath: []
   },*/
   {
-    navPath: '/admin/books',
+    navPath: '/admin/book',
     navTitle: 'Books',
     navIcon: '/src/assets/icons/book-white.png',
     navIconHover: '/src/assets/icons/book-white.png',
     subPaths: [
         {
-            subPath: '/admin/books/add',
+            subPath: '/admin/book/add',
             subTitle: 'Add/Edit a Book',
         },
         {
-            subPath: '/admin/books/search',
+            subPath: '/admin/book/search',
             subTitle: 'Search a Book',
         },
     ]
@@ -76,7 +76,7 @@ export const userNavItems = [
     subPaths: [],
   },
   {
-    navPath: '/user/books',
+    navPath: '/user/book',
     navTitle: 'Books',
     navIcon: '/src/assets/icons/book-linear.png',
     navIconHover: '/src/assets/icons/book-bulk.png',
