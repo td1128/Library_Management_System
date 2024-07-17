@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Help, Profile, UserHome, LandingPage } from '../pages/user'
-import { AdminHome, Transaction, Settings, AddBook } from '../pages/admin'
+import { Help, Profile, UserHome, LandingPage, Books } from '../pages/user'
+import { AdminHome, Transaction, Settings, AddBook, AdminBook } from '../pages/admin'
 import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
 import { userNavItems, adminNavItems } from './NavigationPaths'
 import Layout from './Layout'
@@ -18,7 +18,7 @@ const Routers = () => {
           <Route index element={<UserHome />} />
           <Route path="landing" element={<LandingPage />} />
           <Route path="book">
-            <Route index element={<ShowBookDetails />} />
+            <Route index element={<Books />} />
             <Route
               path="viewdetails/:isbn"
               element={<ShowBookDetails type={'user'} />}
@@ -40,6 +40,7 @@ const Routers = () => {
               path="viewdetails/:isbn"
               element={<ShowBookDetails type={'admin'} />}
             />
+            <Route path="search" element={<AdminBook />} />
           </Route>
         </Route>
       </Route>

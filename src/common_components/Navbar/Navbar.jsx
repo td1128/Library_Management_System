@@ -11,7 +11,10 @@ const Navbar = ({ rootPath, navItems }) => {
   const navigate = useNavigate();
   useEffect(()=>{//TODO check the user details from profile reducer that user is logged in or not
     const location = window.location.href;
-    if(location === 'http://localhost:5173/user/book/viewdetails'  || location === 'http://localhost:5173/admin/book/viewdetails' || location === 'http://localhost:5173/user/book/viewdetails/' || location === 'http://localhost:5173/admin/book/viewdetails/'){
+    const tokens = location.split('/');
+    const path = tokens[tokens.length - 1];
+
+    if(path === 'viewdetails'){
       toast.error("Please provide book isbn number!")
       navigate("/")
     }
