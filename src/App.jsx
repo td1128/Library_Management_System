@@ -14,7 +14,7 @@ function App() {
     <>
       <Provider store={store}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <BrowserRouter>
+          <BrowserRouter basename="/Library_Management_System">
             <Routers />
           </BrowserRouter>
         </LocalizationProvider>
