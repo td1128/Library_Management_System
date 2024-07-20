@@ -97,7 +97,7 @@ const navstyles = {
     elevation: 1,
     position: 'absolute',
     left: '100%',
-    zIndex: 1,
+    zIndex: 0,
     paddingTop: 1,
     paddingX: 2,
     boxShadow: 3,

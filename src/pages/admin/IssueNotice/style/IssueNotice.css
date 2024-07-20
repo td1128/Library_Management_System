@@ -1,0 +1,41 @@
+.content{
+    width:60%;
+    /* background-color:#fbdbdb */
+}
+.custom-heading{
+    font-size: 2.5vw;
+    color: #4F0C24;
+    margin-bottom: 0.5vw;
+}
+
+.Subject{
+    margin: 1vw 0vw;
+    display: flex;
+    flex-direction: column;
+    color: #b24068;
+}
+
+.custom-mark{
+    font-size: 1.2vw;
+}
+
+.subjectArea{
+    margin: 0.5vw 0vw;
+    width: 98%;
+    font-size: 2vw;
+    font-weight: 300;
+    background-color: #f1e5e9;
+    color: black;
+    /* line-height: 1.6vw; */
+    border: 2px solid #4F0C24;
+    border-radius: 0.5vw;
+    padding: 1vw;
+}
+
+.Publish{
+    width: 98%;
+    background-color: #4F0C24;
+    color: white;
+    padding: 1vw;
+    border-radius: 2vw;
+}
