@@ -9,7 +9,7 @@
 /* back frame part */
 .custom-background {
   margin: 10px 5px;
-  width: 14vw;
+  width: 15vw;
   height: auto;
   border-radius: 1vw;
 }
@@ -17,14 +17,13 @@
 /* Book container */
 .book-card {
   position: relative;
-  display: inline-block;
+  height: 18vw;
 }
 
 /* Image section */
-.custom-image {
-  display: block;
-  width: 100%; 
-  height: auto; 
+.card-book-image {
+  width: 100%;
+  height: 100%; 
 }
 
 .custom-name_section {
@@ -105,4 +104,14 @@
 .book-card.out-of-stock::before,
 .book-card.out-of-stock::after {
   opacity: 1; 
+}
+
+.heart-icon-size{
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.card-details-button-size{
+  height: 1.5rem;
+  width: 1.5rem;
 }

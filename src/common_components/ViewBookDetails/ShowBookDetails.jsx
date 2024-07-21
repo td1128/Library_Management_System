@@ -130,9 +130,6 @@ export default function ShowBookDetails(props) {
               {/* Related Books Section */}
               {props.type === 'user'  ? <RelatedBookSection /> : null}
             </div>
-            <div onClick={handleBackButton} className="back_button border h-8 p-1 rounded-full flex justify-center items-center bg-red-900 border-red-900 hover:bg-red-800 cursor-pointer fixed right-8">
-              <ArrowBackOutlinedIcon className='text-white'/>
-            </div>
           </div>
         </div> : null}
         {loading === false?<Footer/>:null}

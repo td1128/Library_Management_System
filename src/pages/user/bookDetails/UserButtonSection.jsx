@@ -111,7 +111,7 @@ export default function UserButtonSection(props) {
             }
         }
         else {
-            navigate("/user/books/goto-wishlist")
+            navigate("/user/books/wishlist")
         }
     }
     const handleShare = () => {

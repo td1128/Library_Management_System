@@ -18,11 +18,11 @@ export default function AdminButtonSection(props) {
   const dispatch = useDispatch();
 
   
-  // const ISBN = props.isbn;
-  // const searchBookList = useSelector((state) => state.searchBookList.books);
-  // const book_data = searchBookList[ISBN];
+  const ISBN = props.isbn;
+  const searchBookList = useSelector((state) => state.searchBookList.books);
+  const book_data = searchBookList[ISBN];
 
-  const book_data = props.book;//TODO as above
+  // const book_data = props.book;//TODO as above
   console.log("book at admin book details section: ",book_data);
 
   //use state for the plus and minus buttons

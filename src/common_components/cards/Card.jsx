@@ -8,6 +8,8 @@ import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 import "/src/common_components/ViewBookDetails/ShowBookDetails"
 import { toast } from 'react-toastify';
+import ReactWhatsappButton from "react-whatsapp-button";
+
 
 import { addBookToWishList, removeBookFromWishList } from '../../features/userSlice';
 
@@ -25,6 +27,9 @@ const Card = ({ Object }) => {
 
   const wishList = useSelector((state) => state.user.wishList);
   const isbn_no = Object.book.isbn;
+  const book_title = Object.book.title;
+  const title_length = 45;
+
   const navigate = useNavigate();
 
   const modalRef = useRef();
@@ -71,36 +76,36 @@ const Card = ({ Object }) => {
     }
   }
 
-  const handleRemoveWishList = async ()=>{
+  const handleRemoveWishList = async () => {
     setShow(false)
     const apiURL = import.meta.env.VITE_APP_API_URL
-      const memberId = 'm_11201';//TODO 
+    const memberId = 'm_11201';//TODO 
 
-      toast.info("Request sent to the server.");
+    toast.info("Request sent to the server.");
 
-      try {
-        const response = await fetch(`${apiURL}/api/user/books/remove-wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const json = await response.json()
-        if (response.status === 200 && json.message != "Member does not exist") {
-          dispatch(removeBookFromWishList(Object));
-          setIsAdded(false);
-          setIsFavorite(false)
+    try {
+      const response = await fetch(`${apiURL}/api/user/books/remove-wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = await response.json()
+      if (response.status === 200 && json.message != "Member does not exist") {
+        dispatch(removeBookFromWishList(Object));
+        setIsAdded(false);
+        setIsFavorite(false)
 
-          toast.success("Book removed from your wishlist successfully.");
-        }
-        else {
-          toast.error(json.message);
-        }
-        console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
-      } catch (error) {
-        toast.error("Something went wrong. Please try again later.")
-        console.log('Error while requesing for add to favorite books: ', error)
+        toast.success("Book removed from your wishlist successfully.");
       }
+      else {
+        toast.error(json.message);
+      }
+      console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.")
+      console.log('Error while requesing for add to favorite books: ', error)
+    }
   }
 
 
@@ -114,7 +119,7 @@ const Card = ({ Object }) => {
   }
   console.log("Object at card: ", Object)
   // console.log(Object)
-  const path = `/user/books/viewdetails/${Object.book.isbn}`
+  const path = `/user/books/view-details/${Object.book.isbn}`
 
   return (
     <>
@@ -138,33 +143,33 @@ const Card = ({ Object }) => {
       </Modal>
 
       <div className="custom-background border-1 border-red-900 shadow-xl">
-        <div className={`h-52 w-auto m-2 book-card ${Object.book.no_of_copies === 0?'out-of-stock':''}`}>
-          <img src={Object.book.cover_img} alt="Image loading...." className={`h-full w-full rounded-lg border-1 border-gray-400 `} />
+        <div className={`m-2 book-card ${Object.book.no_of_copies === 0 ? 'out-of-stock' : ''}`}>
+          <img src={Object.book.cover_img} alt="Image loading...." className={`rounded-lg border-1 border-gray-400 card-book-image`} />
         </div>
-        {/* {Object.book.no_of_copies === 0 && (
-        <div className={`${Object.book.no_of_copies === 0?'z-5':'out-of-stock'}`}>Out of Stock</div>
-      )} */}
-        <div className="custom-name_section">
 
+        <div className="custom-name_section">
           <Tooltip title={Object.book.title} arrow>
-            <p className="custom-book_name text-red-900">{Object.book.title}</p>
+            <h1 className="custom-book_name text-red-900">{book_title.length >title_length?book_title.substring(0,title_length)+'...':book_title}</h1>
           </Tooltip>
           <Tooltip title={Object.author_name} arrow>
-            <p className="custom-author_name text-red-900">{Object.author_name}</p>
+            <h2 className="custom-author_name text-red-900">{Object.author_name}</h2>
           </Tooltip>
         </div>
         <div className="flex gap-x-px custom-buttons">
           <div onClick={handleAddtoWishlist} className={`border-1 border-red-900 bg-slate-50 rounded-xl w-10 h-10 flex justify-center items-center hover:cursor-pointer`}>
-
-            <FavoriteIcon className={`${isFavorite ? 'text-pink-600 hover:text-pink-700' : 'text-gray-500 hover:text-pink-600'} `} style={{ height: "1.5rem", width: "1.5rem" }} />
+            <FavoriteIcon className={`${isFavorite ? 'text-pink-600 hover:text-pink-700' : 'text-gray-500 hover:text-pink-600'} heart-icon-size`} />
           </div>
           <NavLink to={path} className="custom-stylebtn py-3 border-1 border-red-900 bg-slate-50 text-red-900 hover:bg-red-800 hover:text-white">
             <TravelExploreTwoToneIcon
-              className=""
-              style={{ width: '1.5vw', height: '1.5vw' }}
+              className="card-details-button-size"
+
             />
-            <p>Details</p>
+            <h2>Details</h2>
           </NavLink>
+            <ReactWhatsappButton
+              countryCode="91"
+              phoneNumber="6297862916"
+            />
         </div>
       </div>
     </>

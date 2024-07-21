@@ -19,8 +19,8 @@ const Routers = () => {
           <Route path="help" element={<Help />} />
           <Route path="books" >
             <Route index element={<Books />} />
-            <Route path="viewdetails/:isbn" element={<ShowBookDetails type={'user'} />} />
-            <Route path="goto-wishlist" element={<WishList />} />
+            <Route path="view-details/:isbn" element={<ShowBookDetails type={'user'} />} />//view-details
+            <Route path="wishlist" element={<WishList />} />//wishlist 
           </Route>
         </Route>
         <Route path="/admin/*" element={<Layout rootPath="/admin" navItems={adminNavItems} />}>
@@ -29,7 +29,7 @@ const Routers = () => {
           <Route path="settings" element={<Settings />} />
           <Route path="books/*" >
             <Route path="search" element={<AdminBook />} />
-            <Route path="viewdetails/:isbn" element={<ShowBookDetails type={'admin'} />} />
+            <Route path="view-details/:isbn" element={<ShowBookDetails type={'admin'} />} />
           </Route>
 
         </Route>
