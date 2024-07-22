@@ -39,7 +39,7 @@ const Card = ({ Object }) => {
   const handleAddtoWishlist = async () => {
     if (isAdded == false) {
       const apiURL = import.meta.env.VITE_APP_API_URL
-      const memberId = 'm_11201';//TODO 
+      const memberId = 'm_11201'; //TODO 
 
       toast.info("Request sent to the server.");
       setIsFavorite(true);
