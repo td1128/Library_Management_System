@@ -1,15 +1,15 @@
-import React from 'react'
-
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import { toast } from 'react-toastify';
+import { Backdrop, CircularProgress } from '@mui/material';
+import { useState } from 'react';
 
 
 export const handleReturn = async (memberID, isbn) =>  { 
     console.log(memberID, isbn);
-    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+    const res = await fetch(`${process.env.VITE_APP_API_URL}/${process.env.VITE_APP_ADMIN_PATH}/transaction/return`, {
         method: "PUT", // Specify the method
         headers: {
           'Content-Type': 'application/json' // Specify the content type
@@ -25,7 +25,7 @@ export const handleReturn = async (memberID, isbn) =>  {
       console.log(res);
 }
 export const handleRenew = async (memberID, isbn) =>  { 
-    const res = await fetch("https://library-management-system-ce6z.onrender.com/api/admin/transaction/return", {
+    const res = await fetch(`${process.env.VITE_APP_API_URL}/${process.env.VITE_APP_ADMIN_PATH}/transaction/renew`, {
         method: "PUT", // Specify the method
         headers: {
           'Content-Type': 'application/json' // Specify the content type
@@ -44,14 +44,14 @@ export const handleRenew = async (memberID, isbn) =>  {
 
 const Card = (props) => {
 
-    const [openRenew, setOpenRenew] = React.useState(false);
-    const [openReturn, setOpenReturn] = React.useState(false);
+    const [openRenew, setOpenRenew] = useState(false);
+    const [openReturn, setOpenReturn] = useState(false);
     const handleOpenRenew = () => setOpenRenew(true);
     const handleCloseRenew = () => setOpenRenew(false);
     const handleOpenReturn = () => setOpenReturn(true);
     const handleCloseReturn = () => setOpenReturn(false);
 
-
+    const [backDrop, setBackDrop] = useState(false);
 
     const style = {
         position: 'absolute',
@@ -68,7 +68,7 @@ const Card = (props) => {
 
 
   return (
-    <div className=' p-4 m-4 b-2 border-black border-2'>
+    <div className=' p-4 m-4 border-2 border-[#761236]'>
         <div>Book: {props.book.book_title} </div>
         <div>Author: {props.book.author_name}</div>
         <div>ISBN: {props.book.isbn}</div>
@@ -87,7 +87,10 @@ const Card = (props) => {
                 Are you sure you want to return this book?
             </Typography>
             <div className='flex'>
-                <Button onClick={() => handleReturn(props.member, props.book.isbn)}>Yes</Button>
+                <Button onClick={() => {
+                    setBackDrop(true);
+                    handleReturn(props.member, props.book.isbn);
+                    setBackDrop(false);}}>Yes</Button>
                 <Button onClick={handleCloseReturn}>No</Button>
             </div>
             </Box>
@@ -104,12 +107,22 @@ const Card = (props) => {
                 Are you sure you want to renew this book?
             </Typography>
             <div className='flex'>
-                <Button onClick={() => handleRenew(props.member, props.book.isbn)}>Yes</Button>
+                <Button onClick={() => {
+                    setBackDrop(true);
+                    handleRenew(props.member, props.book.isbn)
+                    setBackDrop(false)
+                    }}>Yes</Button>
                 <Button onClick={handleCloseRenew}>No</Button>
             </div>
             </Box>
         </Modal>
         </div>
+        <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={backDrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
     </div>
   )
 }

@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { Select } from '@mui/material';
+import { Backdrop, CircularProgress, Select } from '@mui/material';
 import FormModal from './Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
 
 
 export const Grid = () => {
@@ -23,6 +24,8 @@ export const Grid = () => {
     const [filterByTime, setFilterByTime] = useState('');
     const [status, setStatus] = useState('');
     const [searchText, setSearchText] = useState('');
+
+    const [backDrop, setBackDrop] = useState(false);
 
 
     const getFilterDate = () => {
@@ -76,13 +79,11 @@ export const Grid = () => {
       } 
     };
 
-
-
     const handleSearch = () => {
       // fetch data
       const dataFetch = async () => {
 
-        let url = 'https://library-management-system-f9gh.onrender.com/api/admin/transaction/history?';
+        let url = `${process.env.VITE_APP_API_URL}/${process.env.VITE_APP_ADMIN_PATH}/transaction/history?`;
 
         if (searchBy === 1) {
           url += `&memberId=${searchText}`;
@@ -99,15 +100,14 @@ export const Grid = () => {
         if (status !== '') {
           url += `&status=${status}`;
         }
-
+        setBackDrop(true);
         const data = await fetch(url)
         .then(res =>  res.json())
-        .then(response => { console.log(response) });
 
-        
-  
-        const newData = data.map((item) => {
-          return {
+        console.log(data);
+
+        if(Array.isArray(data)){
+          const newData = data?.map(item => ({
             'transaction id': item.transaction.id,
             'member id': item.memberId,
             'issue date': item.transaction.issue_date,
@@ -117,10 +117,16 @@ export const Grid = () => {
             status: item.transaction.status,
             fine: item.transaction.fine,
             actions: 'Renew/Return',
-          };
-        });
-
-        setRowData(newData);
+        }));
+  
+          setRowData(newData);
+          setBackDrop(false);
+        } else {
+          toast.error('No data found');
+          setRowData([]);
+          setBackDrop(false);
+        }
+ 
       };
   
       dataFetch();
@@ -129,12 +135,13 @@ export const Grid = () => {
     useEffect(() => {
       // fetch data
       const dataFetch = async () => {
+        setBackDrop(true);
         const data = await fetch(
             'https://library-management-system-f9gh.onrender.com/api/admin/transaction/history',
           ).then(req => req.json());
+          
   
-        const newData = data.map((item) => {
-          return {
+        const newData = data.map(item => ({
             'transaction id': item.transaction.id,
             'member id': item.memberId,
             'issue date': item.transaction.issue_date,
@@ -144,8 +151,10 @@ export const Grid = () => {
             status: item.transaction.status,
             fine: item.transaction.fine,
             actions: 'Renew/Return',
-          };
-        });
+        }));
+          
+        console.log(newData);
+        setBackDrop(false);
 
         setRowData(newData);
       };
@@ -197,7 +206,7 @@ export const Grid = () => {
                         {console.log(searchText)}
                   </Box>
               </Box>
-              <Button sx={{width: '20ch', height: '5ch'}} variant="contained" onClick={handleSearch}>Search</Button>
+              <Button sx={{width: '20ch', height: '5ch', backgroundColor:'#761236', borderRadius:50}} variant="contained" onClick={handleSearch}>Search</Button>
           </div>
           <div className=' flex mt-4 mb-8 space-x-4 items-center'>
             <h6>Filter:</h6>
@@ -218,7 +227,7 @@ export const Grid = () => {
                     </FormControl>
             </div>
             <div>
-              <FormControl sx={{ minWidth: 240, height:50 }}>
+              <FormControl sx={{ minWidth: 240, minHeight:50 }}>
                         <InputLabel id="demo-simple-select-helper-label">Status</InputLabel>
                         <Select
                         labelId="demo-simple-select-helper-label"
@@ -247,6 +256,12 @@ export const Grid = () => {
             
             />
           </div>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={backDrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
        )
    }
