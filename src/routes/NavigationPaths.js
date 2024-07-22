@@ -23,21 +23,21 @@ export const adminNavItems = [
     ]
   },
   {
-    navPath: '/admin/transactions',
+    navPath: '/admin/transaction',
     navTitle: 'Transactions',
     navIcon: '/src/assets/icons/transaction-white.png',
     navIconHover: '/src/assets/icons/transaction-white.png',
     subPaths: [
         {
-            subPath: '/admin/transactions/issue',
+            subPath: '/admin/transaction/issue',
             subTitle: 'Issue a Book',
         },
         {
-            subPath: '/admin/transactions/return',
+            subPath: '/admin/transaction/return',
             subTitle: 'Return a book',
         },
         {
-            subPath: '/admin/transactions',
+            subPath: '/admin/transaction/history',
             subTitle: 'Transaction History',
         },
     ]
