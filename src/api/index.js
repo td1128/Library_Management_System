@@ -1,6 +1,12 @@
-import fetchUserDetails from "./fetchUserDetails";
-import updateUserDetails from "./updateUserDetails";
-import updateFavSubject from "./updateFavSubject";
-import getLibraryCards from "./getLibraryCards";
+import axios from 'axios';
 
-export { fetchUserDetails, updateUserDetails, updateFavSubject, getLibraryCards };
+const fetchUserDetails = async ( studentID ) => {
+    const userRootUrl = import.meta.env.VITE_APP_USER_ROOT_URL;
+    const getUserDetails = import.meta.env.VITE_APP_GET_USER_DETAILS;
+
+    const res = await axios.get( `${userRootUrl}/${getUserDetails}/${studentID}` );
+    console.log( res )
+    return res.data;
+}
+
+export { fetchUserDetails };
