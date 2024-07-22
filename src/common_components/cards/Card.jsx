@@ -8,8 +8,6 @@ import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 import "/src/common_components/ViewBookDetails/ShowBookDetails"
 import { toast } from 'react-toastify';
-import ReactWhatsappButton from "react-whatsapp-button";
-import ReactWhatsapp from 'react-whatsapp';
 
 
 import { addBookToWishList, removeBookFromWishList } from '../../features/userSlice';
@@ -167,11 +165,6 @@ const Card = ({ Object }) => {
             />
             <h2>Details</h2>
           </NavLink>
-            <ReactWhatsappButton
-              countryCode="91"
-              phoneNumber="6297862916"
-            />
-            {/* <ReactWhatsapp number='6297862916' message='Hare Krishna'/> */}
         </div>
       </div>
     </>
