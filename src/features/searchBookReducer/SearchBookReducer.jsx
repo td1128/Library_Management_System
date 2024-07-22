@@ -15,22 +15,10 @@ const searchBookListSlice = createSlice({
         return acc
       }, {})
     },
-    
-    updateSearchBookDetails: (state, action)=>{
-      const book_details = action.payload;
-      state.books[book_details.book.isbn] = book_details;
-    },
-    updateSearchBookAvailability: (state, action)=>{
-      console.log("called update search book avl : ",action.payload);
-      const {isbn, noOfCopies} = action.payload;
-      console.log("isbn: ",isbn," no: ",noOfCopies);
-      state.books[isbn].book.no_of_copies = noOfCopies;
-    }
-
   },
 })
 
-export const { setSearchQueryResult, updateSearchBookDetails, updateSearchBookAvailability } = searchBookListSlice.actions
+export const { setSearchQueryResult } = searchBookListSlice.actions
 export default searchBookListSlice.reducer
 
 export const fetchSearchQueryResult =
