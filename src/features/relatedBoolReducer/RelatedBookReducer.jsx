@@ -13,7 +13,7 @@ const relatedBookListSlice = createSlice({
         setRelatedBookList: (state, action)=>{//change the action name(done)
             const bookArray = action.payload;
             state.books = bookArray.reduce((acc, item) => {
-                acc[item.book.isbn] = item;
+                acc[item.isbn] = item;
                 return acc;
             }, {});
             state.loading = false;
@@ -40,7 +40,6 @@ export const fetchRelatedBookList =
         `${apiURL}/api/user/books/related-books/isbn/${isbn}`
       )
       const data = await response.json()
-      console.log(data)
       dispatch(setRelatedBookList(data))
     } catch (error) {
       console.log('Error while fetching related books: ', error)

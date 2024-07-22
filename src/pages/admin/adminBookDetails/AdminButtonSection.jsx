@@ -1,5 +1,5 @@
-import { React, useState, useRef, useDebugValue } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { React, useState, useRef } from 'react'
+
 import ModeIcon from '@mui/icons-material/Mode';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -8,21 +8,20 @@ import { Button as EditButton } from 'react-bootstrap'
 import { Modal as EditModal } from 'react-bootstrap'
 
 import './AdminBookDetailsDesign.css'
+
 import { toast } from 'react-toastify';
 
-import { updateSearchBookDetails } from '../../../features/searchBookReducer/SearchBookReducer';
-
-//Expect the book isbn as props.
+//Expect the book object as props.
 export default function AdminButtonSection(props) {
   const apiURL = import.meta.env.VITE_APP_API_URL;
-  const dispatch = useDispatch();
+
+  //TODO props.book
+  // const book = { shelving_no: "sh-2-4", isbn: '978-0-19-852663-6', cover_img: "https://www.pngkey.com/png/detail/350-3500680_placeholder-open-book-silhouette-vector.png", author: "abcd", title: "Learn C++ online", description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptate qui provident fuga mollitia voluptas molestiae magni quidem nobis dicta totam iste animi! Fuga veritatis iure earum ipsum soluta! Molestiae", date_of_publication: "2023", publisher: "Mc Graw Hill", no_of_copies: 10, edition: 6 };//TODO props.book
   const book = props.book;
-  console.log(book)
 
   //use state for the plus and minus buttons
   const [isClickEnabled, setIsClickEnabled] = useState(false);
-  const [plusBgclass, setPlusBgclass] = useState('bg-grey');
-  const [minusBgclass, setMinusBgclass] = useState('bg-grey');
+  const [bgclass, setBgclass] = useState('bg-grey')
 
 
   const [author, setAuthor] = useState(book.author);
@@ -36,6 +35,8 @@ export default function AdminButtonSection(props) {
   const [edition, setEdition] = useState(book.edition);
   const [cover_image, setCoverImage] = useState(book.cover_img);
 
+  const [details, setDetails] = useState(book_description.substring(0, 150));
+
   const handleShelvingNoChange = (e) => {
     setShelVingNo(e.target.value);
   }
@@ -47,6 +48,9 @@ export default function AdminButtonSection(props) {
   }
   const handlePublisherChange = (e) => {
     setPublisher(e.target.value);
+  }
+  const handleIsbnChange = (e) => {
+    setIsbn(e.target.value);
   }
   const handleDescriptionChange = (e) => {
     setBookDescription(e.target.value);
@@ -101,20 +105,6 @@ export default function AdminButtonSection(props) {
       if(response.status === 200){
         toast.success("Book details updated successfully.")
         //TODO dispatch(action)
-        const book= {};
-        book.shelving_no = shelVingNo;
-        book.isbn = isbn;
-        book.date_of_publication = date_publication;
-        book.edition = edition;
-        book.description = book_description;
-        book.title = book_title;
-        book.cover_img = cover_image;
-        book.author_name = author;
-        book.sub_name = book_title;
-        book.no_of_copies = noOfCopies;
-
-        dispatch(updateSearchBookDetails(book));
-      
       }
       else{
         toast.error("Error! updating book details.");
@@ -129,13 +119,11 @@ export default function AdminButtonSection(props) {
 
   const handleEditAvailability = () => {
     setIsClickEnabled(true);
-    setPlusBgclass('bg-red');
-    setMinusBgclass('bg-red');
+    setBgclass('bg-red')
   }
   const handleSaveAvailability = async () => {
     setIsClickEnabled(false);
-    setPlusBgclass('bg-grey');
-    setMinusBgclass('bg-grey');
+    setBgclass('bg-grey');
     const data = {
       "isbn": isbn,
       "updatedCount": noOfCopies
@@ -166,30 +154,12 @@ export default function AdminButtonSection(props) {
   }
 
   const handleIncrement = () => {
-    if(noOfCopies < 99){
-      setNoOfCopies(noOfCopies + 1);
-      setPlusBgclass('bg-red');
-      setMinusBgclass('bg-red');
-    }
-    else{
-      setPlusBgclass('bg-grey');
-    }
+    setNoOfCopies(noOfCopies + 1);
   }
 
   const handleDecrement = () => {
-    if(noOfCopies>0){
-      setNoOfCopies(noOfCopies - 1);
-      setMinusBgclass('bg-red');
-      setPlusBgclass('bg-red');
-    }
-    else{
-      setMinusBgclass('bg-grey');
-    }
+    setNoOfCopies(noOfCopies - 1);
   }
-
- const handleChangeNoOfCopies = (e)=>{
-  setNoOfCopies(e.target.value);
- }
 
   return (
     <>
@@ -215,10 +185,10 @@ export default function AdminButtonSection(props) {
               <label htmlFor="author" className=' text-lg mr-2'>Author:</label>
               <input id='author' type="text" className='input_field' value={author} onChange={handleAuthorChange} />
             </div>
-            {publisher!==undefined? <div className="take_input flex flex-row">
+            <div className="take_input flex flex-row">
               <label htmlFor="publisher" className=' text-lg mr-2' >Publisher:</label>
               <input id='publisher' type="text" className='input_field' value={publisher} onChange={handlePublisherChange} />
-            </div> :null}
+            </div>
 
             <div className="take_input flex flex-row">
               <label htmlFor="date" className=' text-lg mr-2'>Date of publication:</label>
@@ -228,6 +198,11 @@ export default function AdminButtonSection(props) {
             <div className="take_input flex flex-row">
               <label htmlFor="edition" className=' text-lg mr-2'>Edition:</label>
               <input id='edition' type="text" className='input_field' value={edition} onChange={handleEditionChange} />
+            </div>
+
+            <div className="take_input flex flex-row">
+              <label htmlFor="isbn" className=' text-lg mr-2'>ISBN:</label>
+              <input id='isbn' type="text" className='input_field' value={isbn} onChange={handleIsbnChange} />
             </div>
             <div
               className="take_input flex flex-row">
@@ -251,10 +226,9 @@ export default function AdminButtonSection(props) {
         <div className="flex flex-row  items-center">
           <span className='mr-2 text-red-900 font-bold text-lg'>Availability: </span>
           <div className=' w-24 h-8 flex flex-row justify-between items-center'>
-            <span ref={minusRef} onClick={isClickEnabled === true ? handleDecrement : null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${minusBgclass}`}>-</span>
+            <span ref={minusRef} onClick={isClickEnabled === true ? handleDecrement : null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${bgclass}`}>-</span>
             <span className='flex justify-center items-center text-lg font-bold bg-red-200 w-8 h-8'>{noOfCopies}</span>
-            {/* <input disabled={!isClickEnabled} onChange={handleChangeNoOfCopies} type="text" max={99} value={noOfCopies} className={`text-lg font-bold  ${isClickEnabled?"bg-red-200":"bg-gray-200"} w-8 h-8`}/> */}
-            <span ref={plusRef} onClick={isClickEnabled === true ? handleIncrement : null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${plusBgclass}`}>+</span>
+            <span ref={plusRef} onClick={isClickEnabled === true ? handleIncrement : null} className={`flex justify-center items-center text-lg font-bold  w-8 h-8 ${bgclass}`}>+</span>
           </div>
           {
             isClickEnabled === false ? <DriveFileRenameOutlineIcon onClick={handleEditAvailability} className=' text-red-900 text-2xl cursor-pointer border-2 border-red-800 ml-2 rounded-sm hover:bg-red-100' /> : <DoneAllIcon onClick={handleSaveAvailability} className=' text-red-900 text-2xl cursor-pointer border-2 border-red-800 ml-2 rounded-sm hover:bg-red-100' />
