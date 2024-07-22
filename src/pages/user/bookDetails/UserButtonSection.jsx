@@ -55,7 +55,7 @@ export default function UserButtonSection(props) {
     const dispatch = useDispatch();
 
     const noOfCopies = props.no_of_copies;
-    const isbn_no = props.book.book.isbn;
+    const isbn_no =  props.book.book.isbn;
     const navigate = useNavigate();
     const wishListBook = useSelector((state)=> state.user.wishList);
 

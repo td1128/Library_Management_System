@@ -5,7 +5,7 @@ import TravelExploreTwoToneIcon from '@mui/icons-material/TravelExploreTwoTone'
 
 const AdminCard = ({ Object }) => {
 
-  const path = `/admin/book/viewdetails/${Object.book.isbn}`
+  const path = `/admin/books/view-details/${Object.book.isbn}`
   return (
     <div className="custom-frame">
       <div className="custom-image" style={{ backgroundImage: `url(${Object.book.cover_img})` }}></div>

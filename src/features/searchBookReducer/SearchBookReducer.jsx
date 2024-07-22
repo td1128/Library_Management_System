@@ -15,14 +15,16 @@ const searchBookListSlice = createSlice({
         return acc
       }, {})
     },
-
+    
     updateSearchBookDetails: (state, action)=>{
       const book_details = action.payload;
       state.books[book_details.book.isbn] = book_details;
     },
     updateSearchBookAvailability: (state, action)=>{
+      console.log("called update search book avl : ",action.payload);
       const {isbn, noOfCopies} = action.payload;
-      state.books[isbn].availability = noOfCopies;
+      console.log("isbn: ",isbn," no: ",noOfCopies);
+      state.books[isbn].book.no_of_copies = noOfCopies;
     }
 
   },

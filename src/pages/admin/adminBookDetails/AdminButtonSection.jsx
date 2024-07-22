@@ -22,6 +22,7 @@ export default function AdminButtonSection(props) {
   const ISBN = props.isbn;
   const searchBookList = useSelector((state) => state.searchBookList.books);
   const book_data = searchBookList[ISBN];
+  // const book_data = props.book;
 
   console.log("book at admin book details section: ",book_data);
 
@@ -108,9 +109,8 @@ export default function AdminButtonSection(props) {
 
       if(response.status === 200){
         toast.success("Book details updated successfully.")
-        dispatch(setOverlayState(false));
-
-        const book_details= book_data;
+        
+        let book_details={book:{},};
         book_details.book.shelving_no = shelVingNo;
         book_details.book.isbn = isbn;
         book_details.book.date_of_publication = date_publication;
@@ -121,9 +121,9 @@ export default function AdminButtonSection(props) {
         book_details.author_name = author;
         book_details.sub_name = book_title;
         book_details.book.no_of_copies = noOfCopies;
-
+        console.log("updated book admin: ",book_details);
         dispatch(updateSearchBookDetails(book_details));// TODO check correctness.
-      
+        dispatch(setOverlayState(false));
       }
       else{
         toast.error("Error! updating book details.");

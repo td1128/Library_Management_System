@@ -3,6 +3,7 @@ import '../../pages/user/bookDetails/BookDetailsDesign.css'
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRelatedBookList } from '../../features/relatedBoolReducer/RelatedBookReducer';
+import { setSearchQueryResult } from '../../features/searchBookReducer/SearchBookReducer';
 import { setOverlayState } from '../../features/showOverlayReducer/ShowOverlayReducer';
 //Material ui icons
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
@@ -30,9 +31,11 @@ export default function ShowBookDetails(props) {
 
   const apiURL = import.meta.env.VITE_APP_API_URL;
 
-  const [book, setBook] = useState(undefined); //Initially book will be undefined, if changed to null then gives error as we are reading book.book.description
-  const [loading, setLoading] = useState(true);
+  const [user_book, setUserBook] = useState(undefined); //Initially book will be undefined, if changed to null then gives error as we are reading book.book.description
+  const admin_book = useSelector((state)=>state.searchBookList.books)[isbn];
+  const book = props.type === 'user'?user_book:admin_book;
 
+  const [loading, setLoading] = useState(true);
   const description_length = 50;//Describe description length to be shown in frontend.
 
   useEffect(() => {
@@ -43,10 +46,14 @@ export default function ShowBookDetails(props) {
         );
         if (response.status === 200) {
           const data = await response.json();
-          setBook(data);
-          setDetails(data.book.description.substring(0, description_length));
+          if(props.type === 'admin'){
+            dispatch(setSearchQueryResult([data]));
+          }
+          setUserBook(data);
           setLoading(false);
           dispatch(setOverlayState(false));
+
+          setDetails(data.book.description.substring(0, description_length));
           console.log("overlay after: ",showOverlay);
         }
       }
