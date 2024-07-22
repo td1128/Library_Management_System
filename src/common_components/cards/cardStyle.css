@@ -1,6 +1,3 @@
-*{
-  font-weight: 500;
-}
 :root {
   --font1: 1vw;
   --font2: 1.3vw;
@@ -9,35 +6,49 @@
 /* back frame part */
 .custom-background {
   margin: 10px 5px;
-  width: 15vw;
+  width: 14vw;
   height: auto;
+  border: 2px solid darkgray;
+  background: rgba(128, 128, 128, 0.3);
   border-radius: 1vw;
 }
 
-/* Book container */
-.book-card {
+/* Availability section */
+.custom-availability {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  width: 20%;
+  height: 1.5vw;
+  background-color: #3fd43f;
   position: relative;
-  height: 18vw;
+  left: 10.5vw;
+  z-index: 100;
+  top: 0.5vw;
+  border-radius: 1vw;
 }
 
 /* Image section */
-.card-book-image {
-  width: 100%;
-  height: 100%; 
+.custom-image {
+  margin: -1.3vw auto 3px;
+  border-radius: 1vw;
+  aspect-ratio: 2/2.5;
+  width: 97%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .custom-name_section {
   display: flex;
   flex-direction: column;
   margin: 0px 5px;
-  height: 5vw;
+  height: 5.2vw;
   letter-spacing: -0.5px;
 }
 
 .custom-book_name {
   padding: 0px;
   font-size: var(--font2);
-  max-height: 3.1vw;
+  max-height: 3.5vw;
   max-width: fit-content;
   overflow: hidden;
 }
@@ -45,23 +56,27 @@
 .custom-author_name {
   padding: 0px;
   font-size: var(--font1);
-  max-height: 1.5vw;
+  max-height: 1.4vw;
   max-width: fit-content;
   overflow: hidden;
 }
 
 /* buttons */
 .custom-buttons {
-  margin: 3px 0px;
+  margin: 2px 0px;
+  place-content: space-around;
+  position: relative;
+  top: 15%;
   justify-content: space-around;
+  /* margin: 3px 0px; */
+  /* position: relative; */
 }
 
 .custom-stylebtn {
   margin: 0px -4px;
   display: flex;
   align-items: center;
-  font-weight: 600;
-  place-content: space-evenly;
+  justify-content: space-evenly;
   background: aliceblue;
   width: 45%;
   height: 1.5vw;
@@ -69,49 +84,7 @@
   font-size: var(--font1);
 }
 
-.book-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* semi-transparent black overlay */
-  border-radius: 8px;
-  z-index: 1;
-  opacity: 0; /* hidden by default */
-  transition: opacity 0.3s ease;
-}
-
-.book-card::after {
-  content: "Out of Stock";
-  position: absolute;
-  top: 40%;
-  left: 0;
-  width: 100%;
-  background: gray; 
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center; 
-  padding: 8px 0; 
-  z-index: 2;
-  opacity: 0; 
-  transition: opacity 0.3s ease;
-  white-space: nowrap; 
-}
-
-.book-card.out-of-stock::before,
-.book-card.out-of-stock::after {
-  opacity: 1; 
-}
-
-.heart-icon-size{
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
-.card-details-button-size{
-  height: 1.5rem;
-  width: 1.5rem;
+.custom-stylebtn:hover {
+  font-size: 1.1vw;
+  background-color: rgb(183, 216, 244);
 }

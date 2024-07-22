@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.11",
     "gh-pages": "^6.1.1",
+    "ag-grid-react": "^31.3.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.3",
     "react-dom": "^18.2.0",
@@ -37,8 +38,6 @@
     "react-share": "^5.1.0",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
-    "react-whatsapp": "^0.3.0",
-    "react-whatsapp-button": "^2.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.11"
   },
