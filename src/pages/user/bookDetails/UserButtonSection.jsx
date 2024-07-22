@@ -1,11 +1,14 @@
 import { React, useState, useRef, useEffect } from 'react'
 import './BookDetailsDesign.css'
-
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addBookToWishList } from '../../../features/userSlice';
 
 //Material ui icons
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import AddIcon from '@mui/icons-material/Add';
+import ShortcutIcon from '@mui/icons-material/Shortcut';
 
 //Modal component material ui
 import Box from '@mui/material/Box';
@@ -42,20 +45,25 @@ const style = {
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    borderRadius: '12px',
     boxShadow: 24,
     p: 4,
 };
 
 //Expect isbn no of the book as props.
 export default function UserButtonSection(props) {
-    // const isbn_no = "978-0-07-140194-4";//TODO pops.isbn
-    const isbn_no = props.isbn;
+    const dispatch = useDispatch();
+
+    const noOfCopies = props.no_of_copies;
+    const isbn_no =  props.book.book.isbn;
+    const navigate = useNavigate();
+    const wishListBook = useSelector((state)=> state.user.wishList);
 
     const heartRef = useRef();
     const shareRef = useRef();
 
     const [heart_class, setHeartClass] = useState('');
-
+    const [isAdded, setIsAdded] = useState(isbn_no in wishListBook?true:false);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -72,30 +80,38 @@ export default function UserButtonSection(props) {
 
 
     const handleAddtoWishlist = async () => {
-        setHeartClass('heart_icon')
-        const apiURL = import.meta.env.VITE_APP_API_URL
-        const memberId = 28;//TODO 
-
-        toast.info("Request sent to the server.");
-
-        try {
-            const response = await fetch(`${apiURL}/api/user/books/wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            if (response.status === 200) {
-                toast.success("Book added to wishlist successfully.")
-            }
-            else {
+        if (isAdded == false) {
+            const apiURL = import.meta.env.VITE_APP_API_URL
+            const memberId = 'm_11201';//TODO take member id from user slice.
+            toast.info("Request sent to the server.");
+            setHeartClass('heart_icon');
+            
+            try {
+                const response = await fetch(`${apiURL}/api/user/books/add-wishlist/isbn/${isbn_no}/memberId/${memberId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const json = await response.json()
+                if (response.status === 200 && json.message != "Member does not exist") {
+                    dispatch(addBookToWishList(props.book))
+                    setIsAdded(true);
+                    toast.success("Book added to your wishlist.");
+                }
+                else {
+                    setHeartClass('');
+                    toast.error(json.message);
+                }
+                console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
+            } catch (error) {
+                setHeartClass('');
                 toast.error("Something went wrong. Please try again later.")
+                console.log('Error while requesing for add to favorite books: ', error)
             }
-            const json = await response.json()
-            console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json.message}`);
-        } catch (error) {
-            toast.error("Something went wrong. Please try again later.")
-            console.log('Error while requesing for add to favorite books: ', error)
+        }
+        else {
+            navigate("/user/books/wishlist")
         }
     }
     const handleShare = () => {
@@ -104,7 +120,7 @@ export default function UserButtonSection(props) {
     const handleReserveBook = async () => {
         console.log("called handle reserve book");
         const apiURL = import.meta.env.VITE_APP_API_URL
-        const memberId = 28;//TODO 
+        const memberId = 'm_11201';//TODO take member id from user state.
 
         toast.info("Request sent to the server.");
 
@@ -115,14 +131,14 @@ export default function UserButtonSection(props) {
                     'Content-Type': 'application/json',
                 },
             });
-            const text = await response.text()
+            const json = await response.json()
             if (response.status === 200) {
-                toast.success(text)
+                toast.success(json.message)
             }
             else {
                 toast.error("Something went wrong. Please try again later.")
             }
-            console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${text}`);
+            console.log(`Response for add to favorite books isbn - ${isbn_no} :  ${json}`);
         } catch (error) {
             toast.error("Something went wrong. Please try again later.")
             console.log('Error while requesing for reserving the book: ', error)
@@ -174,10 +190,10 @@ export default function UserButtonSection(props) {
             </div>
 
             <div className="buttons_section">
-                <button onClick={handleReserveBook} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 mb-2 rounded-full" ><AddIcon />Reserve Book</button>
-                <button onClick={handleAddtoWishlist} className="bg-blue-500 hover:bg-blue-700  text-white font-bold py-2 px-4 rounded-full" ><FavoriteIcon ref={heartRef} className={`${heart_class} `} />  Add to wish list</button>
-                <div onClick={handleShare} className="share_hover bg-blue-100 ml-4  inline-block border border-blue-700 p-2 rounded-full hover:cursor-pointer hover:bg-blue-500">
-                    <ShareOutlinedIcon className='share_icon share_hover' />
+                <button onClick={handleReserveBook} className={`${noOfCopies > 0?'bg-red-900 hover:bg-red-800 text-white':'bg-gray-500 text-black'}   font-bold py-2 px-4 mb-2 rounded-full`} disabled = {noOfCopies>0?false:true}><AddIcon />Reserve Book</button>
+                <button onClick={handleAddtoWishlist} className="bg-red-900 hover:bg-red-800  text-white font-bold py-2 px-4 rounded-full" > {isAdded ? <ShortcutIcon /> : <FavoriteIcon ref={heartRef} className={`${heart_class} `} />}  {isAdded ? "Go to wishlist" : "Add to wish list"}</button>
+                <div onClick={handleShare} className="share_hover bg-red-900 ml-4  inline-block border border-red-900 p-2 rounded-full hover:cursor-pointer hover:bg-red-800">
+                    <ShareOutlinedIcon className='share_icon share_hover text-white' />
                 </div>
             </div>
         </>
