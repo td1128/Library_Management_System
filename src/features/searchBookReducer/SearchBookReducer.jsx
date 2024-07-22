@@ -15,10 +15,16 @@ const searchBookListSlice = createSlice({
         return acc
       }, {})
     },
+
+    updateSearchBookDetails: (state, action)=>{
+      const book = action.payload;
+      state.books[book.isbn] = book;
+    },
+
   },
 })
 
-export const { setSearchQueryResult } = searchBookListSlice.actions
+export const { setSearchQueryResult, updateSearchBookDetails } = searchBookListSlice.actions
 export default searchBookListSlice.reducer
 
 export const fetchSearchQueryResult =

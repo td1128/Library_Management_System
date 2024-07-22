@@ -5,9 +5,6 @@ import Layout from './Layout';
 import { userNavItems, adminNavItems } from './NavigationPaths';
 import ShowBookDetails from '../common_components/ViewBookDetails/ShowBookDetails'
 import Footer from '../common_components/footer/Footer';
-import IssueBook from "../pages/admin/transactions/routes/IssueBook";
-import ReturnBook from "../pages/admin/transactions/routes/ReturnBook";
-
 const Routers = () => {
   return (
     <Routes>
@@ -24,11 +21,7 @@ const Routers = () => {
         <Route path="/admin/*" element={<Layout rootPath="/admin" navItems={adminNavItems} />}>
           <Route index element={<AdminHome />} />
           <Route path="books/search" element={<AdminBook />} />  
-          <Route path="transactions">
-                <Route index element={<Transaction />} />
-                <Route path="issue" element={<IssueBook/>}/>
-                <Route path="return" element={<ReturnBook/>}/>
-          </Route> 
+          <Route path="transaction" element={<Transaction />} /> 
           <Route path="issue_notice" element={<IssueNoticePage />} />
           <Route path="settings" element={<Settings />} />
           <Route path="book/viewdetails/:isbn" element={<ShowBookDetails type={'admin'}/>} />
@@ -40,4 +33,3 @@ const Routers = () => {
 }
 
 export default Routers
-

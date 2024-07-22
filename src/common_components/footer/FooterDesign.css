@@ -1,0 +1,58 @@
+.footer_container{
+  /* background-color: gold; */
+  color: white;
+  background-color: rgb(71, 7, 7);
+  height: 20%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.logo{
+  /* background-color: blue; */
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logg-image{
+  background-color: rgb(247, 237, 237);
+  border-radius: 1.2rem;
+  margin-right: 5px;
+}
+
+.logo_img_name{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.about{
+  /* background-color: red; */
+  grid-column-start: 3;
+  grid-column-end: 7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.details{
+  /* background-color: green; */
+  grid-column-start: 7;
+  grid-column-end: 11;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left_text{
+  font-size: larger;
+  font-family: serif;
+}
+.right_text{
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
