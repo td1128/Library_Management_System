@@ -8,7 +8,7 @@ const Layout = ({ rootPath, navItems }) => {
   return (
     <div className="flex flex-grow w-full">
       <Navbar rootPath={rootPath} navItems={navItems} />
-      <div className="flex flex-col w-full h-screen">
+      <div className="flex flex-col w-full">
         <div className="flex justify-between px-2">
           <MuiBreadcrumbs />
           <ProfileMenu />
