@@ -1,9 +1,9 @@
 import { React, useState, useRef, useEffect } from 'react'
 import '../../pages/user/bookDetails/BookDetailsDesign.css'
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchRelatedBookList } from '../../features/relatedBoolReducer/RelatedBookReducer';
-
+import { setOverlayState } from '../../features/showOverlayReducer/ShowOverlayReducer';
 //Material ui icons
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
@@ -25,7 +25,8 @@ import Footer from '../footer/Footer';
 export default function ShowBookDetails(props) {
   const dispatch = useDispatch();
   const {isbn} = useParams();
-
+  const showOverlay = useSelector((state)=>state.showOverlay.value);
+  console.log("show overlay: ",showOverlay);
 
   const apiURL = import.meta.env.VITE_APP_API_URL;
 
@@ -45,6 +46,8 @@ export default function ShowBookDetails(props) {
           setBook(data);
           setDetails(data.book.description.substring(0, description_length));
           setLoading(false);
+          dispatch(setOverlayState(false));
+          console.log("overlay after: ",showOverlay);
         }
       }
       catch (error) {
@@ -57,7 +60,7 @@ export default function ShowBookDetails(props) {
     if (props.type === 'user' ) {
       dispatch(fetchRelatedBookList(isbn));
     }
-  }, [isbn])
+  }, [isbn, showOverlay])
 
   if (isbn === undefined) {
     setBook(props.book);
@@ -109,16 +112,17 @@ export default function ShowBookDetails(props) {
           <div className="book_details_section">
             <div className="book_features">
 
-              <span className="book_title">{book.book.title} <span className={`noOfCopies ${book.book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
+              <span className="book_details_title font-bold">{book.book.title} <span className={`noOfCopies ${book.book.no_of_copies > 0 ? 'in_stock' : 'out_stock'}`}>{book.book.no_of_copies > 0 ? "In Stock" : "Out of Stock"}</span></span>
 
-              <span className='author'>by  {book.author_name}</span>
-
+              <span className='author_details font-bold'>by  {book.author_name}</span>
 
               <span className='place_holder mt-1'>Shelving No: <span className='place_value'>{book.book.shelving_no}</span></span>
 
               <span className='place_holder mt-1'>ISBN No: <span className='place_value'>{book.book.isbn}</span></span>
 
               <span className='place_holder mt-1'>Date of publication: <span className='place_value'>{book.book.date_of_publication}</span></span>
+
+              <span className='place_holder mt-1'>Edition: <span className='place_value'>{book.book.edition}</span></span>
 
               {book.book.publisher && <span className='mt-2 place_holder'>Publisher: <span className='place_value'>{book.book.publisher}</span></span>}
 

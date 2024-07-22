@@ -10,7 +10,7 @@ const relatedBookListSlice = createSlice({
     name: 'bookList',
     initialState,
     reducers: {
-        setRelatedBookList: (state, action)=>{//change the action name(done)
+        setRelatedBookList: (state, action)=>{
             const bookArray = action.payload;
             state.books = bookArray.reduce((acc, item) => {
                 acc[item.book.isbn] = item;

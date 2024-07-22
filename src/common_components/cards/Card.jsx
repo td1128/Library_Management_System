@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import "/src/common_components/ViewBookDetails/ShowBookDetails"
 import { toast } from 'react-toastify';
 import ReactWhatsappButton from "react-whatsapp-button";
+import ReactWhatsapp from 'react-whatsapp';
 
 
 import { addBookToWishList, removeBookFromWishList } from '../../features/userSlice';
@@ -170,6 +171,7 @@ const Card = ({ Object }) => {
               countryCode="91"
               phoneNumber="6297862916"
             />
+            {/* <ReactWhatsapp number='6297862916' message='Hare Krishna'/> */}
         </div>
       </div>
     </>

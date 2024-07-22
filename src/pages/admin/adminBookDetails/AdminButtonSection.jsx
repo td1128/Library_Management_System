@@ -10,7 +10,8 @@ import { Modal as EditModal } from 'react-bootstrap'
 import './AdminBookDetailsDesign.css'
 import { toast } from 'react-toastify';
 
-import { updateSearchBookDetails } from '../../../features/searchBookReducer/SearchBookReducer';
+import { updateSearchBookDetails, updateSearchBookAvailability } from '../../../features/searchBookReducer/SearchBookReducer';
+import { setOverlayState } from '../../../features/showOverlayReducer/ShowOverlayReducer';
 
 //Expect the book isbn as props.
 export default function AdminButtonSection(props) {
@@ -22,7 +23,6 @@ export default function AdminButtonSection(props) {
   const searchBookList = useSelector((state) => state.searchBookList.books);
   const book_data = searchBookList[ISBN];
 
-  // const book_data = props.book;//TODO as above
   console.log("book at admin book details section: ",book_data);
 
   //use state for the plus and minus buttons
@@ -83,6 +83,7 @@ export default function AdminButtonSection(props) {
   }
   const handleSaveEditDetails = async () => {
     setShow(false);
+    dispatch(setOverlayState(true));
     const data = {
       "shelving_no": shelVingNo,
       "isbn": isbn,
@@ -107,7 +108,8 @@ export default function AdminButtonSection(props) {
 
       if(response.status === 200){
         toast.success("Book details updated successfully.")
-        //TODO dispatch(action)
+        dispatch(setOverlayState(false));
+
         const book_details= book_data;
         book_details.book.shelving_no = shelVingNo;
         book_details.book.isbn = isbn;
@@ -120,7 +122,7 @@ export default function AdminButtonSection(props) {
         book_details.sub_name = book_title;
         book_details.book.no_of_copies = noOfCopies;
 
-        dispatch(updateSearchBookDetails(book_details));
+        dispatch(updateSearchBookDetails(book_details));// TODO check correctness.
       
       }
       else{
@@ -158,8 +160,7 @@ export default function AdminButtonSection(props) {
       });
       if (response.status === 200) {
         toast.success("Book availability updated successfully.")
-
-        //TODO dispatch(action)
+        dispatch(updateSearchBookAvailability({isbn, noOfCopies}));// TODO check correctness.
       }
       else{
         toast.error("Error! updating book availability.")

@@ -1,17 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&family=Satisfy&display=swap');
-
 .container{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     width: 100%;
     height: 92vh;
     overflow-y: scroll;
-
   }
 
   .book_section{
@@ -24,7 +16,6 @@
     padding: 10px;
     grid-column-start: 3;
     grid-column-end: 9;
-    /* background-color: green; */
     display: flex;
     flex-direction: row;
     overflow-y: scroll;
@@ -51,18 +42,13 @@
     margin-top: 1.8rem;
     margin-left: 1.5rem;
   }
-.book_title{
-    font-size: 2rem;
-    font-family: "Lora", "serif";
-    /* font-family: "Noto Serif", "serif"; */
-    /* font-weight: bolder; */
+.book_details_title{
+    font-size: 1.8rem;
     color: rgb(128, 16, 16);
 }
 
-.author{
-    /* font-family: "Lora", "serif"; */
-    font-family: "Merriweather", "serif";
-    font-size: 1.5rem;
+.author_details{
+    font-size: 1.3rem;
     color: rgb(154, 20, 20);
     font-weight: bold;
 }
@@ -83,19 +69,12 @@
 }
 
 .related_books_heading{
-  font-family: "Lora", "serif";
-
   font-weight: bold;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: rgb(158, 37, 18);
 }
 .related_books{
-  /* font-family: "Libre Baskerville", "serif"; */
-  /* font-family: "Lobster", "sans-serif"; */
-  /* font-family: "Satisfy", "cursive"; */
-  font-family: "Lora", "serif";
-  
   font-weight: 400;
   font-style: normal;
   font-size: 2rem;
@@ -103,13 +82,11 @@
 
 .place_holder{
   font-size: 1.3rem;
-  font-family: "Libre Baskerville", "serif";
   font-weight: bold;
 }
 
 .place_value{
   font-size: 1.1rem;
-  font-family: "Lora", "serif";
 }
 
 .edit_modal_body{
@@ -124,7 +101,6 @@
 
 .noOfCopies{
   font-size: 1.1rem;
-  font-family: "Lora", "serif";
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 2px;
@@ -150,13 +126,6 @@
   opacity: 0.2;
   z-index: -1;
 }
-
-/* .footer{
-  grid-row-start: 13;
-  grid-row-end: 17;
-  grid-column-start: 1;
-  grid-column-end: 9;
-} */
 
 .book-card::before {
   content: "";
