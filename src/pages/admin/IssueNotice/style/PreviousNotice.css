@@ -1,0 +1,10 @@
+.custom-heading1{
+    font-size: 2vw;
+    color: #4F0C24;
+    margin-bottom: 0.5vw;
+}
+
+.Allcards{
+    height: 80vh;
+    overflow: scroll;
+}

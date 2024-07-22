@@ -3,4 +3,6 @@ import { Transaction } from './transactions/Transaction';
 import { Settings } from './Settings';
 import AdminBook from './Books_catalog/AdminBook'
 
-export { AdminHome, Transaction, Settings,AdminBook };
+import IssueNoticePage from './IssueNotice/IssueNoticePage'
+
+export { AdminHome, Transaction, Settings,AdminBook,IssueNoticePage };
