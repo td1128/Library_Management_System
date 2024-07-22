@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&family=Satisfy&display=swap');
+
 .container{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     width: 100%;
     height: 92vh;
-    overflow-y: scroll;
   }
 
   .book_section{
@@ -16,6 +22,7 @@
     padding: 10px;
     grid-column-start: 3;
     grid-column-end: 9;
+    /* background-color: green; */
     display: flex;
     flex-direction: row;
     overflow-y: scroll;
@@ -42,13 +49,18 @@
     margin-top: 1.8rem;
     margin-left: 1.5rem;
   }
-.book_details_title{
-    font-size: 1.8rem;
+.book_title{
+    font-size: 2rem;
+    font-family: "Lora", "serif";
+    /* font-family: "Noto Serif", "serif"; */
+    /* font-weight: bolder; */
     color: rgb(128, 16, 16);
 }
 
-.author_details{
-    font-size: 1.3rem;
+.author{
+    /* font-family: "Lora", "serif"; */
+    font-family: "Merriweather", "serif";
+    font-size: 1.5rem;
     color: rgb(154, 20, 20);
     font-weight: bold;
 }
@@ -64,17 +76,24 @@
 
 }
 .heart_icon{
-  color: rgb(224, 81, 112);
+  color: rgb(241, 134, 134);
   font-size: 2rem;
 }
 
 .related_books_heading{
+  font-family: "Lora", "serif";
+
   font-weight: bold;
   font-style: normal;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: rgb(158, 37, 18);
 }
 .related_books{
+  /* font-family: "Libre Baskerville", "serif"; */
+  /* font-family: "Lobster", "sans-serif"; */
+  /* font-family: "Satisfy", "cursive"; */
+  font-family: "Lora", "serif";
+  
   font-weight: 400;
   font-style: normal;
   font-size: 2rem;
@@ -82,11 +101,13 @@
 
 .place_holder{
   font-size: 1.3rem;
+  font-family: "Libre Baskerville", "serif";
   font-weight: bold;
 }
 
 .place_value{
   font-size: 1.1rem;
+  font-family: "Lora", "serif";
 }
 
 .edit_modal_body{
@@ -101,6 +122,7 @@
 
 .noOfCopies{
   font-size: 1.1rem;
+  font-family: "Lora", "serif";
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 2px;
@@ -120,46 +142,4 @@
 
 .margin_left{
   margin-left: 8px;
-}
-
-.overlay {
-  opacity: 0.2;
-  z-index: -1;
-}
-
-.book-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* semi-transparent black overlay */
-  border-radius: 8px;
-  z-index: 1;
-  opacity: 0; /* hidden by default */
-  transition: opacity 0.3s ease;
-}
-
-.book-card::after {
-  content: "Out of Stock";
-  position: absolute;
-  top: 40%;
-  left: 0;
-  width: 100%;
-  background: gray; 
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center; 
-  padding: 8px 0; 
-  z-index: 2;
-  opacity: 0; 
-  transition: opacity 0.3s ease;
-  white-space: nowrap; 
-}
-
-.book-card.out-of-stock::before,
-.book-card.out-of-stock::after {
-  opacity: 1; 
 }
