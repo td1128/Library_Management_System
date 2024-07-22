@@ -15,15 +15,26 @@ const searchBookListSlice = createSlice({
         acc[item.book.isbn] = item
         return acc
       }, {})
-      state.loading = false
+      state.loading = false;
+    },
+    
+    updateSearchBookDetails: (state, action)=>{
+      const book_details = action.payload;
+      state.books[book_details.book.isbn] = book_details;
+    },
+    updateSearchBookAvailability: (state, action)=>{
+      console.log("called update search book avl : ",action.payload);
+      const {isbn, noOfCopies} = action.payload;
+      console.log("isbn: ",isbn," no: ",noOfCopies);
+      state.books[isbn].book.no_of_copies = noOfCopies;
     },
     setLoading: (state) => {
       state.loading = true
-    }
+    },
   },
 })
 
-export const { setSearchQueryResult, setLoading } = searchBookListSlice.actions
+export const { setLoading, setSearchQueryResult, updateSearchBookDetails, updateSearchBookAvailability } = searchBookListSlice.actions
 export default searchBookListSlice.reducer
 
 export const fetchSearchQueryResult =
@@ -32,7 +43,8 @@ export const fetchSearchQueryResult =
     availability = availability ? 'true' : 'false'
     sortBy = sortBy.toLowerCase()
     //searchQuery = searchQuery === '' ? 'a' : searchQuery
-    dispatch(setLoading())
+    dispatch(setLoading());
+
     try {
       const response = await fetch(
         `${apiURL}/api/common/book/search/input/${searchQuery}?availability=${availability}&sortby=${sortBy}`
