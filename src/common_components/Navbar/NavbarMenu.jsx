@@ -14,7 +14,7 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           <ListItem component={NavLink} to={rootPath} sx={navstyles.titlebox}>
             <Box sx={navstyles.icon}>
               <img
-                src="/src/assets/icons/book-black.png"
+                src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/book-black.png"
                 width="100%"
                 height="100%"
               />
@@ -29,15 +29,15 @@ const NavbarMenu = ({ children, open, setOpen, rootPath }) => {
           <ListItem
             button
             onClick={handleDrawerToggle}
-            sx={{ justifyContent: 'right', marginBottom: 6, marginTop: 'auto' }} // Push to bottom
+            sx={{ justifyContent: 'right', marginBottom: 6, marginTop: 'auto' }}
           >
             {open ? (
               <Icon fontSize="large">
-                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%"/>
+                <img src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/arrow-white.png" height="100%" width="100%"/>
               </Icon>
             ) : (
               <Icon fontSize="large">
-                <img src="/src/assets/icons/arrow-white.png" height="100%" width="100%" className="rotate-180"/>
+                <img src="https://raw.githubusercontent.com/Imamul5641/Library_Management_System/main/src/assets/icons/arrow-white.png" height="100%" width="100%" className="rotate-180"/>
               </Icon>
             )}
           </ListItem>
