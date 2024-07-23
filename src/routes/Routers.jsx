@@ -1,3 +1,4 @@
+
 import { Route, Routes } from 'react-router-dom'
 import { Help, Profile, UserHome, LandingPage, Books } from '../pages/user';
 import { AdminHome, Transaction, Settings, AdminBook } from '../pages/admin';
@@ -32,7 +33,7 @@ const Routers = () => {
                 <Route path="issue" element={<IssueBook/>}/>
                 <Route path="return" element={<ReturnBook/>}/>
           </Route>
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings/library" element={<Settings />} />
           <Route path="books/*" >
             <Route path="search" element={<AdminBook />} />
             <Route path="view-details/:isbn" element={<ShowBookDetails type={'admin'} />} />
@@ -45,3 +46,4 @@ const Routers = () => {
 }
 
 export default Routers
+

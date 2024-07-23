@@ -1,0 +1,29 @@
+.ag-header-cell-filtered {
+    background-color: #1b6d85 !important;
+    color: #fff !important;
+}
+
+.ag-header-cell-filtered span {
+    color: #fff !important;
+}
+
+.ag-theme-quartz, .ag-theme-quartz-dark {
+      /* Changes the color of the grid text */
+      --ag-foreground-color: rgb(14, 68, 145);
+      /* Changes the color of the grid background */
+      --ag-background-color: rgb(241, 247, 255);
+      /* Changes the header color of the top row */
+      --ag-header-background-color: rgb(228, 237, 250);
+      /* Changes the hover color of the row*/
+      --ag-row-hover-color: rgb(216, 226, 255);
+}
+.currentBookHeading{
+    margin-left : 240px;
+    /* //padding-left: 240px; */
+    font-size: 40;
+    font-weight: 100;
+  }
+
+.rag-red {
+    background-color: #cc222244;
+  }
