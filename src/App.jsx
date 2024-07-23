@@ -11,9 +11,10 @@ function App() {
       <BrowserRouter>
         <Routers />
       </BrowserRouter>
+      {/* <Settings /> */}
       {/* <Books/> */}
     </Provider>
   )
 }
 
-export default App
+export default App;
