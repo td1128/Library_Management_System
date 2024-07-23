@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  width: fit-content;
+  /* width: fit-content; */
 }
 
 /*.logo {
@@ -40,3 +40,46 @@
 .read-the-docs {
   color: #888;
 }*/
+
+/* Headings with specified font sizes */
+.h1 {
+  font-size: 2vw;
+}
+
+.h2 {
+  font-size: 1.5vw;
+}
+
+.h3 {
+  font-size: 1.2vw;
+}
+
+.h4 {
+  font-size: 1vw;
+}
+
+.h5 {
+  font-size: 0.7vw;
+}
+
+/* Theme colors */
+.dark-theme {
+  background-color: #4F0C24;
+}
+
+.bold-theme {
+  color: #761236;
+}
+
+.light-primary {
+  background-color: #FAE6E6;
+}
+
+.light-secondary {
+  background-color: #F7E9FF;
+}
+
+.grey {
+  color: #666666;
+}
+

@@ -1,3 +1,5 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 @tailwind base;
 @tailwind components;
@@ -116,38 +118,28 @@ button:focus-visible {
 .toastBody {
   font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
   font-size: 1rem;
-.header{
-  margin-top: 0%;
-  margin-left: 250px;
-  /* border: dashed red; */
-  margin-right:  800px;;
-}
 }
 
-.statistics{
-  margin-left: 250px;
-  margin-right: 250px;
-  justify-content: center;
-  align-items: center;
-  border-color: aquamarine;
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-jost: Jost;
+
+  /* font sizes */
+  --font-size-9xl: 28px;
+  --font-size-3xl: 22px;
+  --font-size-13xl: 32px;
+  --font-size-lgi: 19px;
+  --font-size-7xl: 26px;
+
+  /* Colors */
+  --ffffff: #fff;
+  --bold-theme: #761236;
+
+  /* Paddings */
+  --padding-10xs: 3px;
 }
 
-
-.currentBookHeading{
-  margin-left : 240px;
-  font-size: 40px;
-  font-display: flex;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ag-theme-quartz, .ag-theme-quartz-dark {
-  /* Changes the color of the grid text */
-  --ag-foreground-color: rgb(14, 68, 145);
-  /* Changes the color of the grid background */
-  --ag-background-color: rgb(241, 247, 255);
-  /* Changes the header color of the top row */
-  --ag-header-background-color: rgb(228, 237, 250);
-  /* Changes the hover color of the row*/
-  --ag-row-hover-color: rgb(216, 226, 255);
-}
